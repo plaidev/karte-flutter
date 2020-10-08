@@ -1,0 +1,6 @@
+package io.karte.flutter.karte_notification_example
+
+import io.flutter.embedding.android.FlutterActivity
+
+class MainActivity: FlutterActivity() {
+}

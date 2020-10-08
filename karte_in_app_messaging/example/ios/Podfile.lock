@@ -1,0 +1,45 @@
+PODS:
+  - Flutter (1.0.0)
+  - karte_core (0.0.1):
+    - Flutter
+    - KarteCore
+  - karte_in_app_messaging (0.0.1):
+    - Flutter
+    - KarteInAppMessaging (~> 2)
+  - KarteCore (2.8.0):
+    - KarteUtilities (~> 3.1)
+  - KarteInAppMessaging (2.8.0):
+    - KarteCore (~> 2.3)
+    - KarteUtilities (~> 3.0)
+  - KarteUtilities (3.1.0)
+
+DEPENDENCIES:
+  - Flutter (from `Flutter`)
+  - karte_core (from `.symlinks/plugins/karte_core/ios`)
+  - karte_in_app_messaging (from `.symlinks/plugins/karte_in_app_messaging/ios`)
+
+SPEC REPOS:
+  trunk:
+    - KarteCore
+    - KarteInAppMessaging
+    - KarteUtilities
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: Flutter
+  karte_core:
+    :path: ".symlinks/plugins/karte_core/ios"
+  karte_in_app_messaging:
+    :path: ".symlinks/plugins/karte_in_app_messaging/ios"
+
+SPEC CHECKSUMS:
+  Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
+  karte_core: 865efdf6d5fc0eb29d60b54769fdd7f2faa268ba
+  karte_in_app_messaging: 074ee9a4840785c67b99883a0eb30a59e1c3392b
+  KarteCore: b171d3bbc33c6c19b9a071a4c714f7d2bd91a988
+  KarteInAppMessaging: e2deb1e262d4a9ff897a2c5fed11273c18ed6e60
+  KarteUtilities: ccc63f2916deb45485d1b2b63516a98b5ecba773
+
+PODFILE CHECKSUM: a75497545d4391e2d394c3668e20cfb1c2bbd4aa
+
+COCOAPODS: 1.9.1
