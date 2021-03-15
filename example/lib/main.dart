@@ -3,6 +3,7 @@ import 'package:karte_flutter/core.dart';
 import 'package:karte_flutter/iam.dart';
 import 'package:karte_flutter/notification.dart';
 import 'package:karte_flutter/variables.dart';
+import 'package:karte_flutter/visual_tracking.dart';
 
 void main() {
   runApp(MyApp());
@@ -49,13 +50,15 @@ class _MyHomePageState extends State<MyHomePage> {
     "Core",
     "IAM",
     "Variables",
-    "Notification"
+    "Notification",
+    "VT",
   ];
   static List<Widget> _widgetOptions = <Widget>[
     CoreScreen(),
     IAMScreen(),
     VariablesScreen(),
     NotificationScreen(),
+    VTScreen(),
   ];
 
   void _onItemTapped(int index) {
@@ -89,6 +92,10 @@ class _MyHomePageState extends State<MyHomePage> {
             icon: Icon(Icons.notifications),
             title: Text('Notification'),
           ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.phonelink_sharp),
+            title: Text('VT'),
+          ),          
         ],
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.amber[800],

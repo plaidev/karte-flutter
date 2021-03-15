@@ -1,0 +1,48 @@
+PODS:
+  - Flutter (1.0.0)
+  - karte_core (0.1.0):
+    - Flutter
+    - KarteCore (~> 2)
+  - karte_visual_tracking (0.0.1):
+    - Flutter
+    - karte_core
+    - KarteVisualTracking (~> 2)
+  - KarteCore (2.13.1):
+    - KarteUtilities (~> 3.3)
+  - KarteUtilities (3.3.0):
+    - KarteUtilities/standard (= 3.3.0)
+  - KarteUtilities/standard (3.3.0)
+  - KarteVisualTracking (2.5.0):
+    - KarteCore (~> 2.0)
+    - KarteUtilities (~> 3.1)
+
+DEPENDENCIES:
+  - Flutter (from `Flutter`)
+  - karte_core (from `.symlinks/plugins/karte_core/ios`)
+  - karte_visual_tracking (from `.symlinks/plugins/karte_visual_tracking/ios`)
+
+SPEC REPOS:
+  trunk:
+    - KarteCore
+    - KarteUtilities
+    - KarteVisualTracking
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: Flutter
+  karte_core:
+    :path: ".symlinks/plugins/karte_core/ios"
+  karte_visual_tracking:
+    :path: ".symlinks/plugins/karte_visual_tracking/ios"
+
+SPEC CHECKSUMS:
+  Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
+  karte_core: b5db0821355805a7fd9e0f0e2a7012f4d54e8547
+  karte_visual_tracking: aedc97a364d9ab9bd6cb58d0123de1ad2a8829b7
+  KarteCore: 682d9c1cb3dd8ac162a5327d5cbcff81fff211f2
+  KarteUtilities: 87d79d20649710937f9bfd4961d369bf77105152
+  KarteVisualTracking: 97cc7ca2b4e429be8fa8e8754fd9f402281fa39d
+
+PODFILE CHECKSUM: aafe91acc616949ddb318b77800a7f51bffa2a4c
+
+COCOAPODS: 1.10.0
