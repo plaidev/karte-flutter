@@ -13,6 +13,13 @@ Please see the detailed instructions in our docs to add [KARTE Flutter SDK](http
 The developer guide is located at
 - [Developer Portal - KARTE Flutter SDK](https://developers.karte.io/docs/flutter-sdk)
 
+The API references are located at
+- [karte_core](https://pub.dev/documentation/karte_core/latest/)
+- [karte_in_app_messaging](https://pub.dev/documentation/karte_in_app_messaging/latest/)
+- [karte_notification](https://pub.dev/documentation/karte_notification/latest/)
+- [karte_variables](https://pub.dev/documentation/karte_variables/latest/)
+- [karte_visual_tracking](https://pub.dev/documentation/karte_visual_tracking/latest/)
+
 ## Getting Help
 - **Have a bug to report?**
   [Open a GitHub issue](https://github.com/plaidev/karte-flutter/issues/new). If possible, include the OS version, SDK version and full logs.
