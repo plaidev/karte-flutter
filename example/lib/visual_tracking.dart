@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:karte_visual_tracking/karte_visual_tracking.dart';
+import 'package:karte_flutter/visual_tracking_helper.dart';
 
 class VTScreen extends StatefulWidget {
   @override
@@ -7,9 +7,6 @@ class VTScreen extends StatefulWidget {
 }
 
 class _VTState extends State<VTScreen> {
-  GlobalKey _globalKey = GlobalKey();
-  GlobalKey _globalKey2 = GlobalKey();
-
   @override
   void initState() {
     super.initState();
@@ -17,37 +14,18 @@ class _VTState extends State<VTScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        children: [
-          RepaintBoundary(
-            key: _globalKey,
-            child: RaisedButton(
-              onPressed: () async {
-                VisualTracking.handle(
-                    "touch", "test_target_text", "test_action_id", _globalKey);
-              },
-              child: Text("handle with image1"),
-            ),
-          ),
-          RepaintBoundary(
-            key: _globalKey2,
-            child: RaisedButton(
-              onPressed: () async {
-                VisualTracking.handle("touch", "test_target_text2",
-                    "test_action_id2", _globalKey2);
-              },
-              child: Text("handle with image2"),
-            ),
-          ),
-          RaisedButton(
-            onPressed: () async {
-              VisualTracking.handle(
-                  "touch", "test_target_text3", "test_action_id3");
-            },
-            child: Text("handle without image"),
-          )
-        ],
+    return VTScreenContainer(
+      child: Center(
+        child: Column(
+          children: [
+            VTButton(
+                title: "handle",
+                actionId: "touch_vtbutton1",
+                onPressed: () async {
+                  print("VTButton pressed");
+                }),
+          ],
+        ),
       ),
     );
   }
