@@ -28,4 +28,8 @@ import KarteCore
     // call firebase_messaging swizzled method.
     super.userNotificationCenter(center, willPresent: notification, withCompletionHandler: (completionHandler))
   }
+
+  override func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+    return KarteApp.application(app, open: url)
+  }
 }
