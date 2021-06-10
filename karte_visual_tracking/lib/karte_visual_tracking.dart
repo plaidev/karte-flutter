@@ -16,12 +16,12 @@
 
 import 'dart:async';
 import 'dart:typed_data';
+import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:karte_core/karte_core.dart';
-import 'dart:ui' as ui;
 
 const WrapperChannel _channel = const WrapperChannel('karte_visual_tracking');
 
@@ -44,7 +44,7 @@ Future<dynamic> _handleDartMethod(MethodCall call) async {
 class VisualTracking {
   VisualTracking._();
 
-  static var _paired = false;
+  static bool _paired = false;
 
   static bool get _isPaired {
     if (!_dartChannel.checkMethodCallHandler(_handleDartMethod)) {
@@ -66,7 +66,7 @@ class VisualTracking {
   /// [actionId] アクションIDを指定します。（アクションIDにはアプリ再起動時も変化しない一意なIDを設定してください。）
   /// [globalKey] 画像データ生成対象のWidgetに紐づくglobalKeyを指定します。（ペアリング時の操作ログ送信でのみ利用されます。）
   static Future<void> handle(String action, String targetText, String actionId,
-      [GlobalKey globalKey]) async {
+      [GlobalKey? globalKey]) async {
     var imageData;
     if (VisualTracking._isPaired) {
       imageData = await _imageData(globalKey);
@@ -79,18 +79,18 @@ class VisualTracking {
     });
   }
 
-  static Future<Uint8List> _imageData(GlobalKey globalKey,
+  static Future<Uint8List?> _imageData(GlobalKey? globalKey,
       [bool shouldRetry = true]) async {
     if (globalKey == null) return null;
 
-    ui.Image image;
-    RenderRepaintBoundary boundary =
-        globalKey.currentContext.findRenderObject();
+    ui.Image? image;
+    RenderRepaintBoundary? boundary =
+        globalKey.currentContext?.findRenderObject() as RenderRepaintBoundary?;
     try {
-      image = await boundary.toImage(pixelRatio: 2.0);
-      ByteData byteData =
-          await image.toByteData(format: ui.ImageByteFormat.png);
-      return byteData.buffer.asUint8List();
+      image = await boundary?.toImage(pixelRatio: 2.0);
+      ByteData? byteData =
+          await image?.toByteData(format: ui.ImageByteFormat.png);
+      return byteData?.buffer.asUint8List();
     } catch (_) {
       if (shouldRetry) {
         await Future.delayed(Duration(milliseconds: 50));

@@ -29,7 +29,7 @@ class InAppMessaging {
   /// アプリ内メッセージが表示中の場合は `true` を返し、表示されていない場合は `false` を返します。
   static Future<bool> get isPresenting async {
     return await _channel.invokeMethod(
-        'InAppMessaging_isPresenting', null, false);
+        'InAppMessaging_isPresenting', null, false) as FutureOr<bool>;
   }
 
   /// 現在表示中の全てのアプリ内メッセージを非表示にします。

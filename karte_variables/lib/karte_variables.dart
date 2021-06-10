@@ -28,8 +28,8 @@ class Variables {
   ///
   /// 取得完了後に成否の結果を返します。
   static Future<bool> fetch() async {
-    return await _channel.invokeMethod(
-        'Variables_fetchWithResult', null, false);
+    return await _channel.invokeMethod('Variables_fetchWithResult', null, false)
+        as FutureOr<bool>;
   }
 
   /// 指定されたキーに関連付けられた設定値にアクセスします。
@@ -44,7 +44,7 @@ class Variables {
   /// 指定された設定値に関連するキャンペーン情報を元に効果測定用のイベント（message_open）を発火します。
   ///
   /// [variables] に設定値の配列を、 [values] にイベントに紐付けるカスタムオブジェクトを指定します。
-  static void trackOpen(List<Variable> variables, [Map values]) async {
+  static void trackOpen(List<Variable> variables, [Map? values]) async {
     List<String> names =
         List<String>.from(variables.map((e) => e.name), growable: false);
     await _channel.invokeMethod(
@@ -54,7 +54,7 @@ class Variables {
   /// 指定された設定値に関連するキャンペーン情報を元に効果測定用のイベント（message_click）を発火します。
   ///
   /// [variables] に設定値の配列を、 [values] にイベントに紐付けるカスタムオブジェクトを指定します。
-  static void trackClick(List<Variable> variables, [Map values]) async {
+  static void trackClick(List<Variable> variables, [Map? values]) async {
     List<String> names =
         List<String>.from(variables.map((e) => e.name), growable: false);
     await _channel.invokeMethod(
@@ -74,8 +74,10 @@ class Variable {
   ///
   /// [defaultValue] にデフォルト値を指定します。
   Future<String> getString(String defaultValue) async {
-    return await _channel.invokeMethod('Variable_getString',
-        {"name": name, "default": defaultValue}, defaultValue);
+    return await _channel.invokeMethod(
+        'Variable_getString',
+        {"name": name, "default": defaultValue},
+        defaultValue) as FutureOr<String>;
   }
 
   /// 設定値（整数）を返します。
@@ -85,7 +87,7 @@ class Variable {
   /// [defaultValue] にデフォルト値を指定します。
   Future<int> getInteger(int defaultValue) async {
     return await _channel.invokeMethod('Variable_getInteger',
-        {"name": name, "default": defaultValue}, defaultValue);
+        {"name": name, "default": defaultValue}, defaultValue) as FutureOr<int>;
   }
 
   /// 設定値（浮動小数点数）を返します。
@@ -94,8 +96,10 @@ class Variable {
   ///
   /// [defaultValue] にデフォルト値を指定します。
   Future<double> getDouble(double defaultValue) async {
-    return await _channel.invokeMethod('Variable_getDouble',
-        {"name": name, "default": defaultValue}, defaultValue);
+    return await _channel.invokeMethod(
+        'Variable_getDouble',
+        {"name": name, "default": defaultValue},
+        defaultValue) as FutureOr<double>;
   }
 
   /// 設定値（ブール値）を返します。
@@ -104,8 +108,10 @@ class Variable {
   ///
   /// [defaultValue] にデフォルト値を指定します。
   Future<bool> getBoolean(bool defaultValue) async {
-    return await _channel.invokeMethod('Variable_getBoolean',
-        {"name": name, "default": defaultValue}, defaultValue);
+    return await _channel.invokeMethod(
+        'Variable_getBoolean',
+        {"name": name, "default": defaultValue},
+        defaultValue) as FutureOr<bool>;
   }
 
   /// 設定値（配列）を返します。
@@ -116,8 +122,10 @@ class Variable {
   ///
   /// [defaultValue] にデフォルト値を指定します。
   Future<List> getArray(List defaultValue) async {
-    return await _channel.invokeMethod('Variable_getArray',
-        {"name": name, "default": defaultValue}, defaultValue);
+    return await _channel.invokeMethod(
+        'Variable_getArray',
+        {"name": name, "default": defaultValue},
+        defaultValue) as FutureOr<List<dynamic>>;
   }
 
   /// 設定値（辞書）を返します。
@@ -128,7 +136,9 @@ class Variable {
   ///
   /// [defaultValue] にデフォルト値を指定します。
   Future<Map> getObject(Map defaultValue) async {
-    return await _channel.invokeMethod('Variable_getObject',
-        {"name": name, "default": defaultValue}, defaultValue);
+    return await _channel.invokeMethod(
+        'Variable_getObject',
+        {"name": name, "default": defaultValue},
+        defaultValue) as FutureOr<Map<dynamic, dynamic>>;
   }
 }

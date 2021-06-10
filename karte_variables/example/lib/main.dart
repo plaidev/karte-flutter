@@ -11,12 +11,12 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  String _string;
-  int _int;
-  double _double;
-  bool _bool;
-  List _list;
-  Map _map;
+  String? _string;
+  int? _int;
+  double? _double;
+  bool? _bool;
+  List? _list;
+  Map? _map;
 
   @override
   void initState() {
@@ -72,7 +72,7 @@ class _MyAppState extends State<MyApp> {
           child: Column(
             // mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              RaisedButton(
+              ElevatedButton(
                 onPressed: () {
                   Variables.fetch().then((value) async {
                     print("variables fetch completed!");
@@ -81,7 +81,7 @@ class _MyAppState extends State<MyApp> {
                 },
                 child: Text("Fetch Variables"),
               ),
-              RaisedButton(
+              ElevatedButton(
                 onPressed: () async {
                   var strVar = await Variables.get('string');
                   var intVar = await Variables.get('long');
@@ -94,7 +94,7 @@ class _MyAppState extends State<MyApp> {
                 },
                 child: Text("Track open"),
               ),
-              RaisedButton(
+              ElevatedButton(
                 onPressed: () async {
                   var strVar = await Variables.get('string');
                   var intVar = await Variables.get('long');

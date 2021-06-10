@@ -22,7 +22,7 @@ import 'package:flutter/services.dart';
 class WrapperChannel extends MethodChannel {
   const WrapperChannel(String name) : super(name);
 
-  Future<T> invokeMethod<T>(String method, [dynamic arguments, T def]) {
+  Future<T?> invokeMethod<T>(String method, [dynamic arguments, T? def]) {
     try {
       return super.invokeMethod(method, arguments);
     } on PlatformException {
@@ -43,7 +43,8 @@ class KarteApp {
   ///
   /// なお初期化が行われていない場合は空文字列を返します。
   static Future<String> get visitorId async {
-    return await _channel.invokeMethod('KarteApp_getVisitorId', null, "");
+    return await _channel.invokeMethod('KarteApp_getVisitorId', null, "")
+        as FutureOr<String>;
   }
 
   /// オプトアウトの設定有無を返します。
@@ -51,7 +52,8 @@ class KarteApp {
   /// オプトアウトされている場合は、`true` を返し、されていない場合は `false` を返します。
   /// また初期化が行われていない場合は `false` を返します。
   static Future<bool> get isOptOut async {
-    return await _channel.invokeMethod('KarteApp_isOptOut', null, false);
+    return await _channel.invokeMethod('KarteApp_isOptOut', null, false)
+        as FutureOr<bool>;
   }
 
   /// オプトインします。
@@ -86,7 +88,7 @@ class Tracker {
   /// イベントの送信を行います。
   ///
   /// [name] はイベント名、 [values] はイベントに紐付けるカスタムオブジェクトを指定します。
-  static void track(String name, [Map values]) async {
+  static void track(String name, [Map? values]) async {
     await _channel
         .invokeMethod('Tracker_track', {"name": name, "values": values});
   }
@@ -102,7 +104,7 @@ class Tracker {
   ///
   /// [viewName] は画面名、 [title] はタイトル、
   /// [values] はViewイベントに紐付けるカスタムオブジェクトを指定します。
-  static void view(String viewName, [String title, Map values]) async {
+  static void view(String viewName, [String? title, Map? values]) async {
     await _channel.invokeMethod('Tracker_view',
         {"viewName": viewName, "title": title, "values": values});
   }
@@ -121,6 +123,7 @@ class UserSync {
   /// 指定されたURL文字列の形式が正しくない場合、またはSDKの初期化が行われていない場合は、引数に指定したURL文字列を返します。
   static Future<String> appendingQueryParameter(String url) async {
     return await _channel.invokeMethod(
-        'UserSync_appendingQueryParameter', {"url": url}, url);
+            'UserSync_appendingQueryParameter', {"url": url}, url)
+        as FutureOr<String>;
   }
 }

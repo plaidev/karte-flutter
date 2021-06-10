@@ -40,7 +40,7 @@ class KarteCorePlugin : FlutterPlugin, MethodCallHandler, Library {
     private lateinit var channel: MethodChannel
 
     override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
-        channel = MethodChannel(flutterPluginBinding.getFlutterEngine().getDartExecutor(), "karte_core")
+        channel = MethodChannel(flutterPluginBinding.binaryMessenger, "karte_core")
         channel.setMethodCallHandler(this)
     }
 

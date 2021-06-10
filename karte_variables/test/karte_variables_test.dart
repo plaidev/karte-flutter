@@ -18,6 +18,7 @@ void main() {
   });
 
   test('getPlatformVersion', () async {
-    expect(await Variables.get("test"), "test");
+    var variable = await Variables.get("test");
+    expect(variable.name, "test");
   });
 }

@@ -42,7 +42,7 @@ public class SwiftKarteNotificationPlugin: NSObject, FlutterPlugin {
                 }
                 result(nil)
             default:
-                let message = (call.arguments as? [String:Any?])?["message"] as? [String:
+                let message = (call.arguments as? [String:Any?])?["data"] as? [String:
                     Any]
                 let notification = RemoteNotification(userInfo: message ?? [:])
                 switch methodName {
