@@ -37,6 +37,7 @@ android {
     defaultConfig {
         minSdkVersion 16
         versionName version
+        buildConfigField "String", "LIB_VERSION", "\"$version\""
     }
     lintOptions {
         disable 'InvalidPackage'

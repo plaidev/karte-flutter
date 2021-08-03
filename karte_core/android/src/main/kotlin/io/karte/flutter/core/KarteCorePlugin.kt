@@ -132,7 +132,7 @@ class KarteCorePlugin : FlutterPlugin, MethodCallHandler, Library {
     //region Library
     override val isPublic: Boolean = true
     override val name: String = "flutter"
-    override val version: String = BuildConfig.VERSION_NAME
+    override val version: String = BuildConfig.LIB_VERSION
     override fun configure(app: KarteApp) {}
     override fun unconfigure(app: KarteApp) {}
     //endregion
