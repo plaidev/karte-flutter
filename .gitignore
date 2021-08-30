@@ -336,3 +336,7 @@ hs_err_pid*
 # Firebase
 GoogleService-Info.plist
 google-services.json
+
+# KARTE
+karte.xml
+Karte-Info.plist

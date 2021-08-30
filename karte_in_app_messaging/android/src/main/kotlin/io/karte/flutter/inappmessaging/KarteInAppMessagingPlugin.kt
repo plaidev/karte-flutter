@@ -35,7 +35,7 @@ public class KarteInAppMessagingPlugin : FlutterPlugin, MethodCallHandler {
     private lateinit var channel: MethodChannel
 
     override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
-        channel = MethodChannel(flutterPluginBinding.getFlutterEngine().getDartExecutor(), "karte_in_app_messaging")
+        channel = MethodChannel(flutterPluginBinding.binaryMessenger, "karte_in_app_messaging")
         channel.setMethodCallHandler(this);
     }
 

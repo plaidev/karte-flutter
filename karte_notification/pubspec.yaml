@@ -1,19 +1,19 @@
 name: karte_notification
 description: Flutter plugin for KARTE Notification.
-version: 0.1.0
+version: 0.2.0
 homepage: https://github.com/plaidev/karte-flutter/tree/master/karte_notification
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
-  flutter: ">=1.20.0 <2.0.0"
+  sdk: '>=2.12.0 <3.0.0'
+  flutter: ">=1.20.0"
 
 dependencies:
   flutter:
     sdk: flutter
 
-  firebase_messaging: ^7.0.0
+  firebase_messaging: ^10.0.1
   karte_core:
-    version: ^0.1.0
+    version: ^0.2.0
 #    path: ../karte_core # comment out when local development.
 
 dev_dependencies:

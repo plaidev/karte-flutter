@@ -12,10 +12,10 @@ class MyApp extends StatefulWidget {
 
 class VTButton extends StatelessWidget {
   const VTButton({
-    Key key,
+    Key? key,
     this.title = "",
-    @required this.actionId,
-    @required this.onPressed,
+    required this.actionId,
+    required this.onPressed,
   }) : super(key: key);
 
   final String title;
@@ -27,9 +27,10 @@ class VTButton extends StatelessWidget {
     final k = key ?? GlobalObjectKey(context);
     return RepaintBoundary(
         key: k,
-        child: RaisedButton(
+        child: ElevatedButton(
           onPressed: () async {
-            VisualTracking.handle("touch", "$title", actionId, k);
+            VisualTracking.handle("touch", "$title", actionId,
+                k as GlobalKey<State<StatefulWidget>>?);
             onPressed();
           },
           child: Text(title),

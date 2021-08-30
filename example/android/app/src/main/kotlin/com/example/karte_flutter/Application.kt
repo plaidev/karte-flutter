@@ -10,13 +10,12 @@ import io.karte.flutter.notifications.KarteNotificationPlugin
 
 class Application : FlutterApplication(), PluginRegistry.PluginRegistrantCallback {
 
-    private val appKey = "YOUR_APP_KEY"
     override fun onCreate() {
         super.onCreate()
 
         FlutterFirebaseMessagingService.setPluginRegistrant(this)
         KarteApp.setLogLevel(LogLevel.DEBUG)
-        KarteApp.setup(this, appKey)
+        KarteApp.setup(this)
     }
 
     override fun registerWith(registry: PluginRegistry?) {

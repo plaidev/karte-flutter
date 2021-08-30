@@ -1,6 +1,12 @@
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:karte_notification/karte_notification.dart';
+
+
+RemoteMessage getDummyMessage() {
+  return RemoteMessage.fromMap({'data':{'aaa': 'bbb'}});
+}
 
 void main() {
   const MethodChannel channel = MethodChannel('karte_notification');
@@ -8,9 +14,11 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
   setUp(() {
-    // channel.setMockMethodCallHandler((MethodCall methodCall) async {
-    //   return Notification._({'aaa':'bbb'});
-    // });
+    channel.setMockMethodCallHandler((MethodCall methodCall) async {
+      if (methodCall.method == 'Notification_canHandle') {
+        return true;
+      }
+    });
   });
 
   tearDown(() {
@@ -18,7 +26,9 @@ void main() {
   });
 
   test('Notification create', () async {
-    Notification n = await Notification.create({'aaa': 'bbb'});
-    expect(n.message, {'aaa': 'bbb'});
+    RemoteMessage dummy = getDummyMessage();
+    Notification? n = await (Notification.create(dummy));
+    expect(n, isNotNull);
+    expect(n!.message.data, dummy.data);
   });
 }

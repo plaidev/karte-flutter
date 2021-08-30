@@ -55,23 +55,23 @@ class _MyAppState extends State<MyApp> {
             // mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text('isPresenting:  $_isPresenting'),
-              RaisedButton(
+              ElevatedButton(
                 onPressed: () => initPlatformState(),
                 child: Text("checkPresent"),
               ),
-              RaisedButton(
+              ElevatedButton(
                 onPressed: () => InAppMessaging.dismiss(),
                 child: Text("dismiss"),
               ),
-              RaisedButton(
+              ElevatedButton(
                 onPressed: () => InAppMessaging.suppress(),
                 child: Text("suppress"),
               ),
-              RaisedButton(
+              ElevatedButton(
                 onPressed: () => InAppMessaging.unsuppress(),
                 child: Text("unsuppress"),
               ),
-              RaisedButton(
+              ElevatedButton(
                 onPressed: () => Tracker.view("popup"),
                 child: Text("view"),
               ),

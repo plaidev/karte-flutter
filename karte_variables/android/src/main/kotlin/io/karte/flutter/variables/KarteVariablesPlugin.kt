@@ -41,7 +41,7 @@ public class KarteVariablesPlugin : FlutterPlugin, MethodCallHandler {
     private lateinit var channel: MethodChannel
 
     override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
-        channel = MethodChannel(flutterPluginBinding.getFlutterEngine().getDartExecutor(), "karte_variables")
+        channel = MethodChannel(flutterPluginBinding.binaryMessenger, "karte_variables")
         channel.setMethodCallHandler(this);
     }
 

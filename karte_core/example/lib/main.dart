@@ -52,33 +52,33 @@ class _MyAppState extends State<MyApp> {
               children: [
                 Text('Visitor id:  $_visitorId'),
                 Text('isOptOut:  $_isOptOut'),
-                RaisedButton(
+                ElevatedButton(
                   onPressed: () => Tracker.track("test"),
                   child: Text("track"),
                 ),
-                RaisedButton(
+                ElevatedButton(
                   onPressed: () => Tracker.identify({"name": "sample"}),
                   child: Text("identify"),
                 ),
-                RaisedButton(
+                ElevatedButton(
                   onPressed: () => Tracker.view("test"),
                   child: Text("view"),
                 ),
-                RaisedButton(
+                ElevatedButton(
                   onPressed: () async {
                     KarteApp.optIn();
                     await initPlatformState();
                   },
                   child: Text("optIn"),
                 ),
-                RaisedButton(
+                ElevatedButton(
                   onPressed: () async {
                     KarteApp.optOut();
                     await initPlatformState();
                   },
                   child: Text("optOut"),
                 ),
-                RaisedButton(
+                ElevatedButton(
                   onPressed: () async {
                     var url = await UserSync.appendingQueryParameter(
                         "https://example.com");

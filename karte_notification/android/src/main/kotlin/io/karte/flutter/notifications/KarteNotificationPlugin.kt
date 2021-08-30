@@ -31,6 +31,7 @@ import io.karte.android.notifications.MessageHandler
 import io.karte.android.notifications.Notifications
 
 private const val LOG_TAG = "KarteFlutter"
+
 /** KarteNotificationPlugin */
 class KarteNotificationPlugin : FlutterPlugin, MethodCallHandler {
     /// The MethodChannel that will the communication between Flutter and native Android
@@ -41,7 +42,7 @@ class KarteNotificationPlugin : FlutterPlugin, MethodCallHandler {
     private lateinit var context: Context
 
     override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
-        channel = MethodChannel(flutterPluginBinding.getFlutterEngine().getDartExecutor(), "karte_notification")
+        channel = MethodChannel(flutterPluginBinding.binaryMessenger, "karte_notification")
         channel.setMethodCallHandler(this);
         context = flutterPluginBinding.applicationContext
     }
@@ -83,8 +84,12 @@ class KarteNotificationPlugin : FlutterPlugin, MethodCallHandler {
                 else -> {
                     val message = call.argument<Map<String, Any?>>("message")
 
-                    @Suppress("UNCHECKED_CAST")
-                    val data = message?.get("data") as? Map<String, String>
+                    val data = if (message != null) {
+                        @Suppress("UNCHECKED_CAST")
+                        message.get("data") as? Map<String, String>
+                    } else {
+                        call.argument<Map<String, String>>("data")
+                    }
                     when (methodName) {
                         "canHandle" -> {
                             if (data != null) {
