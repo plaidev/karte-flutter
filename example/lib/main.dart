@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:karte_flutter/core.dart';
 import 'package:karte_flutter/iam.dart';
@@ -5,7 +6,9 @@ import 'package:karte_flutter/notification.dart';
 import 'package:karte_flutter/variables.dart';
 import 'package:karte_flutter/visual_tracking.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
@@ -37,8 +40,8 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-  final String title;
+  MyHomePage({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -78,24 +81,24 @@ class _MyHomePageState extends State<MyHomePage> {
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            title: Text('Core'),
+            label: 'Core',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.message),
-            title: Text('IAM'),
+            label: 'IAM',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.sync),
-            title: Text('Variables'),
+            label: 'Variables',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.notifications),
-            title: Text('Notification'),
+            label: 'Notification',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.phonelink_sharp),
-            title: Text('VT'),
-          ),          
+            label: 'VT',
+          ),
         ],
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.amber[800],

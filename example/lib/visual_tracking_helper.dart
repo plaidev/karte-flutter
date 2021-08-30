@@ -4,10 +4,10 @@ import 'package:karte_visual_tracking/karte_visual_tracking.dart';
 
 class VTButton extends StatelessWidget {
   const VTButton({
-    Key key,
+    Key? key,
     this.title = "",
-    @required this.actionId,
-    @required this.onPressed,
+    required this.actionId,
+    required this.onPressed,
   }) : super(key: key);
 
   final String title;
@@ -16,10 +16,14 @@ class VTButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final k = key ?? GlobalObjectKey(context);
+    final GlobalKey k;
+    if (key is GlobalKey)
+      k = key as GlobalKey;
+    else
+      k = GlobalObjectKey(context);
     return RepaintBoundary(
         key: k,
-        child: RaisedButton(
+        child: ElevatedButton(
           onPressed: () async {
             VisualTracking.handle("touch", "$title", actionId, k);
             onPressed();
@@ -30,7 +34,7 @@ class VTButton extends StatelessWidget {
 }
 
 class VTScreenContainer extends StatefulWidget {
-  const VTScreenContainer({@required this.child});
+  const VTScreenContainer({required this.child});
 
   final Widget child;
 
@@ -44,7 +48,7 @@ class _VTScreenContainerState extends State<VTScreenContainer> {
   @override
   void initState() {
     super.initState();
-    SchedulerBinding.instance.addPostFrameCallback((_) => {
+    SchedulerBinding.instance?.addPostFrameCallback((_) => {
           VisualTracking.handle("initState", "",
               widget.toStringShort() + "_" + widget.child.toStringShort(), key)
         });

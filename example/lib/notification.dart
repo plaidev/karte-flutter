@@ -1,20 +1,15 @@
-import 'dart:io';
-
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:karte_core/karte_core.dart';
 import 'package:karte_notification/karte_notification.dart' as krt;
 
-Future<dynamic> myBackgroundMessageHandler(Map<String, dynamic> message) async {
+Future<dynamic> myBackgroundMessageHandler(RemoteMessage message) async {
   // Called when received notification on background only Android
   print('myBackgroundMessageHandler $message');
-  if (message.containsKey('data')) {
-    // Handle data message
-    var karteNotification = await krt.Notification.create(message);
-    print("karte notification: $karteNotification");
-    if (karteNotification != null) {
-      karteNotification.handleForAndroid();
-    }
+  var karteNotification = await krt.Notification.create(message);
+  print("karte notification: $karteNotification");
+  if (karteNotification != null) {
+    karteNotification.handleForAndroid();
   }
 }
 
@@ -26,67 +21,69 @@ class NotificationScreen extends StatefulWidget {
 class _NotificationState extends State<NotificationScreen> {
   String _homeScreenText = "Waiting for token...";
   String _logText = "";
-  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
+  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
 
-  void updateState({String log, String token}) {
+  void updateState({String? log, String? token}) {
     if (!mounted) return;
     setState(() {
-      if(log!=null) _logText += log;
-      if(token!=null) _homeScreenText = "Push Messaging token: $token";
+      if (log != null) _logText += log;
+      if (token != null) _homeScreenText = "Push Messaging token: $token";
     });
+  }
+
+  void checkInitialMessage() async {
+    RemoteMessage? message =
+        await FirebaseMessaging.instance.getInitialMessage();
+    // Called when app launch by tap notification on iOS
+    print("checkInitialMessage: $message");
+    updateState(log: "\nonLaunch");
+    if (message == null) return;
+    var karteNotification = await krt.Notification.create(message);
+    print("karte notification: $karteNotification");
+    if (karteNotification != null) {
+      karteNotification.handleForIOS();
+    }
   }
 
   @override
   void initState() {
     super.initState();
 
-    _firebaseMessaging.configure(
-      onMessage: (Map<String, dynamic> message) async {
-        // Called when received notification on foreground
-        print("onMessage: $message");
-        updateState(log: "\nonMessage");
-        var karteNotification = await krt.Notification.create(message);
-        print("karte notification: $karteNotification");
-        if (karteNotification != null) {
-          karteNotification.handleForAndroid();
-        }
-      },
-      onBackgroundMessage: Platform.isIOS ? null : myBackgroundMessageHandler,
-      onLaunch: (Map<String, dynamic> message) async {
-        // Called when app launch by tap notification on iOS
-        print("onLaunch: $message");
-        updateState(log: "\nonLaunch");
-        var karteNotification = await krt.Notification.create(message);
-        print("karte notification: $karteNotification");
-        if (karteNotification != null) {
-          karteNotification.handleForIOS();
-        }
-      },
-      onResume: (Map<String, dynamic> message) async {
-        // Called when app resume by tap notification on iOS
-        print("onResume: $message");
-        updateState(log: "\nonResume");
-        var karteNotification = await krt.Notification.create(message);
-        print("karte notification: $karteNotification");
-        if (karteNotification != null) {
-          karteNotification.handleForIOS();
-        }
-      },
-    );
-    _firebaseMessaging.requestNotificationPermissions(
-        const IosNotificationSettings(
-            sound: true, badge: true, alert: true, provisional: true));
-    _firebaseMessaging.onIosSettingsRegistered
-        .listen((IosNotificationSettings settings) {
-      print("Settings registered: $settings");
+    checkInitialMessage();
+    FirebaseMessaging.onBackgroundMessage(myBackgroundMessageHandler);
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
+      // Called when received notification on foreground
+      print("onMessage: $message");
+      updateState(log: "\nonMessage");
+      var karteNotification = await krt.Notification.create(message);
+      print("karte notification: $karteNotification");
+      if (karteNotification != null) {
+        karteNotification.handleForAndroid();
+      }
+    });
+    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) async {
+      // Called when app resume by tap notification on iOS
+      print("onMessageOpenedApp: $message");
+      updateState(log: "\nonMessageOpenedApp");
+      var karteNotification = await krt.Notification.create(message);
+      print("karte notification: $karteNotification");
+      if (karteNotification != null) {
+        karteNotification.handleForIOS();
+      }
+    });
+    _firebaseMessaging
+        .requestPermission(
+            alert: true, badge: true, provisional: true, sound: true)
+        .then((NotificationSettings value) {
+      print("Settings registered: $value");
     });
     _firebaseMessaging.onTokenRefresh.listen((String token) {
       print("onTokenRefreshed: $token");
       krt.Notification.registerFCMToken(token);
       updateState(token: token);
     });
-    _firebaseMessaging.getToken().then((String token) {
-      assert(token != null);
+    _firebaseMessaging.getToken().then((String? token) {
+      if (token == null) return;
       krt.Notification.registerFCMToken(token);
       updateState(token: token);
     });
@@ -99,7 +96,7 @@ class _NotificationState extends State<NotificationScreen> {
           // mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(_homeScreenText),
-            RaisedButton(
+            ElevatedButton(
               onPressed: () {
                 Tracker.view("push_text");
               },

@@ -1,82 +1,75 @@
 PODS:
-  - Firebase/CoreOnly (6.26.0):
-    - FirebaseCore (= 6.7.2)
-  - Firebase/Messaging (6.26.0):
+  - Firebase/CoreOnly (8.6.0):
+    - FirebaseCore (= 8.6.0)
+  - Firebase/Messaging (8.6.0):
     - Firebase/CoreOnly
-    - FirebaseMessaging (~> 4.4.1)
-  - firebase_core (0.5.0):
-    - Firebase/CoreOnly (~> 6.26.0)
+    - FirebaseMessaging (~> 8.6.0)
+  - firebase_core (1.6.0):
+    - Firebase/CoreOnly (= 8.6.0)
     - Flutter
-  - firebase_messaging (7.0.2):
-    - Firebase/CoreOnly (~> 6.26.0)
-    - Firebase/Messaging (~> 6.26.0)
+  - firebase_messaging (10.0.6):
+    - Firebase/Messaging (= 8.6.0)
     - firebase_core
     - Flutter
-  - FirebaseAnalyticsInterop (1.5.0)
-  - FirebaseCore (6.7.2):
-    - FirebaseCoreDiagnostics (~> 1.3)
-    - FirebaseCoreDiagnosticsInterop (~> 1.2)
-    - GoogleUtilities/Environment (~> 6.5)
-    - GoogleUtilities/Logger (~> 6.5)
-  - FirebaseCoreDiagnostics (1.7.0):
-    - GoogleDataTransport (~> 7.4)
-    - GoogleUtilities/Environment (~> 6.7)
-    - GoogleUtilities/Logger (~> 6.7)
-    - nanopb (~> 1.30906.0)
-  - FirebaseCoreDiagnosticsInterop (1.2.0)
-  - FirebaseInstallations (1.3.0):
-    - FirebaseCore (~> 6.6)
-    - GoogleUtilities/Environment (~> 6.6)
-    - GoogleUtilities/UserDefaults (~> 6.6)
-    - PromisesObjC (~> 1.2)
-  - FirebaseInstanceID (4.3.4):
-    - FirebaseCore (~> 6.6)
-    - FirebaseInstallations (~> 1.0)
-    - GoogleUtilities/Environment (~> 6.5)
-    - GoogleUtilities/UserDefaults (~> 6.5)
-  - FirebaseMessaging (4.4.1):
-    - FirebaseAnalyticsInterop (~> 1.5)
-    - FirebaseCore (~> 6.6)
-    - FirebaseInstanceID (~> 4.3)
-    - GoogleUtilities/AppDelegateSwizzler (~> 6.5)
-    - GoogleUtilities/Environment (~> 6.5)
-    - GoogleUtilities/Reachability (~> 6.5)
-    - GoogleUtilities/UserDefaults (~> 6.5)
-    - Protobuf (>= 3.9.2, ~> 3.9)
+  - FirebaseCore (8.6.0):
+    - FirebaseCoreDiagnostics (~> 8.0)
+    - GoogleUtilities/Environment (~> 7.4)
+    - GoogleUtilities/Logger (~> 7.4)
+  - FirebaseCoreDiagnostics (8.6.0):
+    - GoogleDataTransport (~> 9.0)
+    - GoogleUtilities/Environment (~> 7.4)
+    - GoogleUtilities/Logger (~> 7.4)
+    - nanopb (~> 2.30908.0)
+  - FirebaseInstallations (8.6.0):
+    - FirebaseCore (~> 8.0)
+    - GoogleUtilities/Environment (~> 7.4)
+    - GoogleUtilities/UserDefaults (~> 7.4)
+    - PromisesObjC (< 3.0, >= 1.2)
+  - FirebaseMessaging (8.6.0):
+    - FirebaseCore (~> 8.0)
+    - FirebaseInstallations (~> 8.0)
+    - GoogleDataTransport (~> 9.0)
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.4)
+    - GoogleUtilities/Environment (~> 7.4)
+    - GoogleUtilities/Reachability (~> 7.4)
+    - GoogleUtilities/UserDefaults (~> 7.4)
+    - nanopb (~> 2.30908.0)
   - Flutter (1.0.0)
-  - GoogleDataTransport (7.5.1):
-    - nanopb (~> 1.30906.0)
-  - GoogleUtilities/AppDelegateSwizzler (6.7.2):
+  - GoogleDataTransport (9.1.0):
+    - GoogleUtilities/Environment (~> 7.2)
+    - nanopb (~> 2.30908.0)
+    - PromisesObjC (< 3.0, >= 1.2)
+  - GoogleUtilities/AppDelegateSwizzler (7.5.1):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
     - GoogleUtilities/Network
-  - GoogleUtilities/Environment (6.7.2):
-    - PromisesObjC (~> 1.2)
-  - GoogleUtilities/Logger (6.7.2):
+  - GoogleUtilities/Environment (7.5.1):
+    - PromisesObjC (< 3.0, >= 1.2)
+  - GoogleUtilities/Logger (7.5.1):
     - GoogleUtilities/Environment
-  - GoogleUtilities/Network (6.7.2):
+  - GoogleUtilities/Network (7.5.1):
     - GoogleUtilities/Logger
     - "GoogleUtilities/NSData+zlib"
     - GoogleUtilities/Reachability
-  - "GoogleUtilities/NSData+zlib (6.7.2)"
-  - GoogleUtilities/Reachability (6.7.2):
+  - "GoogleUtilities/NSData+zlib (7.5.1)"
+  - GoogleUtilities/Reachability (7.5.1):
     - GoogleUtilities/Logger
-  - GoogleUtilities/UserDefaults (6.7.2):
+  - GoogleUtilities/UserDefaults (7.5.1):
     - GoogleUtilities/Logger
-  - karte_core (0.1.0):
+  - karte_core (0.2.0):
     - Flutter
     - KarteCore (~> 2)
-  - karte_in_app_messaging (0.1.0):
+  - karte_in_app_messaging (0.2.0):
     - Flutter
     - KarteInAppMessaging (~> 2)
-  - karte_notification (0.1.0):
+  - karte_notification (0.2.0):
     - Flutter
     - KarteRemoteNotification (~> 2)
-  - karte_variables (0.1.0):
+  - karte_variables (0.2.0):
     - Flutter
     - karte_core
     - KarteVariables (~> 2)
-  - karte_visual_tracking (0.1.0):
+  - karte_visual_tracking (0.2.0):
     - Flutter
     - karte_core
     - KarteVisualTracking (~> 2)
@@ -97,13 +90,12 @@ PODS:
   - KarteVisualTracking (2.5.0):
     - KarteCore (~> 2.0)
     - KarteUtilities (~> 3.1)
-  - nanopb (1.30906.0):
-    - nanopb/decode (= 1.30906.0)
-    - nanopb/encode (= 1.30906.0)
-  - nanopb/decode (1.30906.0)
-  - nanopb/encode (1.30906.0)
-  - PromisesObjC (1.2.12)
-  - Protobuf (3.14.0)
+  - nanopb (2.30908.0):
+    - nanopb/decode (= 2.30908.0)
+    - nanopb/encode (= 2.30908.0)
+  - nanopb/decode (2.30908.0)
+  - nanopb/encode (2.30908.0)
+  - PromisesObjC (2.0.0)
 
 DEPENDENCIES:
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
@@ -118,12 +110,9 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - Firebase
-    - FirebaseAnalyticsInterop
     - FirebaseCore
     - FirebaseCoreDiagnostics
-    - FirebaseCoreDiagnosticsInterop
     - FirebaseInstallations
-    - FirebaseInstanceID
     - FirebaseMessaging
     - GoogleDataTransport
     - GoogleUtilities
@@ -135,7 +124,6 @@ SPEC REPOS:
     - KarteVisualTracking
     - nanopb
     - PromisesObjC
-    - Protobuf
 
 EXTERNAL SOURCES:
   firebase_core:
@@ -156,34 +144,30 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/karte_visual_tracking/ios"
 
 SPEC CHECKSUMS:
-  Firebase: 7cf5f9c67f03cb3b606d1d6535286e1080e57eb6
-  firebase_core: 3134fe79d257d430f163b558caf52a10a87efe8a
-  firebase_messaging: 2844c37f9ce87c0904b38fe435223161b1a71528
-  FirebaseAnalyticsInterop: 3f86269c38ae41f47afeb43ebf32a001f58fcdae
-  FirebaseCore: f42e5e5f382cdcf6b617ed737bf6c871a6947b17
-  FirebaseCoreDiagnostics: 770ac5958e1372ce67959ae4b4f31d8e127c3ac1
-  FirebaseCoreDiagnosticsInterop: 296e2c5f5314500a850ad0b83e9e7c10b011a850
-  FirebaseInstallations: 6f5f680e65dc374397a483c32d1799ba822a395b
-  FirebaseInstanceID: cef67c4967c7cecb56ea65d8acbb4834825c587b
-  FirebaseMessaging: 29543feb343b09546ab3aa04d008ee8595b43c44
-  Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
-  GoogleDataTransport: f56af7caa4ed338dc8e138a5d7c5973e66440833
-  GoogleUtilities: 7f2f5a07f888cdb145101d6042bc4422f57e70b3
-  karte_core: b5db0821355805a7fd9e0f0e2a7012f4d54e8547
-  karte_in_app_messaging: fa3f627efb46b7fa68ec684f7aa2557424180dcc
-  karte_notification: 87f5ca292cede2b8bbc3a4ed7a6d5bb6ea14ade7
-  karte_variables: a8a87969957e48d6c1fe0d55ab59b0611c139795
-  karte_visual_tracking: cc8573c9929d44af7d875f7fc2b4f6f5504f102c
+  Firebase: 21ac9f28b09a8bdfc005f34c984fca84e7e8786d
+  firebase_core: c21ac09a8d23afd3594b56ed786bad12e5266bba
+  firebase_messaging: 0da89f644566bce5822fa3a5d47c764c44f1cf1d
+  FirebaseCore: 620b677f70f5470a8e59cb77f3ddc666f6f09785
+  FirebaseCoreDiagnostics: 3721920bde3a9a6d5aa093c1d25e9d3e47f694af
+  FirebaseInstallations: 0ede6ffcd215b8f93c19d9b06c1c54e2d4107e98
+  FirebaseMessaging: ce0a5ee974f7bfe83b6cc5acce88c2d969e37c41
+  Flutter: 434fef37c0980e73bb6479ef766c45957d4b510c
+  GoogleDataTransport: 85fd18ff3019bb85d3f2c551d04c481dedf71fc9
+  GoogleUtilities: 3df19e3c24f7bbc291d8b5809aa6b0d41e642437
+  karte_core: 46a7f72158f6af2299027be3ba012614cb7e7add
+  karte_in_app_messaging: b0de299462fcb0ca1052d233e6b1136fa44e4727
+  karte_notification: f94b287f758dbc7847cfb854a765a34b0d3f52b8
+  karte_variables: 47b9c3162923176604c6d131541db2d1940ab059
+  karte_visual_tracking: a9db6d0625affc0cf617fc27f98ef2b4ed124896
   KarteCore: 6b7990368f438d5bbf19bf94ffe703181d648c8f
   KarteInAppMessaging: 5c05e89e52c6d2b7565cc9e3dc62844daf94912e
   KarteRemoteNotification: 6c3836cf3fe7679c876c4e377aa7b3ae9fa0d900
   KarteUtilities: 87d79d20649710937f9bfd4961d369bf77105152
   KarteVariables: 263a5244f2b9524ad3ea2b40ba2aaa57748accd0
   KarteVisualTracking: 97cc7ca2b4e429be8fa8e8754fd9f402281fa39d
-  nanopb: 59317e09cf1f1a0af72f12af412d54edf52603fc
-  PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
-  Protobuf: 0cde852566359049847168e51bd1c690e0f70056
+  nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
+  PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
 
-PODFILE CHECKSUM: aafe91acc616949ddb318b77800a7f51bffa2a4c
+PODFILE CHECKSUM: fe0e1ee7f3d1f7d00b11b474b62dd62134535aea
 
-COCOAPODS: 1.10.0
+COCOAPODS: 1.10.1
