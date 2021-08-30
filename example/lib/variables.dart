@@ -7,12 +7,12 @@ class VariablesScreen extends StatefulWidget {
 }
 
 class _VariablesState extends State<VariablesScreen> {
-  String _string;
-  int _int;
-  double _double;
-  bool _bool;
-  List _list;
-  Map _map;
+  String? _string;
+  int? _int;
+  double? _double;
+  bool? _bool;
+  List? _list;
+  Map? _map;
 
   @override
   void initState() {
@@ -63,7 +63,7 @@ class _VariablesState extends State<VariablesScreen> {
       child: Column(
         // mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          RaisedButton(
+          ElevatedButton(
             onPressed: () {
               Variables.fetch().then((value) async {
                 print("variables fetch completed!");
@@ -72,7 +72,7 @@ class _VariablesState extends State<VariablesScreen> {
             },
             child: Text("Fetch Variables"),
           ),
-          RaisedButton(
+          ElevatedButton(
             onPressed: () async {
               var strVar = await Variables.get('string');
               var intVar = await Variables.get('long');
@@ -85,7 +85,7 @@ class _VariablesState extends State<VariablesScreen> {
             },
             child: Text("Track open"),
           ),
-          RaisedButton(
+          ElevatedButton(
             onPressed: () async {
               var strVar = await Variables.get('string');
               var intVar = await Variables.get('long');
