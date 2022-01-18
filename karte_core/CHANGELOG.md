@@ -1,3 +1,7 @@
+## 1.0.0
+
+* General availability release.
+
 ## 0.2.0
 
 * Support null safety.
