@@ -55,14 +55,15 @@ case "$yn" in
 esac
 
 for PACKAGE in ${TARGET_PACKAGES[@]}; do
+  TAG_VERSION=$(get_package_version_tag $PACKAGE)
+
   cd $PACKAGE
-  flutter pub publish --dry-run1``
+  flutter pub publish
   if [ $? -ne 0 ]; then
     echo "WarningまたはErrorを解消してください"
     exit 1
   fi
 
-  TAG_VERSION=$(get_package_version_tag $PACKAGE)
   set_tag $TAG_VERSION
   cd ..
 done
