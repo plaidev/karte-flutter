@@ -87,7 +87,10 @@ class KarteVisualTrackingPlugin : FlutterPlugin, MethodCallHandler {
                                 val width: Double = call.argument("imageWidth") ?: return@ImageProvider bitmap
                                 val height: Double = call.argument("imageHeight") ?: return@ImageProvider bitmap
 
-                                Bitmap.createBitmap(bitmap, x.toInt(), y.toInt(), width.toInt(), height.toInt())
+                                val croppedBitmap = Bitmap.createBitmap(bitmap, x.toInt(), y.toInt(), width.toInt(), height.toInt())
+                                bitmap.recycle()
+
+                                return@ImageProvider croppedBitmap
                             }
                         }
                         val action = BasicAction(
