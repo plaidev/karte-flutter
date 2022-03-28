@@ -41,7 +41,9 @@ class VisualTracking {
   /// [action] にアクション名を指定します。
   /// [targetText] にターゲット文字列を指定します。（Viewコンポーネントのタイトルなど）
   /// [actionId] アクションIDを指定します。（アクションIDにはアプリ再起動時も変化しない一意なIDを設定してください。）
-  /// [globalKey] 画像データ生成対象のWidgetに紐づくglobalKeyを指定します。（ペアリング時の操作ログ送信でのみ利用されます。）
+  /// [renderRepaintBoundary] 画像データの取得元となるRenderRepaintBoundary。（ペアリング時の操作ログ送信でのみ利用されます。）
+  /// [offset] RenderRepaintBoundaryと操作ログ対象Widgetの相対座標
+  /// [size] 操作ログ対象Widgetのサイズ
   static Future<void> handle(
       {required String action,
       required String targetText,
