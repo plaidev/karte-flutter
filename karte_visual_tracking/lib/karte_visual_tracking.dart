@@ -28,33 +28,9 @@ const WrapperChannel _channel = const WrapperChannel('karte_visual_tracking');
 const MethodChannel _dartChannel =
     const MethodChannel('karte_visual_tracking_dart');
 
-Future<dynamic> _handleDartMethod(MethodCall call) async {
-  switch (call.method) {
-    case 'pairingStatusUpdated':
-      print("pairingStatusUpdated was called isPaired = ${call.arguments}");
-      VisualTracking._paired = call.arguments;
-      return Future.value(null);
-    default:
-      throw MissingPluginException(
-          "No implementation found for method ${call.method}");
-  }
-}
-
 /// ビジュアルトラッキングの管理を行うクラスです。
 class VisualTracking {
   VisualTracking._();
-
-  static bool _paired = false;
-
-  static bool get _isPaired {
-    if (!_dartChannel.checkMethodCallHandler(_handleDartMethod)) {
-      _dartChannel.setMethodCallHandler(_handleDartMethod);
-      _channel
-          .invokeMethod('VisualTracking_isPaired')
-          .then((value) => {_paired = value});
-    }
-    return _paired;
-  }
 
   /// 操作ログをハンドルします。
   ///
@@ -68,9 +44,12 @@ class VisualTracking {
   static Future<void> handle(String action, String targetText, String actionId,
       [GlobalKey? globalKey]) async {
     var imageData;
-    if (VisualTracking._isPaired) {
+
+    final isPaired = await _channel.invokeMethod('VisualTracking_isPaired');
+    if (isPaired) {
       imageData = await _imageData(globalKey);
     }
+
     await _channel.invokeMethod('VisualTracking_handle', {
       "action": action,
       "targetText": targetText,
