@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:karte_flutter/visual_tracking_helper.dart';
+import 'package:karte_flutter_example/visual_tracking_helper.dart';
 
 class VTScreen extends StatefulWidget {
   @override

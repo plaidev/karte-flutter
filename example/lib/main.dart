@@ -1,10 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:karte_flutter/core.dart';
-import 'package:karte_flutter/iam.dart';
-import 'package:karte_flutter/notification.dart';
-import 'package:karte_flutter/variables.dart';
-import 'package:karte_flutter/visual_tracking.dart';
+import 'package:karte_flutter_example/core.dart';
+import 'package:karte_flutter_example/iam.dart';
+import 'package:karte_flutter_example/notification.dart';
+import 'package:karte_flutter_example/variables.dart';
+import 'package:karte_flutter_example/visual_tracking.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

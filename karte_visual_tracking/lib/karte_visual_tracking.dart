@@ -32,6 +32,7 @@ const MethodChannel _dartChannel =
 class VisualTracking {
   VisualTracking._();
 
+
   /// 操作ログをハンドルします。
   ///
   /// 操作ログはペアリング時のみ送信されます。
