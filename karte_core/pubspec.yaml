@@ -1,6 +1,8 @@
 name: karte_core
-description: Flutter plugin for KARTE Core.
-version: 0.2.0
+description:
+  Flutter plugin for KARTE Core, provides a simple API for event tracking.
+  Supports on Android and iOS.
+version: 1.0.0
 homepage: https://github.com/plaidev/karte-flutter/tree/master/karte_core
 
 environment:

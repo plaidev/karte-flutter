@@ -1,3 +1,11 @@
+## 1.1.0
+
+* Changed the constraint to build with firebase_messaging: 11.x.x.
+
+## 1.0.0
+
+* General availability release.
+
 ## 0.2.0
 
 * Support null safety.
