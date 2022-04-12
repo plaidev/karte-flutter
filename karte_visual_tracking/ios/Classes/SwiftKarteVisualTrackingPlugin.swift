@@ -19,24 +19,6 @@ import KarteCore
 import karte_core
 import KarteVisualTracking
 
-internal class VisualTrackDelegateHook: VisualTrackingDelegate {
-    private static let shared = VisualTrackDelegateHook()
-    private var channel: FlutterMethodChannel?
-
-    private init() {}
-    
-    static func sharedInstance(messenger: FlutterBinaryMessenger) -> VisualTrackDelegateHook {
-        shared.channel = FlutterMethodChannel(name: "karte_visual_tracking_dart", binaryMessenger: messenger)
-        return shared
-    }
-        
-    func visualTrackingDevicePairingStatusUpdated(_ visualTracking: VisualTracking, isPaired: Bool) {
-        DispatchQueue.main.async {
-            self.channel?.invokeMethod("pairingStatusUpdated", arguments: isPaired)
-        }
-    }
-}
-
 internal struct DefaultFlutterAction: ActionProtocol {
     let action: String
     
@@ -60,7 +42,6 @@ public class SwiftKarteVisualTrackingPlugin: NSObject, FlutterPlugin {
         let channel = FlutterMethodChannel(name: "karte_visual_tracking", binaryMessenger: registrar.messenger())
         let instance = SwiftKarteVisualTrackingPlugin()
         registrar.addMethodCallDelegate(instance, channel: channel)
-        VisualTracking.shared.delegate = VisualTrackDelegateHook.sharedInstance(messenger: registrar.messenger())
     }
     
     public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {

@@ -44,7 +44,6 @@ class KarteVisualTrackingPlugin : FlutterPlugin, MethodCallHandler {
     override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
         channel = MethodChannel(flutterPluginBinding.binaryMessenger, "karte_visual_tracking")
         channel.setMethodCallHandler(this)
-        setDelegate(flutterPluginBinding.binaryMessenger)
     }
 
     // This static function is optional and equivalent to onAttachedToEngine. It supports the old
@@ -62,7 +61,6 @@ class KarteVisualTrackingPlugin : FlutterPlugin, MethodCallHandler {
             val channel = MethodChannel(registrar.messenger(), "karte_visual_tracking")
             val plugin = KarteVisualTrackingPlugin()
             channel.setMethodCallHandler(plugin)
-            plugin.setDelegate(registrar.messenger())
         }
     }
 
@@ -112,17 +110,5 @@ class KarteVisualTrackingPlugin : FlutterPlugin, MethodCallHandler {
 
     override fun onDetachedFromEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
         channel.setMethodCallHandler(null)
-    }
-
-    private fun setDelegate(messenger: BinaryMessenger) {
-        VisualTracking.delegate = object : VisualTrackingDelegate() {
-            override fun onDevicePairingStatusUpdated(isPaired: Boolean) {
-                Logger.d(LOG_TAG, "onDevicePairingStatusUpdated called isPaired=$isPaired")
-                val channel = MethodChannel(messenger, "karte_visual_tracking_dart")
-                Handler(Looper.getMainLooper()).post {
-                    channel.invokeMethod("pairingStatusUpdated", isPaired)
-                }
-            }
-        }
     }
 }

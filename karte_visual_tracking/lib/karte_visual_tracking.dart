@@ -24,9 +24,6 @@ import 'package:karte_core/karte_core.dart';
 
 const WrapperChannel _channel = const WrapperChannel('karte_visual_tracking');
 
-const MethodChannel _dartChannel =
-    const MethodChannel('karte_visual_tracking_dart');
-
 /// ビジュアルトラッキングの管理を行うクラスです。
 class VisualTracking {
   VisualTracking._();
