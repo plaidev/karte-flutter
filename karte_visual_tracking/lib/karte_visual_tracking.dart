@@ -18,19 +18,17 @@ import 'dart:async';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
 
-import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:karte_core/karte_core.dart';
 
 const WrapperChannel _channel = const WrapperChannel('karte_visual_tracking');
 
-const MethodChannel _dartChannel =
-    const MethodChannel('karte_visual_tracking_dart');
-
 /// ビジュアルトラッキングの管理を行うクラスです。
 class VisualTracking {
   VisualTracking._();
+
+  static const _pixelRatio = 2.0;
 
   /// 操作ログをハンドルします。
   ///
@@ -40,40 +38,52 @@ class VisualTracking {
   /// [action] にアクション名を指定します。
   /// [targetText] にターゲット文字列を指定します。（Viewコンポーネントのタイトルなど）
   /// [actionId] アクションIDを指定します。（アクションIDにはアプリ再起動時も変化しない一意なIDを設定してください。）
-  /// [globalKey] 画像データ生成対象のWidgetに紐づくglobalKeyを指定します。（ペアリング時の操作ログ送信でのみ利用されます。）
-  static Future<void> handle(String action, String targetText, String actionId,
-      [GlobalKey? globalKey]) async {
+  /// [renderRepaintBoundary] 画像データの取得元となるRenderRepaintBoundary。（ペアリング時の操作ログ送信でのみ利用されます。）
+  /// [offset] RenderRepaintBoundaryと操作ログ対象Widgetの相対座標
+  /// [size] 操作ログ対象Widgetのサイズ
+  static Future<void> handle(
+      {required String action,
+      required String targetText,
+      required String actionId,
+      RenderRepaintBoundary? renderRepaintBoundary,
+      Offset? offset,
+      Size? size}) async {
     var imageData;
 
     final isPaired = await _channel.invokeMethod('VisualTracking_isPaired');
     if (isPaired) {
-      imageData = await _imageData(globalKey);
+      imageData = await _imageData(renderRepaintBoundary);
     }
 
+    final offsetX = offset != null ? _pixelRatio * offset.dx : null;
+    final offsetY = offset != null ? _pixelRatio * offset.dy : null;
+    final imageWidth = size != null ? _pixelRatio * size.width : null;
+    final imageHeight = size != null ? _pixelRatio * size.height : null;
     await _channel.invokeMethod('VisualTracking_handle', {
       "action": action,
       "targetText": targetText,
       "actionId": actionId,
-      "imageData": imageData
+      "imageData": imageData,
+      "offsetX": offsetX,
+      "offsetY": offsetY,
+      "imageWidth": imageWidth,
+      "imageHeight": imageHeight,
     });
   }
 
-  static Future<Uint8List?> _imageData(GlobalKey? globalKey,
+  static Future<Uint8List?> _imageData(
+      RenderRepaintBoundary? renderRepaintBoundary,
       [bool shouldRetry = true]) async {
-    if (globalKey == null) return null;
-
     ui.Image? image;
-    RenderRepaintBoundary? boundary =
-        globalKey.currentContext?.findRenderObject() as RenderRepaintBoundary?;
     try {
-      image = await boundary?.toImage(pixelRatio: 2.0);
+      image = await renderRepaintBoundary?.toImage(pixelRatio: _pixelRatio);
       ByteData? byteData =
           await image?.toByteData(format: ui.ImageByteFormat.png);
       return byteData?.buffer.asUint8List();
     } catch (_) {
       if (shouldRetry) {
         await Future.delayed(Duration(milliseconds: 50));
-        return _imageData(globalKey, false);
+        return _imageData(renderRepaintBoundary, false);
       }
     }
     return null;

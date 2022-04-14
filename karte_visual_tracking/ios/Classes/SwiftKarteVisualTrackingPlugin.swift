@@ -19,24 +19,6 @@ import KarteCore
 import karte_core
 import KarteVisualTracking
 
-internal class VisualTrackDelegateHook: VisualTrackingDelegate {
-    private static let shared = VisualTrackDelegateHook()
-    private var channel: FlutterMethodChannel?
-
-    private init() {}
-    
-    static func sharedInstance(messenger: FlutterBinaryMessenger) -> VisualTrackDelegateHook {
-        shared.channel = FlutterMethodChannel(name: "karte_visual_tracking_dart", binaryMessenger: messenger)
-        return shared
-    }
-        
-    func visualTrackingDevicePairingStatusUpdated(_ visualTracking: VisualTracking, isPaired: Bool) {
-        DispatchQueue.main.async {
-            self.channel?.invokeMethod("pairingStatusUpdated", arguments: isPaired)
-        }
-    }
-}
-
 internal struct DefaultFlutterAction: ActionProtocol {
     let action: String
     
@@ -60,7 +42,6 @@ public class SwiftKarteVisualTrackingPlugin: NSObject, FlutterPlugin {
         let channel = FlutterMethodChannel(name: "karte_visual_tracking", binaryMessenger: registrar.messenger())
         let instance = SwiftKarteVisualTrackingPlugin()
         registrar.addMethodCallDelegate(instance, channel: channel)
-        VisualTracking.shared.delegate = VisualTrackDelegateHook.sharedInstance(messenger: registrar.messenger())
     }
     
     public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
@@ -81,8 +62,26 @@ public class SwiftKarteVisualTrackingPlugin: NSObject, FlutterPlugin {
                     imageProvider = { () -> UIImage? in
                         let rgbaUint8 = [UInt8](imageData.data)
                         let data = NSData(bytes: rgbaUint8, length: rgbaUint8.count)
-                        let uiimage = UIImage(data: data as Data)
-                        return uiimage
+                        
+                        guard let uiimage = UIImage(data: data as Data) else {
+                            return nil
+                        }
+                        
+                        guard let x = arguments?["offsetX"] as? Double,
+                            let y = arguments?["offsetY"] as? Double,
+                            let width = arguments?["imageWidth"] as? Double,
+                            let height = arguments?["imageHeight"] as? Double else {
+                                return uiimage
+                        }
+                        
+                        if Int(uiimage.size.width - width) <= 0 && Int(uiimage.size.height - height) <= 0 {
+                            return uiimage
+                        }
+                        
+                        guard let cropImage = uiimage.cgImage?.cropping(to: .init(x: x, y: y, width: width, height: height)) else {
+                            return nil
+                        }
+                        return UIImage(cgImage: cropImage)
                     }
                 }
                 

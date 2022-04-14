@@ -15,6 +15,7 @@
 //
 package io.karte.flutter.visual_tracking
 
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Handler
 import android.os.Looper
@@ -43,7 +44,6 @@ class KarteVisualTrackingPlugin : FlutterPlugin, MethodCallHandler {
     override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
         channel = MethodChannel(flutterPluginBinding.binaryMessenger, "karte_visual_tracking")
         channel.setMethodCallHandler(this)
-        setDelegate(flutterPluginBinding.binaryMessenger)
     }
 
     // This static function is optional and equivalent to onAttachedToEngine. It supports the old
@@ -61,7 +61,6 @@ class KarteVisualTrackingPlugin : FlutterPlugin, MethodCallHandler {
             val channel = MethodChannel(registrar.messenger(), "karte_visual_tracking")
             val plugin = KarteVisualTrackingPlugin()
             channel.setMethodCallHandler(plugin)
-            plugin.setDelegate(registrar.messenger())
         }
     }
 
@@ -78,8 +77,19 @@ class KarteVisualTrackingPlugin : FlutterPlugin, MethodCallHandler {
                     "handle" -> {
                         val actionName = call.argument<String>("action") ?: return
                         var imageProvider: ImageProvider? = null
-                        call.argument<ByteArray>("imageData")?.let {
-                            imageProvider = ImageProvider { BitmapFactory.decodeByteArray(it, 0, it.size) }
+                        call.argument<ByteArray>("imageData")?.let { byteArray ->
+                            imageProvider = ImageProvider {
+                                val bitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
+                                val x: Double = call.argument("offsetX") ?: return@ImageProvider bitmap
+                                val y: Double = call.argument("offsetY") ?: return@ImageProvider bitmap
+                                val width: Double = call.argument("imageWidth") ?: return@ImageProvider bitmap
+                                val height: Double = call.argument("imageHeight") ?: return@ImageProvider bitmap
+
+                                val croppedBitmap = Bitmap.createBitmap(bitmap, x.toInt(), y.toInt(), width.toInt(), height.toInt())
+                                bitmap.recycle()
+
+                                return@ImageProvider croppedBitmap
+                            }
                         }
                         val action = BasicAction(
                                 actionName,
@@ -100,17 +110,5 @@ class KarteVisualTrackingPlugin : FlutterPlugin, MethodCallHandler {
 
     override fun onDetachedFromEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
         channel.setMethodCallHandler(null)
-    }
-
-    private fun setDelegate(messenger: BinaryMessenger) {
-        VisualTracking.delegate = object : VisualTrackingDelegate() {
-            override fun onDevicePairingStatusUpdated(isPaired: Boolean) {
-                Logger.d(LOG_TAG, "onDevicePairingStatusUpdated called isPaired=$isPaired")
-                val channel = MethodChannel(messenger, "karte_visual_tracking_dart")
-                Handler(Looper.getMainLooper()).post {
-                    channel.invokeMethod("pairingStatusUpdated", isPaired)
-                }
-            }
-        }
     }
 }
