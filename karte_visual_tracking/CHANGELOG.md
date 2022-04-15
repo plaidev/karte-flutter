@@ -1,3 +1,8 @@
+## 0.3.0
+
+* Replace obsolete api.
+* Added a widget wrapper to automatically collect visual tracking operation logs.
+
 ## 0.2.0
 
 * Support null safety.
