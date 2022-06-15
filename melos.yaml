@@ -2,6 +2,7 @@ name: karte_flutter
 
 packages:
   - karte_*/**
+  - example/**
 
 command:
   bootstrap:
