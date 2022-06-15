@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:karte_flutter/visual_tracking_helper.dart';
+import 'package:karte_visual_tracking/karte_visual_tracking_widget.dart';
 
 class VTScreen extends StatefulWidget {
   @override
@@ -14,18 +14,12 @@ class _VTState extends State<VTScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return VTScreenContainer(
-      child: Center(
-        child: Column(
-          children: [
-            VTButton(
-                title: "handle",
-                actionId: "touch_vtbutton1",
-                onPressed: () async {
-                  print("VTButton pressed");
-                }),
-          ],
-        ),
+    return VisualTrackingWidget(
+      child: ElevatedButton(
+        child: Text('handle'),
+        onPressed: () {
+          print("VTButton pressed");
+        },
       ),
     );
   }
