@@ -24,6 +24,7 @@ jobs:
           cache-key: ${{ env.FLUTTER_VERSION }}-${{ env.FLUTTER_CHANNEL }}
       - name: set up melos
         run: |
+          flutter pub global activate melos
           ./scripts/setup.sh
       - name: analyze all packages
         run: |
