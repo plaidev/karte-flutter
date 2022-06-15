@@ -22,6 +22,7 @@ import 'package:flutter/services.dart';
 class WrapperChannel extends MethodChannel {
   const WrapperChannel(String name) : super(name);
 
+  @override
   Future<T?> invokeMethod<T>(String method, [dynamic arguments, T? def]) {
     try {
       return super.invokeMethod(method, arguments);
@@ -31,7 +32,7 @@ class WrapperChannel extends MethodChannel {
   }
 }
 
-const WrapperChannel _channel = const WrapperChannel('karte_core');
+const WrapperChannel _channel = WrapperChannel('karte_core');
 
 /// KARTE SDKのエントリポイントクラスです。
 class KarteApp {

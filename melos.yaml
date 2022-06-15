@@ -10,4 +10,4 @@ command:
 
 scripts:
   analyze:
-    exec: dart analyze .
+    exec: flutter analyze .

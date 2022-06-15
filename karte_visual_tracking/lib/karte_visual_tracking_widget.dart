@@ -95,7 +95,7 @@ class _RenderVisualTracking extends RenderConstrainedBox {
 
       if (renderRepaintBoundary == null) {
         if (renderObject is RenderRepaintBoundary) {
-          renderRepaintBoundary = renderObject as RenderRepaintBoundary;
+          renderRepaintBoundary = renderObject;
         }
         continue;
       }
@@ -109,7 +109,7 @@ class _RenderVisualTracking extends RenderConstrainedBox {
         continue;
       }
 
-      renderPointerListener = renderObject as RenderPointerListener;
+      renderPointerListener = renderObject;
       break;
     }
 
