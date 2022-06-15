@@ -1,0 +1,12 @@
+name: karte_flutter
+
+packages:
+  - karte_*/**
+
+command:
+  bootstrap:
+    usePubspecOverrides: true
+
+scripts:
+  analyze:
+    exec: dart analyze .
