@@ -29,3 +29,6 @@ jobs:
       - name: analyze all packages
         run: |
           flutter pub global run melos run analyze
+      - name: test all packages
+        run: |
+          flutter pub global run melos run test
