@@ -13,9 +13,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  karte_core:
-    version: ^1.0.0
-#    path: ../karte_core # comment out when local development.
+  karte_core: ^1.0.0
 
 dev_dependencies:
   flutter_test:
