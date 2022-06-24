@@ -8,7 +8,7 @@ env:
   FLUTTER_CHANNEL: 'stable'
 
 jobs:
-  pr-check:
+  publish:
     runs-on: ubuntu-latest
     permissions:
       contents: write
