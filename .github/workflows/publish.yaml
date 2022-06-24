@@ -1,0 +1,44 @@
+name: Publish
+
+on:
+  pull_request:
+
+env:
+  FLUTTER_VERSION: 3.0.1
+  FLUTTER_CHANNEL: 'stable'
+
+jobs:
+  pr-check:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+      - name: set up flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: ${{ env.FLUTTER_CHANNEL }}
+          cache: true
+          cache-key: ${{ env.FLUTTER_VERSION }}-${{ env.FLUTTER_CHANNEL }}
+      - name: set up melos
+        run: |
+          flutter pub global activate melos
+          ./scripts/setup.sh
+      - name: publish dry run
+        if: github.event.pull_request.merged == false
+        run: |
+          melos publish --dry-run -y | grep ^Publishing > publish-dry-run.log
+      - name: commnet pr
+        if: github.event.pull_request.merged == false
+        uses: machine-learning-apps/pr-comment@master
+        with:
+          path: publish-dry-run.log
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: publish
+        if: github.event.pull_request.merged == true
+        run: |
+          melos publish --no-dry-run --git-tag-version -y
+          git push origin --tags
