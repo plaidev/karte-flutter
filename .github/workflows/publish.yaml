@@ -28,18 +28,18 @@ jobs:
           flutter pub global activate melos
           ./scripts/setup.sh
       - name: publish dry run
-        if: github.event.pull_request.merged == false
+        if: github.event.pull_request.merged == false && github.event.pull_request.base.ref == 'develop'
         run: |
           melos publish --dry-run -y | grep -e ^Publishing -e '^No unpublished packages found' > publish-dry-run.log
       - name: commnet pr
-        if: github.event.pull_request.merged == false
+        if: github.event.pull_request.merged == false && github.event.pull_request.base.ref == 'develop'
         uses: machine-learning-apps/pr-comment@master
         with:
           path: publish-dry-run.log
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: publish
-        if: github.event.pull_request.merged == true
+        if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'master'
         run: |
           melos publish --no-dry-run --git-tag-version -y
           git push origin --tags
