@@ -30,7 +30,7 @@ jobs:
       - name: publish dry run
         if: github.event.pull_request.merged == false
         run: |
-          melos publish --dry-run -y | grep ^Publishing > publish-dry-run.log
+          melos publish --dry-run -y | grep -e ^Publishing -e '^No unpublished packages found' > publish-dry-run.log
       - name: commnet pr
         if: github.event.pull_request.merged == false
         uses: machine-learning-apps/pr-comment@master
