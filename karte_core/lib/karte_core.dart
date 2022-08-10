@@ -121,9 +121,20 @@ class UserSync {
   ///
   /// [url] に連携するページのURL文字列を指定すると、連携用のクエリパラメータを付与したURL文字列を返します。
   /// 指定されたURL文字列の形式が正しくない場合、またはSDKの初期化が行われていない場合は、引数に指定したURL文字列を返します。
+  @Deprecated(
+      "User sync function using query parameters is deprecated. It will be removed in the future.")
   static Future<String> appendingQueryParameter(String url) async {
     return await _channel.invokeMethod(
             'UserSync_appendingQueryParameter', {"url": url}, url)
         as FutureOr<String>;
+  }
+
+  /// WebView 連携用のスクリプト(javascript)を返却します。
+  ///
+  /// ユーザースクリプトとしてWebViewに設定することで、WebView内のタグと連携されます。
+  /// なおSDKの初期化が行われていない場合はnullを返却します。
+  static Future<String?> getUserSyncScript() async {
+    return await _channel.invokeMethod('UserSync_getUserSyncScript', null)
+        as FutureOr<String?>;
   }
 }

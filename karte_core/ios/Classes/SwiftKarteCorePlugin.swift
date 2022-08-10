@@ -90,6 +90,8 @@ public class SwiftKarteCorePlugin: NSObject, FlutterPlugin {
                     Logger.warn(tag: .flutter, message: "UserSync.appendingQueryParameter didn't get argument 'url', return null.")
                     result(nil)
                 }
+            case "getUserSyncScript":
+                result(UserSync.getUserSyncScript())
             default:
                 result(FlutterMethodNotImplemented)
             }
