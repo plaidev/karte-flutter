@@ -95,7 +95,7 @@ class _RenderVisualTracking extends RenderConstrainedBox {
 
       if (renderRepaintBoundary == null) {
         if (renderObject is RenderRepaintBoundary) {
-          renderRepaintBoundary = renderObject as RenderRepaintBoundary;
+          renderRepaintBoundary = renderObject;
         }
         continue;
       }
@@ -109,7 +109,7 @@ class _RenderVisualTracking extends RenderConstrainedBox {
         continue;
       }
 
-      renderPointerListener = renderObject as RenderPointerListener;
+      renderPointerListener = renderObject;
       break;
     }
 
@@ -158,8 +158,8 @@ class KarteNavigatorObserver extends NavigatorObserver {
     }
     await Future.delayed(route.transitionDuration);
 
-    final page = route.navigator?.widget.pages.first;
-    if (page == null || page is! MaterialPage) {
+    final screenName = route.settings.name;
+    if (screenName == null) {
       return;
     }
 
@@ -172,7 +172,7 @@ class KarteNavigatorObserver extends NavigatorObserver {
     VisualTracking.handle(
       action: "didPush",
       targetText: "",
-      actionId: page.child.runtimeType.toString(),
+      actionId: screenName,
       renderRepaintBoundary: renderRepaintBoundary,
     );
   }
@@ -186,8 +186,8 @@ class KarteNavigatorObserver extends NavigatorObserver {
     }
     await Future.delayed(previousRoute.transitionDuration);
 
-    final page = previousRoute.navigator?.widget.pages.first;
-    if (page == null || page is! MaterialPage) {
+    final screenName = previousRoute.settings.name;
+    if (screenName == null) {
       return;
     }
 
@@ -196,8 +196,8 @@ class KarteNavigatorObserver extends NavigatorObserver {
 
     VisualTracking.handle(
       action: "didPop",
-      targetText: page.name ?? "",
-      actionId: page.child.runtimeType.toString(),
+      targetText: "",
+      actionId: screenName,
       renderRepaintBoundary: renderRepaintBoundary,
     );
   }

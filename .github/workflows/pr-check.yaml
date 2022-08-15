@@ -1,0 +1,32 @@
+name: Pull Request Check
+
+on:
+  pull_request:
+
+env:
+  FLUTTER_VERSION: 3.0.1
+  FLUTTER_CHANNEL: 'stable'
+
+jobs:
+  pr-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+      - name: set up flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: ${{ env.FLUTTER_CHANNEL }}
+          cache: true
+          cache-key: ${{ env.FLUTTER_VERSION }}-${{ env.FLUTTER_CHANNEL }}
+      - name: set up melos
+        run: |
+          flutter pub global activate melos
+          ./scripts/setup.sh
+      - name: analyze all packages
+        run: |
+          flutter pub global run melos run analyze
+      - name: test all packages
+        run: |
+          flutter pub global run melos run test
