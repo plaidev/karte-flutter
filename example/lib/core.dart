@@ -67,10 +67,18 @@ class _CoreState extends State<CoreScreen> {
           ElevatedButton(
             onPressed: () async {
               var url =
+                  // ignore: deprecated_member_use
                   await UserSync.appendingQueryParameter("https://example.com");
               print("url: $url");
             },
-            child: Text("userSync"),
+            child: Text("userSync query(dep)"),
+          ),
+          ElevatedButton(
+            onPressed: () async {
+              var script = await UserSync.getUserSyncScript();
+              print("script: $script");
+            },
+            child: Text("userSync script"),
           ),
         ],
       ),
