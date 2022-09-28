@@ -119,6 +119,9 @@ class KarteCorePlugin : FlutterPlugin, MethodCallHandler, Library {
                         result.success(null)
                     }
                 }
+                "getUserSyncScript" -> {
+                    result.success(UserSync.getUserSyncScript())
+                }
                 else -> result.notImplemented()
             }
             else -> result.notImplemented()

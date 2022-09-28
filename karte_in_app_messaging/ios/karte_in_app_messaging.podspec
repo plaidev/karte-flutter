@@ -20,7 +20,7 @@ Flutter plugin for KARTE In-app Messaging.
   s.source_files = 'Classes/**/*'
   s.dependency 'Flutter'
   s.dependency 'KarteInAppMessaging', '~> 2'
-  s.platform = :ios, '9.0'
+  s.platform = :ios, '10.0'
   s.static_framework = true
 
   # Flutter.framework does not contain a i386 slice. Only x86_64 simulators are supported.

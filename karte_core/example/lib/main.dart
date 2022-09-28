@@ -80,11 +80,19 @@ class _MyAppState extends State<MyApp> {
                 ),
                 ElevatedButton(
                   onPressed: () async {
+                    // ignore: deprecated_member_use
                     var url = await UserSync.appendingQueryParameter(
                         "https://example.com");
                     print("url: $url");
                   },
-                  child: Text("userSync"),
+                  child: Text("userSync query(dep)"),
+                ),
+                ElevatedButton(
+                  onPressed: () async {
+                    var script = await UserSync.getUserSyncScript();
+                    print("script: $script");
+                  },
+                  child: Text("userSync script"),
                 ),
               ],
             ),
