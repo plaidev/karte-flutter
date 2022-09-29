@@ -96,7 +96,13 @@ class KarteCorePlugin : FlutterPlugin, MethodCallHandler, Library {
                         result.success(null)
                     }
                     "identify" -> {
-                        Tracker.identify(values ?: mapOf<String, Any?>())
+                        val userId = call.argument<String>("userId")
+                        if (userId != null) Tracker.identify(userId, values)
+                        else Tracker.identify(values ?: mapOf<String, Any?>())
+                        result.success(null)
+                    }
+                    "attribute" -> {
+                        Tracker.attribute(values ?: mapOf<String, Any?>())
                         result.success(null)
                     }
                     "view" -> {

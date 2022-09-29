@@ -101,6 +101,22 @@ class Tracker {
     await _channel.invokeMethod('Tracker_identify', {"values": values});
   }
 
+  /// ユーザーIDを指定して、Identifyイベントの送信を行います。
+  ///
+  /// [userId] はユーザーを識別する一意なID、
+  /// [values] はIdentifyイベントに紐付けるカスタムオブジェクトを指定します。
+  static void identifyWithUserId(String userId, [Map? values]) async {
+    await _channel
+        .invokeMethod('Tracker_identify', {"values": values, "userId": userId});
+  }
+
+  /// Attributeイベントの送信を行います。
+  ///
+  /// [values] はAttributeイベントに紐付けるカスタムオブジェクトを指定します。
+  static void attribute(Map values) async {
+    await _channel.invokeMethod('Tracker_attribute', {"values": values});
+  }
+
   /// Viewイベントの送信を行います。
   ///
   /// [viewName] は画面名、 [title] はタイトル、
