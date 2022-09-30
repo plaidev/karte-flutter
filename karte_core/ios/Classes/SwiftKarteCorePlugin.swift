@@ -68,7 +68,14 @@ public class SwiftKarteCorePlugin: NSObject, FlutterPlugin {
                 }
                 result(nil)
             case "identify":
-                Tracker.identify(values)
+                if let userId = arguments?["userId"] as? String {
+                    Tracker.identify(userId, values)
+                } else {
+                    Tracker.identify(values)
+                }
+                result(nil)
+            case "attribute":
+                Tracker.attribute(values)
                 result(nil)
             case "view":
                 if let viewName = arguments?["viewName"] as? String {
