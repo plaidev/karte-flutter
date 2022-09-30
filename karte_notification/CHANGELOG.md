@@ -1,3 +1,7 @@
+## 1.2.0
+
+* Change Deployment Target: iOS9 → iOS10
+
 ## 1.1.0
 
 * Changed the constraint to build with firebase_messaging: 11.x.x.

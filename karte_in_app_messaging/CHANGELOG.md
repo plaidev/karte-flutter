@@ -1,3 +1,7 @@
+## 1.1.0
+
+* Change Deployment Target: iOS9 → iOS10
+
 ## 1.0.0
 
 * General availability release.
