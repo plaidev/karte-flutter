@@ -1,3 +1,10 @@
+## 1.1.0
+
+* Change Deployment Target: iOS9 → iOS10
+* Supported deeplink processing in resuming Activity on Android.
+* Add `Tracker.indentifyWithUserId()` and `Tracker.attribute()`.
+* Add `UserSync.getUserSyncScript()`.
+
 ## 1.0.0
 
 * General availability release.

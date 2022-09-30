@@ -1,3 +1,8 @@
+## 0.4.0
+
+* Change Deployment Target: iOS9 → iOS10
+* Fix action id calculation logic (#16).
+
 ## 0.3.0
 
 * Replace obsolete api.
