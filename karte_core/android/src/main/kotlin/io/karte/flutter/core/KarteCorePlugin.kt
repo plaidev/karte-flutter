@@ -15,13 +15,17 @@
 //
 package io.karte.flutter.core
 
+import android.content.Intent
 import androidx.annotation.NonNull;
 
 import io.flutter.embedding.engine.plugins.FlutterPlugin
+import io.flutter.embedding.engine.plugins.activity.ActivityAware
+import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
+import io.flutter.plugin.common.PluginRegistry
 import io.flutter.plugin.common.PluginRegistry.Registrar
 import io.karte.android.KarteApp
 import io.karte.android.core.library.Library
@@ -32,17 +36,24 @@ import io.karte.android.tracking.Tracker
 private const val LOG_TAG = "KarteFlutter"
 
 /** KarteCorePlugin */
-class KarteCorePlugin : FlutterPlugin, MethodCallHandler, Library {
+class KarteCorePlugin : FlutterPlugin, ActivityAware, MethodCallHandler,
+    PluginRegistry.NewIntentListener, Library {
     /// The MethodChannel that will the communication between Flutter and native Android
     ///
     /// This local reference serves to register the plugin with the Flutter Engine and unregister it
     /// when the Flutter Engine is detached from the Activity
     private lateinit var channel: MethodChannel
 
+    //region FlutterPlugin
     override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
         channel = MethodChannel(flutterPluginBinding.binaryMessenger, "karte_core")
         channel.setMethodCallHandler(this)
     }
+
+    override fun onDetachedFromEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
+        channel.setMethodCallHandler(null)
+    }
+    //endregion
 
     // This static function is optional and equivalent to onAttachedToEngine. It supports the old
     // pre-Flutter-1.12 Android projects. You are encouraged to continue supporting
@@ -58,9 +69,14 @@ class KarteCorePlugin : FlutterPlugin, MethodCallHandler, Library {
         fun registerWith(registrar: Registrar) {
             val channel = MethodChannel(registrar.messenger(), "karte_core")
             channel.setMethodCallHandler(KarteCorePlugin())
+            registrar.addNewIntentListener {
+                KarteApp.onNewIntent(it)
+                return@addNewIntentListener false
+            }
         }
     }
 
+    //region MethodCallHandler
     override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
         Logger.d(LOG_TAG, "onMethodCall ${call.method}")
         if (!call.method.contains("_")) {
@@ -121,7 +137,10 @@ class KarteCorePlugin : FlutterPlugin, MethodCallHandler, Library {
                     if (url != null) {
                         result.success(UserSync.appendUserSyncQueryParameter(url))
                     } else {
-                        Logger.w(LOG_TAG, "UserSync.appendingQueryParameter didn't get argument 'url', return null.")
+                        Logger.w(
+                            LOG_TAG,
+                            "UserSync.appendingQueryParameter didn't get argument 'url', return null."
+                        )
                         result.success(null)
                     }
                 }
@@ -133,10 +152,28 @@ class KarteCorePlugin : FlutterPlugin, MethodCallHandler, Library {
             else -> result.notImplemented()
         }
     }
+    //endregion
 
-    override fun onDetachedFromEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
-        channel.setMethodCallHandler(null)
+    //region ActivityAware
+    override fun onAttachedToActivity(binding: ActivityPluginBinding) {
+        binding.addOnNewIntentListener(this)
     }
+
+    override fun onDetachedFromActivityForConfigChanges() {}
+
+    override fun onReattachedToActivityForConfigChanges(binding: ActivityPluginBinding) {
+        binding.addOnNewIntentListener(this)
+    }
+
+    override fun onDetachedFromActivity() {}
+    //endregion
+
+    //region NewIntentListener
+    override fun onNewIntent(intent: Intent): Boolean {
+        KarteApp.onNewIntent(intent)
+        return false
+    }
+    //endregion
 
     //region Library
     override val isPublic: Boolean = true
