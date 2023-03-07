@@ -86,12 +86,18 @@ class KarteApp {
 class Tracker {
   Tracker._();
 
+  static Map? _normalize(Map? values) {
+    return values?.map((k, v) =>
+        MapEntry(k, v is DateTime ? v.millisecondsSinceEpoch ~/ 1000 : v)
+    );
+  }
+
   /// イベントの送信を行います。
   ///
   /// [name] はイベント名、 [values] はイベントに紐付けるカスタムオブジェクトを指定します。
   static void track(String name, [Map? values]) async {
     await _channel
-        .invokeMethod('Tracker_track', {"name": name, "values": values});
+        .invokeMethod('Tracker_track', {"name": name, "values": _normalize(values)});
   }
 
   /// Identifyイベントの送信を行います。
@@ -107,14 +113,14 @@ class Tracker {
   /// [values] はIdentifyイベントに紐付けるカスタムオブジェクトを指定します。
   static void identifyWithUserId(String userId, [Map? values]) async {
     await _channel
-        .invokeMethod('Tracker_identify', {"values": values, "userId": userId});
+        .invokeMethod('Tracker_identify', {"values": _normalize(values), "userId": userId});
   }
 
   /// Attributeイベントの送信を行います。
   ///
   /// [values] はAttributeイベントに紐付けるカスタムオブジェクトを指定します。
   static void attribute(Map values) async {
-    await _channel.invokeMethod('Tracker_attribute', {"values": values});
+    await _channel.invokeMethod('Tracker_attribute', {"values": _normalize(values)});
   }
 
   /// Viewイベントの送信を行います。
@@ -123,7 +129,7 @@ class Tracker {
   /// [values] はViewイベントに紐付けるカスタムオブジェクトを指定します。
   static void view(String viewName, [String? title, Map? values]) async {
     await _channel.invokeMethod('Tracker_view',
-        {"viewName": viewName, "title": title, "values": values});
+        {"viewName": viewName, "title": title, "values": _normalize(values)});
   }
 }
 
