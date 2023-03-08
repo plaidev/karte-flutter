@@ -6,13 +6,14 @@ import KarteCore
 @UIApplicationMain
 @objc class AppDelegate: FlutterAppDelegate {
 
+  private let appKey = "YOUR_APP_KEY"
   override func application(
     _ application: UIApplication,
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
   ) -> Bool {
     GeneratedPluginRegistrant.register(with: self)
     KarteApp.setLogLevel(.debug)
-    KarteApp.setup()
+    KarteApp.setup(appKey: appKey)
 
     if #available(iOS 10.0, *) {
       print("Use UserNotification.framework")

@@ -56,38 +56,38 @@ PODS:
     - GoogleUtilities/Logger
   - GoogleUtilities/UserDefaults (7.5.1):
     - GoogleUtilities/Logger
-  - karte_core (0.2.0):
+  - karte_core (1.1.0):
     - Flutter
-    - KarteCore (~> 2)
-  - karte_in_app_messaging (0.2.0):
+    - KarteCore (~> 2.21)
+  - karte_in_app_messaging (1.1.0):
     - Flutter
     - KarteInAppMessaging (~> 2)
-  - karte_notification (0.2.0):
+  - karte_notification (1.2.0):
     - Flutter
     - KarteRemoteNotification (~> 2)
-  - karte_variables (0.2.0):
+  - karte_variables (1.1.0):
     - Flutter
     - karte_core
     - KarteVariables (~> 2)
-  - karte_visual_tracking (0.2.0):
+  - karte_visual_tracking (0.4.0):
     - Flutter
     - karte_core
     - KarteVisualTracking (~> 2)
-  - KarteCore (2.14.0):
+  - KarteCore (2.21.0):
     - KarteUtilities (~> 3.3)
-  - KarteInAppMessaging (2.8.1):
+  - KarteInAppMessaging (2.13.0):
     - KarteCore (~> 2.3)
     - KarteUtilities (~> 3.0)
-  - KarteRemoteNotification (2.4.0):
+  - KarteRemoteNotification (2.8.0):
     - KarteCore (~> 2.0)
     - KarteUtilities (~> 3.0)
-  - KarteUtilities (3.3.0):
-    - KarteUtilities/standard (= 3.3.0)
-  - KarteUtilities/standard (3.3.0)
-  - KarteVariables (2.1.0):
+  - KarteUtilities (3.7.0):
+    - KarteUtilities/standard (= 3.7.0)
+  - KarteUtilities/standard (3.7.0)
+  - KarteVariables (2.4.1):
     - KarteCore (~> 2.0)
-    - KarteUtilities (~> 3.0)
-  - KarteVisualTracking (2.5.0):
+    - KarteUtilities (~> 3.5)
+  - KarteVisualTracking (2.9.0):
     - KarteCore (~> 2.0)
     - KarteUtilities (~> 3.1)
   - nanopb (2.30908.0):
@@ -151,23 +151,23 @@ SPEC CHECKSUMS:
   FirebaseCoreDiagnostics: 3721920bde3a9a6d5aa093c1d25e9d3e47f694af
   FirebaseInstallations: 0ede6ffcd215b8f93c19d9b06c1c54e2d4107e98
   FirebaseMessaging: ce0a5ee974f7bfe83b6cc5acce88c2d969e37c41
-  Flutter: 434fef37c0980e73bb6479ef766c45957d4b510c
+  Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
   GoogleDataTransport: 85fd18ff3019bb85d3f2c551d04c481dedf71fc9
   GoogleUtilities: 3df19e3c24f7bbc291d8b5809aa6b0d41e642437
-  karte_core: 46a7f72158f6af2299027be3ba012614cb7e7add
-  karte_in_app_messaging: b0de299462fcb0ca1052d233e6b1136fa44e4727
-  karte_notification: f94b287f758dbc7847cfb854a765a34b0d3f52b8
-  karte_variables: 47b9c3162923176604c6d131541db2d1940ab059
-  karte_visual_tracking: a9db6d0625affc0cf617fc27f98ef2b4ed124896
-  KarteCore: 6b7990368f438d5bbf19bf94ffe703181d648c8f
-  KarteInAppMessaging: 5c05e89e52c6d2b7565cc9e3dc62844daf94912e
-  KarteRemoteNotification: 6c3836cf3fe7679c876c4e377aa7b3ae9fa0d900
-  KarteUtilities: 87d79d20649710937f9bfd4961d369bf77105152
-  KarteVariables: 263a5244f2b9524ad3ea2b40ba2aaa57748accd0
-  KarteVisualTracking: 97cc7ca2b4e429be8fa8e8754fd9f402281fa39d
+  karte_core: 7ecc33a333b11e60acf72159c88a69f0fbf1d546
+  karte_in_app_messaging: 8353237ade48caf916c9699337cbae245b573d98
+  karte_notification: c23ae178299b7bc0889907dc0cf559bf61ae5c8e
+  karte_variables: a23457e1b7c92a6305002b83951b8c605a493bca
+  karte_visual_tracking: 79d347e16ceb29efb52f11b1e66bab9f6e651677
+  KarteCore: d1a9579683d53f1489dfd90cf9612ea9a25c97a6
+  KarteInAppMessaging: 5d5075358fcbce2ac05a3c11f8192af9c48986c2
+  KarteRemoteNotification: 9837ed5b635a59dd009aaa2df042e25066cd9123
+  KarteUtilities: 432cbe181f861314eecf37bd2bd236d2c9971721
+  KarteVariables: 2390ed3840bcca6a233e7beeb0215e33246b7809
+  KarteVisualTracking: 535c676d9447679cc20d6cc13fc0aef2d886083b
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
 
 PODFILE CHECKSUM: fe0e1ee7f3d1f7d00b11b474b62dd62134535aea
 
-COCOAPODS: 1.10.1
+COCOAPODS: 1.11.3

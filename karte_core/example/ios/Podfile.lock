@@ -1,11 +1,13 @@
 PODS:
   - Flutter (1.0.0)
-  - karte_core (0.0.1):
+  - karte_core (1.1.0):
     - Flutter
-    - KarteCore
-  - KarteCore (2.8.0):
-    - KarteUtilities (~> 3.1)
-  - KarteUtilities (3.1.0)
+    - KarteCore (~> 2)
+  - KarteCore (2.21.0):
+    - KarteUtilities (~> 3.3)
+  - KarteUtilities (3.7.0):
+    - KarteUtilities/standard (= 3.7.0)
+  - KarteUtilities/standard (3.7.0)
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
@@ -23,11 +25,11 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/karte_core/ios"
 
 SPEC CHECKSUMS:
-  Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
-  karte_core: 865efdf6d5fc0eb29d60b54769fdd7f2faa268ba
-  KarteCore: b171d3bbc33c6c19b9a071a4c714f7d2bd91a988
-  KarteUtilities: ccc63f2916deb45485d1b2b63516a98b5ecba773
+  Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
+  karte_core: eb8f8fb807f760e6c33359382e56510f5c19e549
+  KarteCore: d1a9579683d53f1489dfd90cf9612ea9a25c97a6
+  KarteUtilities: 432cbe181f861314eecf37bd2bd236d2c9971721
 
-PODFILE CHECKSUM: a75497545d4391e2d394c3668e20cfb1c2bbd4aa
+PODFILE CHECKSUM: 7368163408c647b7eb699d0d788ba6718e18fb8d
 
-COCOAPODS: 1.9.1
+COCOAPODS: 1.11.3

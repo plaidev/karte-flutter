@@ -54,20 +54,20 @@ PODS:
     - GoogleUtilities/Logger
   - GoogleUtilities/UserDefaults (7.5.0):
     - GoogleUtilities/Logger
-  - karte_core (0.2.0):
+  - karte_core (1.1.0):
     - Flutter
-    - KarteCore (~> 2)
-  - karte_notification (0.2.0):
+    - KarteCore (~> 2.21)
+  - karte_notification (1.2.0):
     - Flutter
     - KarteRemoteNotification (~> 2)
-  - KarteCore (2.16.0):
+  - KarteCore (2.21.0):
     - KarteUtilities (~> 3.3)
-  - KarteRemoteNotification (2.6.0):
+  - KarteRemoteNotification (2.8.0):
     - KarteCore (~> 2.0)
     - KarteUtilities (~> 3.0)
-  - KarteUtilities (3.4.0):
-    - KarteUtilities/standard (= 3.4.0)
-  - KarteUtilities/standard (3.4.0)
+  - KarteUtilities (3.7.0):
+    - KarteUtilities/standard (= 3.7.0)
+  - KarteUtilities/standard (3.7.0)
   - nanopb (2.30908.0):
     - nanopb/decode (= 2.30908.0)
     - nanopb/encode (= 2.30908.0)
@@ -117,17 +117,17 @@ SPEC CHECKSUMS:
   FirebaseCoreDiagnostics: 7bf55d386f9fc690d971b70a582142321a390eb8
   FirebaseInstallations: f2bc590b291d25fb40a9a05b8281c02a881b5117
   FirebaseMessaging: 1a33b4af3c8042ed6ddacb6c031894af2064bfab
-  Flutter: 434fef37c0980e73bb6479ef766c45957d4b510c
+  Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
   GoogleDataTransport: 85fd18ff3019bb85d3f2c551d04c481dedf71fc9
   GoogleUtilities: eea970f4a389963963bffe8d8fabe43540678b9c
-  karte_core: 46a7f72158f6af2299027be3ba012614cb7e7add
-  karte_notification: f94b287f758dbc7847cfb854a765a34b0d3f52b8
-  KarteCore: 499266cbbe8d64223f4540ea6f2644f6540fd3ce
-  KarteRemoteNotification: d6bde6f429070ebe95ff2efc447b6afd319f02a8
-  KarteUtilities: 636b60cbc64da8f0f4300607ed8e3eeb2bcc6f77
+  karte_core: 7ecc33a333b11e60acf72159c88a69f0fbf1d546
+  karte_notification: c23ae178299b7bc0889907dc0cf559bf61ae5c8e
+  KarteCore: d1a9579683d53f1489dfd90cf9612ea9a25c97a6
+  KarteRemoteNotification: 9837ed5b635a59dd009aaa2df042e25066cd9123
+  KarteUtilities: 432cbe181f861314eecf37bd2bd236d2c9971721
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
 
-PODFILE CHECKSUM: fe0e1ee7f3d1f7d00b11b474b62dd62134535aea
+PODFILE CHECKSUM: 7368163408c647b7eb699d0d788ba6718e18fb8d
 
-COCOAPODS: 1.10.1
+COCOAPODS: 1.11.3
