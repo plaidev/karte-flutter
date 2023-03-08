@@ -86,10 +86,16 @@ class KarteApp {
 class Tracker {
   Tracker._();
 
-  static Map? _normalize(Map? values) {
-    return values?.map((k, v) =>
-        MapEntry(k, v is DateTime ? v.millisecondsSinceEpoch ~/ 1000 : v)
-    );
+  static dynamic _normalize(dynamic values) {
+    if (values is List) {
+      return values.map((e) => _normalize(e)).toList();
+    } else if (values is Map) {
+      return values.map((key, value) => MapEntry(key, _normalize(value)));
+    } else if (values is DateTime) {
+      return values.millisecondsSinceEpoch ~/ 1000;
+    } else {
+      return values;
+    }
   }
 
   /// イベントの送信を行います。
@@ -104,7 +110,7 @@ class Tracker {
   ///
   /// [values] はIdentifyイベントに紐付けるカスタムオブジェクトを指定します。
   static void identify(Map values) async {
-    await _channel.invokeMethod('Tracker_identify', {"values": values});
+    await _channel.invokeMethod('Tracker_identify', {"values": _normalize(values)});
   }
 
   /// ユーザーIDを指定して、Identifyイベントの送信を行います。
