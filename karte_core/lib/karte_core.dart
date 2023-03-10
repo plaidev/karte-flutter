@@ -17,6 +17,7 @@
 import 'dart:async';
 
 import 'package:flutter/services.dart';
+import 'package:karte_core/utils.dart';
 
 /// Wrapper of [MethodChannel] for catch PlatformExceptions.
 class WrapperChannel extends MethodChannel {
@@ -91,14 +92,14 @@ class Tracker {
   /// [name] はイベント名、 [values] はイベントに紐付けるカスタムオブジェクトを指定します。
   static void track(String name, [Map? values]) async {
     await _channel
-        .invokeMethod('Tracker_track', {"name": name, "values": values});
+        .invokeMethod('Tracker_track', {"name": name, "values": normalize(values)});
   }
 
   /// Identifyイベントの送信を行います。
   ///
   /// [values] はIdentifyイベントに紐付けるカスタムオブジェクトを指定します。
   static void identify(Map values) async {
-    await _channel.invokeMethod('Tracker_identify', {"values": values});
+    await _channel.invokeMethod('Tracker_identify', {"values": normalize(values)});
   }
 
   /// ユーザーIDを指定して、Identifyイベントの送信を行います。
@@ -107,14 +108,14 @@ class Tracker {
   /// [values] はIdentifyイベントに紐付けるカスタムオブジェクトを指定します。
   static void identifyWithUserId(String userId, [Map? values]) async {
     await _channel
-        .invokeMethod('Tracker_identify', {"values": values, "userId": userId});
+        .invokeMethod('Tracker_identify', {"values": normalize(values), "userId": userId});
   }
 
   /// Attributeイベントの送信を行います。
   ///
   /// [values] はAttributeイベントに紐付けるカスタムオブジェクトを指定します。
   static void attribute(Map values) async {
-    await _channel.invokeMethod('Tracker_attribute', {"values": values});
+    await _channel.invokeMethod('Tracker_attribute', {"values": normalize(values)});
   }
 
   /// Viewイベントの送信を行います。
@@ -123,7 +124,7 @@ class Tracker {
   /// [values] はViewイベントに紐付けるカスタムオブジェクトを指定します。
   static void view(String viewName, [String? title, Map? values]) async {
     await _channel.invokeMethod('Tracker_view',
-        {"viewName": viewName, "title": title, "values": values});
+        {"viewName": viewName, "title": title, "values": normalize(values)});
   }
 }
 
