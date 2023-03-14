@@ -1,8 +1,8 @@
 name: karte_flutter
 
 packages:
-  - karte_*/**
-  - example/**
+  - karte_*
+  - example
 
 command:
   bootstrap:
