@@ -1,3 +1,7 @@
+## 1.3.0
+
+* Changed to normalize custom objects for events.
+
 ## 1.2.0
 
 * Android SDK references changed from JCenter to Maven Central.
