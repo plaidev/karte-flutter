@@ -1,3 +1,7 @@
+## 0.5.0
+
+* Android SDK references changed from JCenter to Maven Central.
+
 ## 0.4.0
 
 * Change Deployment Target: iOS9 → iOS10

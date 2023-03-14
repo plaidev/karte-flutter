@@ -1,3 +1,9 @@
+## 1.2.0
+
+* Android SDK references changed from JCenter to Maven Central.
+* Updated the version of KarteCore on which the karte_core package depends.
+* Changed to normalize custom objects for events.
+
 ## 1.1.0
 
 * Change Deployment Target: iOS9 → iOS10
