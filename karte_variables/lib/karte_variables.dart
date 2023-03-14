@@ -17,6 +17,7 @@
 import 'dart:async';
 
 import 'package:karte_core/karte_core.dart';
+import 'package:karte_core/utils.dart';
 
 const WrapperChannel _channel = const WrapperChannel('karte_variables');
 
@@ -48,7 +49,7 @@ class Variables {
     List<String> names =
         List<String>.from(variables.map((e) => e.name), growable: false);
     await _channel.invokeMethod(
-        'Variables_trackOpen', {"variableNames": names, "values": values});
+        'Variables_trackOpen', {"variableNames": names, "values": normalize(values)});
   }
 
   /// 指定された設定値に関連するキャンペーン情報を元に効果測定用のイベント（message_click）を発火します。
@@ -58,7 +59,7 @@ class Variables {
     List<String> names =
         List<String>.from(variables.map((e) => e.name), growable: false);
     await _channel.invokeMethod(
-        'Variables_trackClick', {"variableNames": names, "values": values});
+        'Variables_trackClick', {"variableNames": names, "values": normalize(values)});
   }
 }
 

@@ -13,7 +13,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  karte_core: ^1.0.0
+  karte_core: ^1.2.0
 
 dev_dependencies:
   flutter_test:
