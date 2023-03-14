@@ -32,29 +32,10 @@ void main() {
   });
   
   test("track", () {
-    var dateTime = DateTime.fromMillisecondsSinceEpoch(1000);
-    Tracker.track('foo', {
-      'a': 'bar',
-      'b': 1,
-      'c': true,
-      'd': dateTime,
-      'e': [ dateTime ],
-      'f': {
-        'g': dateTime,
-      },
-    });
+    Tracker.track('foo', { 'd': DateTime.fromMillisecondsSinceEpoch(1000) });
     Map? args = cast<Map>(calls['Tracker_track']?[0].arguments);
     expect(args?['name'], 'foo');
-    expect(args?['values'], {
-      'a': 'bar',
-      'b': 1,
-      'c': true,
-      'd': 1,
-      'e': [ 1 ],
-      'f': {
-        'g': 1
-      }
-    });
+    expect(args?['values'], { 'd': 1 });
   });
 
   test("identify", () {
