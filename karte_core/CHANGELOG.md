@@ -1,3 +1,7 @@
+## 1.2.1
+
+* Fixed an incorrect limitation in Android dependency specification.
+
 ## 1.2.0
 
 * Android SDK references changed from JCenter to Maven Central.
