@@ -155,7 +155,13 @@ public class KarteVariablesPlugin implements FlutterPlugin, MethodCallHandler {
                 result.success(variable.getString((String) defaultValue));
                 break;
             case "getInteger":
-                result.success(variable.getLong((Long) defaultValue));
+                Long def;
+                if (defaultValue instanceof Integer) {
+                    def = ((Integer) defaultValue).longValue();
+                } else {
+                    def = (Long) defaultValue;
+                }
+                result.success(variable.getLong(def));
                 break;
             case "getDouble":
                 result.success(variable.getDouble((Double) defaultValue));
