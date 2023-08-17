@@ -13,4 +13,4 @@ scripts:
     exec: flutter analyze .
   
   test:
-    run: melos exec --ignore="*example" --ignore=karte_visual_tracking -- flutter test
+    run: melos exec --ignore=karte_visual_tracking -- flutter test
