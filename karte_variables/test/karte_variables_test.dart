@@ -11,11 +11,11 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
   setUp(() {
-    channel.setMockMethodCallHandler((MethodCall methodCall) async {
-      calls.putIfAbsent(methodCall.method, () => []);
-      calls[methodCall.method]?.add(methodCall);
+    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger.setMockMethodCallHandler(channel, (message) async {
+      calls.putIfAbsent(message.method, () => []);
+      calls[message.method]?.add(message);
 
-      switch (methodCall.method) {
+      switch (message.method) {
         case 'Variables_get':
           return "test";
       }
@@ -24,7 +24,7 @@ void main() {
   });
 
   tearDown(() {
-    channel.setMockMethodCallHandler(null);
+    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger.setMockMethodCallHandler(channel, (message) => null);
   });
 
   test('getPlatformVersion', () async {
