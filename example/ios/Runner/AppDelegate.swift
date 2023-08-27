@@ -10,7 +10,7 @@ import KarteCore
     _ application: UIApplication,
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
   ) -> Bool {
-    GeneratedPluginRegistrant.register(with: self)
+    GeneratedPluginRegistrant.register(withRegistry: self)
     KarteApp.setLogLevel(.debug)
     KarteApp.setup(appKey: appKey)
 

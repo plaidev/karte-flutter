@@ -56,20 +56,20 @@ PODS:
     - GoogleUtilities/Logger
   - GoogleUtilities/UserDefaults (7.5.1):
     - GoogleUtilities/Logger
-  - karte_core (1.1.0):
+  - karte_core (1.2.1):
     - Flutter
     - KarteCore (~> 2.21)
-  - karte_in_app_messaging (1.1.0):
+  - karte_in_app_messaging (1.2.0):
     - Flutter
     - KarteInAppMessaging (~> 2)
-  - karte_notification (1.2.0):
+  - karte_notification (1.3.0):
     - Flutter
     - KarteRemoteNotification (~> 2)
-  - karte_variables (1.1.0):
+  - karte_variables (1.3.0):
     - Flutter
     - karte_core
     - KarteVariables (~> 2)
-  - karte_visual_tracking (0.4.0):
+  - karte_visual_tracking (0.5.0):
     - Flutter
     - karte_core
     - KarteVisualTracking (~> 2)
@@ -154,11 +154,11 @@ SPEC CHECKSUMS:
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
   GoogleDataTransport: 85fd18ff3019bb85d3f2c551d04c481dedf71fc9
   GoogleUtilities: 3df19e3c24f7bbc291d8b5809aa6b0d41e642437
-  karte_core: 7ecc33a333b11e60acf72159c88a69f0fbf1d546
-  karte_in_app_messaging: 8353237ade48caf916c9699337cbae245b573d98
-  karte_notification: c23ae178299b7bc0889907dc0cf559bf61ae5c8e
-  karte_variables: a23457e1b7c92a6305002b83951b8c605a493bca
-  karte_visual_tracking: 79d347e16ceb29efb52f11b1e66bab9f6e651677
+  karte_core: 36e65e8b83f42d096d409be04a0a14967016dd99
+  karte_in_app_messaging: a7753b9d680460f2ec2e431d82b70d8662e54725
+  karte_notification: bd21ecf94bd32d2bf385fbda1ed88f385db919e5
+  karte_variables: d97cd6241c9051488997fe3c2ec38a19dbee9507
+  karte_visual_tracking: 7a5b2ab950c943f7bc64ca819333d3fbd040890a
   KarteCore: d1a9579683d53f1489dfd90cf9612ea9a25c97a6
   KarteInAppMessaging: 5d5075358fcbce2ac05a3c11f8192af9c48986c2
   KarteRemoteNotification: 9837ed5b635a59dd009aaa2df042e25066cd9123
@@ -170,4 +170,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: fe0e1ee7f3d1f7d00b11b474b62dd62134535aea
 
-COCOAPODS: 1.11.3
+COCOAPODS: 1.12.1
