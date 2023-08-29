@@ -82,7 +82,7 @@ packages:
     source: hosted
     version: "1.1.0"
   firebase_messaging:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: firebase_messaging
       sha256: "6bbcc89efe9b05a87a71261c6a111e8f097171b95c6871863bf38802eb711f9a"
