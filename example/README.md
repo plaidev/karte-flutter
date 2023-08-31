@@ -2,15 +2,13 @@
 
 A Example Flutter application using KARTE SDK.
 
-## Getting Started
+## Setup
 
-This project is a starting point for a Flutter application.
+You can choose to install published or local packages. Follow the instructions below to install packages you want.
 
-A few resources to get you started if this is your first Flutter project:
+1. Use published packages
+    * Run `flutter pub get`
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+2. Use local packages
+    * Ensure that [melos](https://melos.invertase.dev/~melos-latest/getting-started) is installed
+    * Run `./scripts/setup.sh` at the project root
