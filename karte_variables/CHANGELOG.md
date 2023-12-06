@@ -1,3 +1,7 @@
+## 1.4.0
+
+* Removed dependency on kotlin.
+
 ## 1.3.0
 
 * Changed to normalize custom objects for events.

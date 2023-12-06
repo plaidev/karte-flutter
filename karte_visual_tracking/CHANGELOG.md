@@ -1,3 +1,7 @@
+## 0.6.0
+
+* Removed dependency on kotlin.
+
 ## 0.5.0
 
 * Android SDK references changed from JCenter to Maven Central.

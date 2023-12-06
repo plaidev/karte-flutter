@@ -1,3 +1,7 @@
+## 1.3.0
+
+* Removed dependency on kotlin.
+
 ## 1.2.1
 
 * Fixed an incorrect limitation in Android dependency specification.

@@ -1,8 +1,11 @@
+## 1.4.0
+
+* Removed dependency on kotlin.
+
 ## 1.3.0
 
 * Android SDK references changed from JCenter to Maven Central.
 * Updated the version of firebase_messaging on which the karte_notification package depends.
-
 
 ## 1.2.0
 
