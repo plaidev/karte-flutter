@@ -16,7 +16,7 @@ class _IAMState extends State<IAMScreen> {
     updateState();
   }
 
-  void updateState() async {
+  Future<void> updateState() async {
     bool isPresenting = await InAppMessaging.isPresenting;
     if (!mounted) return;
 
