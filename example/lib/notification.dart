@@ -31,7 +31,7 @@ class _NotificationState extends State<NotificationScreen> {
     });
   }
 
-  void checkInitialMessage() async {
+  Future<void> checkInitialMessage() async {
     RemoteMessage? message =
         await FirebaseMessaging.instance.getInitialMessage();
     // Called when app launch by tap notification on iOS
