@@ -77,8 +77,8 @@ public class SwiftKarteCorePlugin: NSObject, FlutterPlugin {
                     task.completion = { _ in result(nil) }
                 }
             case "attribute":
-                Tracker.attribute(values)
-                result(nil)
+                let task = Tracker.attribute(values)
+                task.completion = { _ in result(nil) }
             case "view":
                 if let viewName = arguments?["viewName"] as? String {
                     Tracker.view(viewName, title: arguments?["title"] as? String, values: values)
