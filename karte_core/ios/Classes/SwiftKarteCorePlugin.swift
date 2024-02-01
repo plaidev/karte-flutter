@@ -62,11 +62,12 @@ public class SwiftKarteCorePlugin: NSObject, FlutterPlugin {
             switch methodName {
             case "track":
                 if let name = arguments?["name"] as? String {
-                    Tracker.track(name, values: values)
+                    let task = Tracker.track(name, values: values)
+                    task.completion = { _ in result(nil) }
                 } else {
                     Logger.warn(tag: .flutter, message: "Tracker.track didn't get argument 'name', NOP.")
+                    result(nil)
                 }
-                result(nil)
             case "identify":
                 if let userId = arguments?["userId"] as? String {
                     Tracker.identify(userId, values)
