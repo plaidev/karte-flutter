@@ -81,11 +81,12 @@ public class SwiftKarteCorePlugin: NSObject, FlutterPlugin {
                 task.completion = { _ in result(nil) }
             case "view":
                 if let viewName = arguments?["viewName"] as? String {
-                    Tracker.view(viewName, title: arguments?["title"] as? String, values: values)
+                    let task = Tracker.view(viewName, title: arguments?["title"] as? String, values: values)
+                    task.completion = { _ in result(nil) }
                 } else {
                     Logger.warn(tag: .flutter, message: "Tracker.view didn't get argument 'viewName', NOP.")
+                    result(nil)
                 }
-                result(nil)
             default:
                 result(FlutterMethodNotImplemented)
             }
