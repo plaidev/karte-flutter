@@ -70,11 +70,12 @@ public class SwiftKarteCorePlugin: NSObject, FlutterPlugin {
                 }
             case "identify":
                 if let userId = arguments?["userId"] as? String {
-                    Tracker.identify(userId, values)
+                    let task = Tracker.identify(userId, values)
+                    task.completion = { _ in result(nil) }
                 } else {
-                    Tracker.identify(values)
+                    let task = Tracker.identify(values)
+                    task.completion = { _ in result(nil) }
                 }
-                result(nil)
             case "attribute":
                 Tracker.attribute(values)
                 result(nil)
