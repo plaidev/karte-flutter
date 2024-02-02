@@ -33,6 +33,7 @@ import io.karte.android.KarteApp;
 import io.karte.android.core.library.Library;
 import io.karte.android.core.logger.Logger;
 import io.karte.android.core.usersync.UserSync;
+import io.karte.android.tracking.TrackCompletion;
 import io.karte.android.tracking.Tracker;
 
 /**
@@ -139,11 +140,16 @@ public class KarteCorePlugin implements FlutterPlugin, ActivityAware, MethodCall
             case "track":
                 String name = call.argument("name");
                 if (name != null) {
-                    Tracker.track(name, values);
+                    Tracker.track(name, values, new TrackCompletion() {
+                        @Override
+                        public  void onComplete(boolean success) {
+                            result.success(null);
+                        }
+                    });
                 } else {
                     Logger.w(LOG_TAG, "Tracker.track didn't get argument 'name', NOP.");
+                    result.success(null);
                 }
-                result.success(null);
                 break;
             case "identify":
                 String userId = call.argument("userId");
