@@ -61,14 +61,14 @@ class KarteApp {
   /// オプトインします。
   ///
   /// 初期化が行われていない状態で呼び出した場合はオプトインは行われません。
-  static void optIn() async {
+  static Future<void> optIn() async {
     await _channel.invokeMethod('KarteApp_optIn');
   }
 
   /// オプトアウトします。
   ///
   /// 初期化が行われていない状態で呼び出した場合はオプトアウトは行われません。
-  static void optOut() async {
+  static Future<void> optOut() async {
     await _channel.invokeMethod('KarteApp_optOut');
   }
 
@@ -78,7 +78,7 @@ class KarteApp {
   /// 例えば、アプリケーションでログアウトを行った場合などがこれに該当します。
   ///
   /// なお初期化が行われていない状態で呼び出した場合は再生成は行われません。
-  static void renewVisitorId() async {
+  static Future<void> renewVisitorId() async {
     await _channel.invokeMethod('KarteApp_renewVisitorId');
   }
 }
@@ -90,7 +90,7 @@ class Tracker {
   /// イベントの送信を行います。
   ///
   /// [name] はイベント名、 [values] はイベントに紐付けるカスタムオブジェクトを指定します。
-  static void track(String name, [Map? values]) async {
+  static Future<void> track(String name, [Map? values]) async {
     await _channel
         .invokeMethod('Tracker_track', {"name": name, "values": normalize(values)});
   }
@@ -98,7 +98,7 @@ class Tracker {
   /// Identifyイベントの送信を行います。
   ///
   /// [values] はIdentifyイベントに紐付けるカスタムオブジェクトを指定します。
-  static void identify(Map values) async {
+  static Future<void> identify(Map values) async {
     await _channel.invokeMethod('Tracker_identify', {"values": normalize(values)});
   }
 
@@ -106,7 +106,7 @@ class Tracker {
   ///
   /// [userId] はユーザーを識別する一意なID、
   /// [values] はIdentifyイベントに紐付けるカスタムオブジェクトを指定します。
-  static void identifyWithUserId(String userId, [Map? values]) async {
+  static Future<void> identifyWithUserId(String userId, [Map? values]) async {
     await _channel
         .invokeMethod('Tracker_identify', {"values": normalize(values), "userId": userId});
   }
@@ -114,7 +114,7 @@ class Tracker {
   /// Attributeイベントの送信を行います。
   ///
   /// [values] はAttributeイベントに紐付けるカスタムオブジェクトを指定します。
-  static void attribute(Map values) async {
+  static Future<void> attribute(Map values) async {
     await _channel.invokeMethod('Tracker_attribute', {"values": normalize(values)});
   }
 
@@ -122,7 +122,7 @@ class Tracker {
   ///
   /// [viewName] は画面名、 [title] はタイトル、
   /// [values] はViewイベントに紐付けるカスタムオブジェクトを指定します。
-  static void view(String viewName, [String? title, Map? values]) async {
+  static Future<void> view(String viewName, [String? title, Map? values]) async {
     await _channel.invokeMethod('Tracker_view',
         {"viewName": viewName, "title": title, "values": normalize(values)});
   }

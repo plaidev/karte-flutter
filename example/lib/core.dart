@@ -17,7 +17,7 @@ class _CoreState extends State<CoreScreen> {
     Tracker.view("test");
   }
 
-  void updateState() async {
+ Future<void> updateState() async {
     String visitorId = await KarteApp.visitorId;
     bool isOptOut = await KarteApp.isOptOut;
     if (!mounted) return;

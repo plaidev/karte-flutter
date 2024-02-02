@@ -33,6 +33,7 @@ import io.karte.android.KarteApp;
 import io.karte.android.core.library.Library;
 import io.karte.android.core.logger.Logger;
 import io.karte.android.core.usersync.UserSync;
+import io.karte.android.tracking.TrackCompletion;
 import io.karte.android.tracking.Tracker;
 
 /**
@@ -139,34 +140,58 @@ public class KarteCorePlugin implements FlutterPlugin, ActivityAware, MethodCall
             case "track":
                 String name = call.argument("name");
                 if (name != null) {
-                    Tracker.track(name, values);
+                    Tracker.track(name, values, new TrackCompletion() {
+                        @Override
+                        public  void onComplete(boolean success) {
+                            result.success(null);
+                        }
+                    });
                 } else {
                     Logger.w(LOG_TAG, "Tracker.track didn't get argument 'name', NOP.");
+                    result.success(null);
                 }
-                result.success(null);
                 break;
             case "identify":
                 String userId = call.argument("userId");
                 if (userId != null) {
                     Tracker.identify(userId, values);
+                    Tracker.track(userId, values, new TrackCompletion() {
+                        @Override
+                        public  void onComplete(boolean success) {
+                            result.success(null);
+                        }
+                    });
                 } else {
-                    Tracker.identify(values != null ? values : new HashMap<String, Object>());
+                    Tracker.identify(values != null ? values : new HashMap<String, Object>(), new TrackCompletion() {
+                        @Override
+                        public  void onComplete(boolean success) {
+                            result.success(null);
+                        }
+                    });
                 }
-                result.success(null);
                 break;
             case "attribute":
-                Tracker.attribute(values);
-                result.success(null);
+                Tracker.attribute(values, new TrackCompletion() {
+                    @Override
+                    public void onComplete(boolean success) {
+                        result.success(null);
+                    }
+                });
                 break;
             case "view":
                 String viewName = call.argument("viewName");
                 String title = call.argument("title");
                 if (viewName != null) {
-                    Tracker.view(viewName, title, values);
+                    Tracker.view(viewName, title, values, new TrackCompletion() {
+                        @Override
+                        public void onComplete(boolean success) {
+                            result.success(null);
+                        }
+                    });
                 } else {
                     Logger.w(LOG_TAG, "Tracker.view didn't get argument 'viewName', NOP");
+                    result.success(null);
                 }
-                result.success(null);
                 break;
             default:
                 result.notImplemented();

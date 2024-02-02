@@ -33,19 +33,19 @@ class InAppMessaging {
   }
 
   /// 現在表示中の全てのアプリ内メッセージを非表示にします。
-  static void dismiss() async {
+  static Future<void> dismiss() async {
     await _channel.invokeMethod('InAppMessaging_dismiss');
   }
 
   /// アプリ内メッセージの表示を抑制します。
   ///
   /// なお既に表示されているアプリ内メッセージは、メソッドの呼び出しと同時に非表示となります。
-  static void suppress() async {
+  static Future<void> suppress() async {
     await _channel.invokeMethod('InAppMessaging_suppress');
   }
 
   /// アプリ内メッセージの表示抑制状態を解除します。
-  static void unsuppress() async {
+  static Future<void> unsuppress() async {
     await _channel.invokeMethod('InAppMessaging_unsuppress');
   }
 }

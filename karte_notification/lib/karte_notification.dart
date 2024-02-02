@@ -24,7 +24,7 @@ const WrapperChannel _channel = const WrapperChannel('karte_notification');
 
 /// リモート通知メッセージのパースおよびメッセージ中に含まれるディープリンクのハンドリングを行うためのクラスです。
 class Notification {
-  static void registerFCMToken(String fcmToken) async {
+  static Future<void> registerFCMToken(String fcmToken) async {
     await _channel
         .invokeMethod('Notification_registerFCMToken', {"fcmToken": fcmToken});
   }
@@ -91,7 +91,7 @@ class Notification {
   /// 通常は自動でクリック計測が行われるため本メソッドを呼び出す必要はありませんが、
   /// `isEnabledAutoMeasurement` が `false` の場合は自動での計測が行われないため、
   /// 本メソッドを呼び出す必要があります。
-  void track() async {
+  Future<void> track() async {
     if (!Platform.isIOS) return;
     await _channel.invokeMethod('Notification_track', {'data': message.data});
   }
