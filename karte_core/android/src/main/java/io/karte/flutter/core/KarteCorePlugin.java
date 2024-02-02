@@ -182,11 +182,16 @@ public class KarteCorePlugin implements FlutterPlugin, ActivityAware, MethodCall
                 String viewName = call.argument("viewName");
                 String title = call.argument("title");
                 if (viewName != null) {
-                    Tracker.view(viewName, title, values);
+                    Tracker.view(viewName, title, values, new TrackCompletion() {
+                        @Override
+                        public void onComplete(boolean success) {
+                            result.success(null);
+                        }
+                    });
                 } else {
                     Logger.w(LOG_TAG, "Tracker.view didn't get argument 'viewName', NOP");
+                    result.success(null);
                 }
-                result.success(null);
                 break;
             default:
                 result.notImplemented();
