@@ -155,10 +155,20 @@ public class KarteCorePlugin implements FlutterPlugin, ActivityAware, MethodCall
                 String userId = call.argument("userId");
                 if (userId != null) {
                     Tracker.identify(userId, values);
+                    Tracker.track(userId, values, new TrackCompletion() {
+                        @Override
+                        public  void onComplete(boolean success) {
+                            result.success(null);
+                        }
+                    });
                 } else {
-                    Tracker.identify(values != null ? values : new HashMap<String, Object>());
+                    Tracker.identify(values != null ? values : new HashMap<String, Object>(), new TrackCompletion() {
+                        @Override
+                        public  void onComplete(boolean success) {
+                            result.success(null);
+                        }
+                    });
                 }
-                result.success(null);
                 break;
             case "attribute":
                 Tracker.attribute(values);
