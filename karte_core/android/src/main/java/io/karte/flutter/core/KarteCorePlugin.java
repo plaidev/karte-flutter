@@ -171,8 +171,12 @@ public class KarteCorePlugin implements FlutterPlugin, ActivityAware, MethodCall
                 }
                 break;
             case "attribute":
-                Tracker.attribute(values);
-                result.success(null);
+                Tracker.attribute(values, new TrackCompletion() {
+                    @Override
+                    public void onComplete(boolean success) {
+                        result.success(null);
+                    }
+                });
                 break;
             case "view":
                 String viewName = call.argument("viewName");
