@@ -62,28 +62,31 @@ public class SwiftKarteCorePlugin: NSObject, FlutterPlugin {
             switch methodName {
             case "track":
                 if let name = arguments?["name"] as? String {
-                    Tracker.track(name, values: values)
+                    let task = Tracker.track(name, values: values)
+                    task.completion = { _ in result(nil) }
                 } else {
                     Logger.warn(tag: .flutter, message: "Tracker.track didn't get argument 'name', NOP.")
+                    result(nil)
                 }
-                result(nil)
             case "identify":
                 if let userId = arguments?["userId"] as? String {
-                    Tracker.identify(userId, values)
+                    let task = Tracker.identify(userId, values)
+                    task.completion = { _ in result(nil) }
                 } else {
-                    Tracker.identify(values)
+                    let task = Tracker.identify(values)
+                    task.completion = { _ in result(nil) }
                 }
-                result(nil)
             case "attribute":
-                Tracker.attribute(values)
-                result(nil)
+                let task = Tracker.attribute(values)
+                task.completion = { _ in result(nil) }
             case "view":
                 if let viewName = arguments?["viewName"] as? String {
-                    Tracker.view(viewName, title: arguments?["title"] as? String, values: values)
+                    let task = Tracker.view(viewName, title: arguments?["title"] as? String, values: values)
+                    task.completion = { _ in result(nil) }
                 } else {
                     Logger.warn(tag: .flutter, message: "Tracker.view didn't get argument 'viewName', NOP.")
+                    result(nil)
                 }
-                result(nil)
             default:
                 result(FlutterMethodNotImplemented)
             }

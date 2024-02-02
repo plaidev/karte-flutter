@@ -36,7 +36,7 @@ class _RenderVisualTracking extends RenderConstrainedBox {
   }
 
   @override
-  void handleEvent(PointerEvent event, BoxHitTestEntry entry) async {
+  Future<void> handleEvent(PointerEvent event, BoxHitTestEntry entry) async {
     if (event is PointerDownEvent) {
       _primaryPointer = event.pointer;
       _initialPosition =
@@ -150,7 +150,7 @@ extension _ActionIdGenerator on RenderObject {
 }
 
 class KarteNavigatorObserver extends NavigatorObserver {
-  void didPush(Route<dynamic> route, Route<dynamic>? previousRoute) async {
+  Future<void> didPush(Route<dynamic> route, Route<dynamic>? previousRoute) async {
     final context = route.navigator?.context;
 
     if (route is! MaterialRouteTransitionMixin) {
@@ -177,7 +177,7 @@ class KarteNavigatorObserver extends NavigatorObserver {
     );
   }
 
-  void didPop(Route<dynamic> route, Route<dynamic>? previousRoute) async {
+  Future<void> didPop(Route<dynamic> route, Route<dynamic>? previousRoute) async {
     final context = previousRoute?.navigator?.context;
 
     if (previousRoute == null ||

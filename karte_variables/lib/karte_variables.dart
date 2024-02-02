@@ -45,7 +45,7 @@ class Variables {
   /// 指定された設定値に関連するキャンペーン情報を元に効果測定用のイベント（message_open）を発火します。
   ///
   /// [variables] に設定値の配列を、 [values] にイベントに紐付けるカスタムオブジェクトを指定します。
-  static void trackOpen(List<Variable> variables, [Map? values]) async {
+  static Future<void> trackOpen(List<Variable> variables, [Map? values]) async {
     List<String> names =
         List<String>.from(variables.map((e) => e.name), growable: false);
     await _channel.invokeMethod(
@@ -55,7 +55,7 @@ class Variables {
   /// 指定された設定値に関連するキャンペーン情報を元に効果測定用のイベント（message_click）を発火します。
   ///
   /// [variables] に設定値の配列を、 [values] にイベントに紐付けるカスタムオブジェクトを指定します。
-  static void trackClick(List<Variable> variables, [Map? values]) async {
+  static Future<void> trackClick(List<Variable> variables, [Map? values]) async {
     List<String> names =
         List<String>.from(variables.map((e) => e.name), growable: false);
     await _channel.invokeMethod(
