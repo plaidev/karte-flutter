@@ -2,7 +2,7 @@ import UIKit
 import Flutter
 import KarteCore
 
-@UIApplicationMain
+@main
 @objc class AppDelegate: FlutterAppDelegate {
 
   private let appKey = "YOUR_APP_KEY"
