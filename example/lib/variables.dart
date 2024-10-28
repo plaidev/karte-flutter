@@ -14,6 +14,8 @@ class _VariablesState extends State<VariablesScreen> {
   List? _list;
   Map? _map;
 
+  final TextEditingController _textEditingController = TextEditingController();
+
   @override
   void initState() {
     super.initState();
@@ -63,6 +65,35 @@ class _VariablesState extends State<VariablesScreen> {
       child: Column(
         // mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          ElevatedButton(
+            onPressed: () {
+              showModalBottomSheet(
+                context: context,
+                builder: (BuildContext context) {
+                return Container(
+                  height: 250 + MediaQuery.of(context).viewInsets.bottom,
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    children: [
+                      TextField(
+                        controller: _textEditingController,
+                      ),
+                      ElevatedButton(
+                        onPressed: () async {
+                          Variables.clearCache(_textEditingController.text);
+                          await checkVariables();
+                          _textEditingController.clear();
+                          Navigator.pop(context);
+                        },
+                        child: Text("OK"),
+                      ),
+                    ]
+                  )
+                );
+              });
+            },
+            child: Text("Clear Cache By Key"),
+          ),
           ElevatedButton(
             onPressed: () {
               Variables.fetch().then((value) async {

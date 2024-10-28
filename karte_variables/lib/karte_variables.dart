@@ -61,6 +61,11 @@ class Variables {
     await _channel.invokeMethod(
         'Variables_trackClick', {"variableNames": names, "values": normalize(values)});
   }
+
+  /// 指定した設定値のキーのキャッシュを削除します。
+  static void clearCache(String key) async {
+    await _channel.invokeMethod('Variables_clearCache', {"key": key});
+  }
 }
 
 /// 設定値とそれに付随する情報を保持するためのクラスです。
