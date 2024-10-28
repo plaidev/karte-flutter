@@ -67,6 +67,9 @@ public class SwiftKarteVariablesPlugin: NSObject, FlutterPlugin {
                 let key = arguments["key"] as? String ?? ""
                 Variables.clearCache(forKey: key)
                 result(nil)
+            case "clearCacheAll":
+                Variables.clearCacheAll()
+                result(nil)
             default:
                 result(FlutterMethodNotImplemented)
             }

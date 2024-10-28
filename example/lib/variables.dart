@@ -66,6 +66,13 @@ class _VariablesState extends State<VariablesScreen> {
         // mainAxisAlignment: MainAxisAlignment.center,
         children: [
           ElevatedButton(
+            onPressed: () async {
+              Variables.clearCacheAll();
+              await checkVariables();
+            },
+            child: Text("Clear Cache All"),
+          ),
+          ElevatedButton(
             onPressed: () {
               showModalBottomSheet(
                 context: context,

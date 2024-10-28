@@ -66,6 +66,11 @@ class Variables {
   static void clearCache(String key) async {
     await _channel.invokeMethod('Variables_clearCache', {"key": key});
   }
+
+  /// 全ての設定値のキャッシュが削除されます。
+  static void clearCacheAll() async {
+    await _channel.invokeMethod('Variables_clearCacheAll');
+  }
 }
 
 /// 設定値とそれに付随する情報を保持するためのクラスです。
