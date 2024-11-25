@@ -50,4 +50,11 @@ void main() {
     expect(args?['variableNames'], ['test']);
     expect(args?['values'], { 'd': 1 });
   });
+
+  test('clearCache', () async {
+    var key = "test";
+    Variables.clearCache(key);
+    Map? args = cast<Map>(calls['Variables_clearCache']?[0].arguments);
+    expect(args?['key'], 'test');
+  });
 }
