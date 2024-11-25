@@ -106,6 +106,22 @@ class _VariablesState extends State<VariablesScreen> {
               Variables.fetch().then((value) async {
                 print("variables fetch completed!");
                 await checkVariables();
+                List allKeys = await Variables.getAllKeys();
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: Text("Fetch Succeeded. Keys:"),
+                      content: Text(allKeys.join(',')),
+                      actions: [
+                        TextButton(
+                          onPressed: () => Navigator.pop(context),
+                          child: Text("OK")
+                        ),
+                      ],
+                    );
+                  }
+                );
               });
             },
             child: Text("Fetch Variables"),

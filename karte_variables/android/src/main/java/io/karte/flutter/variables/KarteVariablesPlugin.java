@@ -128,6 +128,9 @@ public class KarteVariablesPlugin implements FlutterPlugin, MethodCallHandler {
                 Variables.trackOpen(variables, values);
                 result.success(null);
                 break;
+            case "getAllKeys":
+                result.success(Variables.getAllKeys());
+                break;
             case "clearCache":
                 key = call.argument("key");
                 if (key == null) {
