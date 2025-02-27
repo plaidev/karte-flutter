@@ -61,6 +61,26 @@ class Variables {
     await _channel.invokeMethod(
         'Variables_trackClick', {"variableNames": names, "values": normalize(values)});
   }
+
+  /// 全ての設定値のキーの一覧を取得します。
+  /// なお事前に `Variables.fetch()` を呼び出しておく必要があります。
+  static Future<List<String>> getAllKeys() async {
+    final result = await _channel.invokeMethod('Variables_getAllKeys');
+    if (result == null) {
+      return [];
+    }
+    return result.whereType<String>().toList();
+  }
+
+  /// 指定した設定値のキーのキャッシュを削除します。
+  static void clearCache(String key) async {
+    await _channel.invokeMethod('Variables_clearCache', {"key": key});
+  }
+
+  /// 全ての設定値のキャッシュが削除されます。
+  static void clearCacheAll() async {
+    await _channel.invokeMethod('Variables_clearCacheAll');
+  }
 }
 
 /// 設定値とそれに付随する情報を保持するためのクラスです。

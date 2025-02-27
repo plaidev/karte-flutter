@@ -63,6 +63,15 @@ public class SwiftKarteVariablesPlugin: NSObject, FlutterPlugin {
                 let values = convertValues(arguments["values"])
                 Tracker.trackClick(variables: variables, values: values)
                 result(nil)
+            case "getAllKeys":
+                result(Variables.getAllKeys())
+            case "clearCache":
+                let key = arguments["key"] as? String ?? ""
+                Variables.clearCache(forKey: key)
+                result(nil)
+            case "clearCacheAll":
+                Variables.clearCacheAll()
+                result(nil)
             default:
                 result(FlutterMethodNotImplemented)
             }
