@@ -1,3 +1,10 @@
+## 1.4.0
+
+* Added Android namespace settings.
+* Added buildFeatures.buildConfig settings to Android build.gradle.
+* Removed registerWith method from karte_core plugin (ended support for old Flutter projects).
+* Updated dependencies in pubspec.lock.
+
 ## 1.3.0
 
 * Removed dependency on kotlin.
