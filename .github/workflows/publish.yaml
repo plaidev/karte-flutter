@@ -17,9 +17,9 @@ jobs:
       pull-requests: write
     steps:
       - name: checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
       - name: set up flutter
-        uses: subosito/flutter-action@v2
+        uses: subosito/flutter-action@fd55f4c5af5b953cc57a2be44cb082c8f6635e8e # v2.21.0
         with:
           flutter-version: ${{ env.FLUTTER_VERSION }}
           channel: ${{ env.FLUTTER_CHANNEL }}
@@ -35,7 +35,7 @@ jobs:
           melos publish --dry-run -y 2>&1 | grep -e ^Publishing -e '^No unpublished packages found' -e '^\* ' > publish-dry-run.log
       - name: commnet pr
         if: github.event.pull_request.merged == false
-        uses: machine-learning-apps/pr-comment@master
+        uses: machine-learning-apps/pr-comment@78e77cd435e0f9706512ea294d846058ae46f7ff # 1.0.0
         with:
           path: publish-dry-run.log
         env:
