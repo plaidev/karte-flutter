@@ -332,7 +332,6 @@ hs_err_pid*
 
 # End of https://www.toptal.com/developers/gitignore/api/flutter,visualstudiocode,jetbrains,androidstudio,xcode
 
-
 # Firebase
 GoogleService-Info.plist
 google-services.json
@@ -343,3 +342,8 @@ Karte-Info.plist
 
 # melos
 pubspec_overrides.yaml
+
+# FVM Version Cache
+.fvm/
+.fvmrc
+
