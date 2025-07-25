@@ -1,0 +1,88 @@
+name: "Create PR to mirror repo"
+on:
+  pull_request:
+    types: [closed]
+    branches:
+      - master
+  workflow_dispatch: # Enable manual execution for troubleshooting
+jobs:
+  sync-to-mirror:
+    runs-on: ubuntu-latest
+    # Should be executed on the dev repo.
+    if: github.event.pull_request.merged == true && github.repository != 'plaidev/karte-flutter'
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout master
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          ref: master
+          fetch-depth: 0
+      - name: Configure Git
+        run: |
+          git config user.email "git@users.noreply.github.com"
+          git config user.name "github actions"
+      - name: Checkout mirror repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          repository: plaidev/karte-flutter
+          ref: master
+          # TODO: Consider using GitHub Apps instead of PAT tokens.
+          token: ${{ secrets.MIRROR_GH_TOKEN }}
+          path: mirror-repo
+          fetch-depth: 0
+      - name: Add source remote
+        run: |
+          cd mirror-repo
+          git remote add source ../
+      - name: Check for changes
+        id: changes
+        run: |
+          cd mirror-repo
+          git fetch source master
+          # Check if there are any differences
+          if git diff --quiet HEAD source/master; then
+            echo "No changes to sync, exiting"
+            exit 1
+          fi
+      - name: Sync and push changes
+        run: |
+          cd mirror-repo
+          git remote set-url origin https://x-access-token:${{ secrets.MIRROR_GH_TOKEN }}@github.com/plaidev/karte-flutter.git
+          git checkout -b ${{ github.event.pull_request.head.ref }}
+          if ! git merge source/master --no-edit; then
+            echo "❌ Merge conflicts detected"
+            git status
+            exit 1
+          fi
+          git push origin HEAD
+      - name: Create PR to mirror repo
+        id: create_pr
+        env:
+          # TODO: Consider using GitHub Apps instead of PAT tokens.
+          GH_TOKEN: ${{ secrets.MIRROR_GH_TOKEN }}
+        run: |
+          cd mirror-repo
+          PR_URL=$(gh pr create \
+            --title "Release changes" \
+            --body "" \
+            --base master \
+            --head $(git branch --show-current))
+          echo "pr_url=$PR_URL" >> $GITHUB_OUTPUT
+      - name: Notify Slack on success
+        if: success()
+        uses: rtCamp/action-slack-notify@e31e87e03dd19038e411e38ae27cbad084a90661 # v2.3.3
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_MESSAGE: |
+            ✅ Successfully created PR to sync changes to mirror repo
+            PR: ${{ steps.create_pr.outputs.pr_url }}
+          SLACK_COLOR: success
+      - name: Notify Slack on failure
+        if: failure()
+        uses: rtCamp/action-slack-notify@e31e87e03dd19038e411e38ae27cbad084a90661 # v2.3.3
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_MESSAGE: |
+            ❌ Failed to create PR to sync changes to mirror repo
+          SLACK_COLOR: failure
