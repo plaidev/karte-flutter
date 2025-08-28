@@ -2,6 +2,8 @@
 
 * Updated minimum Flutter SDK requirement to 3.7.0.
 * Updated minimum Dart SDK requirement to 2.19.0.
+* Updated AGP and Gradle versions.
+* Updated compileSdk to 34.
 
 ## 1.4.0
 
