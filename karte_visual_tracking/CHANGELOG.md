@@ -4,6 +4,10 @@
 * Updated minimum Dart SDK requirement to 2.19.0.
 * Updated AGP and Gradle versions.
 * Updated compileSdk to 34.
+* Fixed native SDK versions to specific releases for better stability:
+  * iOS: KarteVisualTracking 2.14.0
+  * Android: visualtracking 2.12.0
+* Updated minimum iOS platform target from 10.0 to 15.0.
 
 ## 0.7.0
 

@@ -20,8 +20,8 @@ Flutter plugin for KARTE Visual Tracking.
   s.source_files = 'Classes/**/*'
   s.dependency 'Flutter'
   s.dependency 'karte_core'
-  s.dependency 'KarteVisualTracking', '~> 2'
-  s.platform = :ios, '10.0'
+  s.dependency 'KarteVisualTracking', '= 2.14.0'
+  s.platform = :ios, '15.0'
   s.static_framework = true
 
   # Flutter.framework does not contain a i386 slice.

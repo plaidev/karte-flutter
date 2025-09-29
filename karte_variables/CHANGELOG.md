@@ -4,6 +4,10 @@
 * Updated minimum Dart SDK requirement to 2.19.0.
 * Updated AGP and Gradle versions.
 * Updated compileSdk to 34.
+* Fixed native SDK versions to specific releases for better stability:
+  * iOS: KarteVariables 2.13.0
+  * Android: variables 2.10.0
+* Updated minimum iOS platform target from 10.0 to 15.0.
 
 ## 1.5.0
 
