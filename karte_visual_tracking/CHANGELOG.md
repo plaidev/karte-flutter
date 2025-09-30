@@ -1,4 +1,4 @@
-## x.x.x
+## 0.8.0
 
 * Updated minimum Flutter SDK requirement to 3.7.0.
 * Updated minimum Dart SDK requirement to 2.19.0.
