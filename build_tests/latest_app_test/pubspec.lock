@@ -142,35 +142,35 @@ packages:
       path: "../../karte_core"
       relative: true
     source: path
-    version: "1.4.0"
+    version: "2.0.0"
   karte_in_app_messaging:
     dependency: "direct main"
     description:
       path: "../../karte_in_app_messaging"
       relative: true
     source: path
-    version: "1.4.0"
+    version: "2.0.0"
   karte_notification:
     dependency: "direct main"
     description:
       path: "../../karte_notification"
       relative: true
     source: path
-    version: "1.5.0"
+    version: "2.0.0"
   karte_variables:
     dependency: "direct main"
     description:
       path: "../../karte_variables"
       relative: true
     source: path
-    version: "1.5.0"
+    version: "2.0.0"
   karte_visual_tracking:
     dependency: "direct main"
     description:
       path: "../../karte_visual_tracking"
       relative: true
     source: path
-    version: "0.7.0"
+    version: "0.8.0"
   leak_tracker:
     dependency: transitive
     description:
