@@ -13,11 +13,11 @@ jobs:
     runs-on: ubuntu-latest
     if: github.repository == 'plaidev/karte-flutter'
     steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
         with:
           fetch-depth: 0
       - name: Setup Flutter
-        uses: subosito/flutter-action@e938fdf56512cc96ef2f93601a5a40bde3801046 # v2.19.0
+        uses: subosito/flutter-action@fd55f4c5af5b953cc57a2be44cb082c8f6635e8e # v2.21.0
         with:
           flutter-version: ${{ env.FLUTTER_VERSION }}
           channel: ${{ env.FLUTTER_CHANNEL }}
@@ -25,6 +25,10 @@ jobs:
         run: |
           dart pub global activate melos
           dart pub global run melos bootstrap
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
       - name: Create tags
         # Ref) https://github.com/bluefireteam/melos-action/blob/9bcdb36f9a5556a10467a78aed2cc2e220f54035/action.yml#L118-L122
         run: |
