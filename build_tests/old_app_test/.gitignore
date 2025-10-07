@@ -1,0 +1,32 @@
+# Flutter/Dart related
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+build/
+.fvm/
+
+# IDE/Editor related
+.vscode/
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# OS related
+.DS_Store
+Thumbs.db
+
+# Generated files
+*.g.dart
+*.freezed.dart
+*.mocks.dart
+
+# Coverage
+coverage/
+
+# Local environment
+.env
+.env.local

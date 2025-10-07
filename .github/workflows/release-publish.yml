@@ -1,0 +1,66 @@
+name: Publish packages
+on:
+  workflow_dispatch:
+env:
+  FLUTTER_VERSION: 3.13.0
+  FLUTTER_CHANNEL: 'stable'
+  DART_VERSION: 3.1.0 # Compatible with Flutter 3.13.0
+jobs:
+  publish-packages:
+    name: Publish packages
+    environment: 'pub.dev'
+    permissions:
+      contents: write
+      id-token: write # Required for authentication using OIDC
+    runs-on: ubuntu-latest
+    if: github.repository == 'plaidev/karte-flutter'
+    steps:
+      - name: Validate ref is a tag
+        run: |
+          if [[ "${{ github.ref }}" != refs/tags/* ]]; then
+            echo "Error: This workflow must be triggered with a tag reference"
+            echo "Current ref: ${{ github.ref }}"
+            exit 1
+          fi
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        with:
+          fetch-depth: 0
+      # Set up the Dart SDK and provision the OIDC token used for publishing.
+      # The `dart` command from this step will be shadowed by the one from the Flutter SDK below. 
+      - name: Setup Dart
+        uses: dart-lang/setup-dart@e51d8e571e22473a2ddebf0ef8a2123f0ab2c02c # v1.7.1
+        with:
+          sdk: ${{ env.DART_VERSION }}
+      - name: Setup Flutter
+        uses: subosito/flutter-action@fd55f4c5af5b953cc57a2be44cb082c8f6635e8e # v2.21.0
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: ${{ env.FLUTTER_CHANNEL }}
+      - name: Setup Melos
+        run: |
+          dart pub global activate melos
+          dart pub global run melos bootstrap
+      - name: Extract package name from tag
+        # Ref) https://github.com/bluefireteam/melos-action/blob/9bcdb36f9a5556a10467a78aed2cc2e220f54035/action.yml#L129-L132
+        run: |
+          GITHUB_REF="${{ github.ref }}"
+          PACKAGE_NAME=$(sed -E 's/refs\/tags\/([a-z0-9_]+)-v([0-9]+\.[0-9]+\.[0-9]+.*)$/\1/' <<< "$GITHUB_REF")
+          echo "PACKAGE_NAME=$PACKAGE_NAME" >> $GITHUB_ENV
+      - name: Publish package to pub.dev
+        run: |
+          echo "Publishing package: $PACKAGE_NAME (Tag/Ref: ${{ github.ref_name }})"
+          melos publish -y --no-dry-run --scope=$PACKAGE_NAME
+      - name: Notify Slack on success
+        if: success()
+        uses: rtCamp/action-slack-notify@e31e87e03dd19038e411e38ae27cbad084a90661 # v2.3.3
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_MESSAGE: 'Package ${{ env.PACKAGE_NAME }} published successfully'
+          SLACK_COLOR: success
+      - name: Notify Slack on failure
+        if: failure()
+        uses: rtCamp/action-slack-notify@e31e87e03dd19038e411e38ae27cbad084a90661 # v2.3.3
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_MESSAGE: 'Failed to publish package ${{ env.PACKAGE_NAME }}'
+          SLACK_COLOR: failure

@@ -28,9 +28,11 @@ The API references are located at
 
 ## Contributing
 
-Please follow our guidelines.
- - [Contribution Guideline](https://github.com/plaidev/karte-flutter/blob/master/CONTRIBUTING.md)
- - [Code of Conduct](https://github.com/plaidev/karte-flutter/blob/master/CODE_OF_CONDUCT.md)
+This repository is a mirror of our internal development.
+We do **NOT** accept external pull requests, but we welcome bug reports and feature requests through GitHub Issues.
+
+ - [Contribution Guideline](./CONTRIBUTING.md)
+ - [Code of Conduct](./CODE_OF_CONDUCT.md)
 
 ## License
 KARTE Flutter SDK is published under the Apache 2.0 License.
