@@ -1,0 +1,31 @@
+name: Build iOS app with latest environment
+on:
+  # TODO: Enable to run automatically before release.
+  workflow_dispatch:
+env:
+  FLUTTER_VERSION: '3.35.1'
+  FLUTTER_CHANNEL: 'stable'
+jobs:
+  build-ios:
+    name: Build iOS app with latest environment
+    # macos-15 includes Xcode 26.0
+    # https://github.com/actions/runner-images/blob/main/images/macos/macos-15-arm64-Readme.md
+    runs-on: macos-15
+    timeout-minutes: 20
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+      - name: Select Xcode 26.0
+        run: sudo xcode-select -s /Applications/Xcode_26.0.app/Contents/Developer
+      - name: Setup Flutter
+        uses: subosito/flutter-action@fd55f4c5af5b953cc57a2be44cb082c8f6635e8e # v2.21.0
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: ${{ env.FLUTTER_CHANNEL }}
+          cache: true
+      - name: Get dependencies
+        working-directory: build_tests/latest_app_test
+        run: flutter pub get
+      - name: Build iOS app
+        working-directory: build_tests/latest_app_test
+        run: flutter build ios --release --no-codesign

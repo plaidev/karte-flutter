@@ -5,7 +5,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:8.1.0'
+        classpath 'com.android.tools.build:gradle:8.12.1'
         classpath 'org.yaml:snakeyaml:1.19'
     }
 }
@@ -26,7 +26,7 @@ rootProject.allprojects {
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 31
+    compileSdkVersion 34
 
     if (project.android.hasProperty("namespace")) {
         namespace 'io.karte.flutter.core'
@@ -46,5 +46,5 @@ android {
 }
 
 dependencies {
-    api 'io.karte.android:core:2.+'
+    api 'io.karte.android:core:2.31.1'
 }

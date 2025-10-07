@@ -19,8 +19,8 @@ Flutter plugin for KARTE Notification.
   s.source           = { :path => '.' }
   s.source_files = 'Classes/**/*'
   s.dependency 'Flutter'
-  s.dependency 'KarteRemoteNotification', '~> 2'
-  s.platform = :ios, '10.0'
+  s.dependency 'KarteRemoteNotification', '= 2.13.0'
+  s.platform = :ios, '15.0'
   s.static_framework = true
 
   # Flutter.framework does not contain a i386 slice. Only x86_64 simulators are supported.

@@ -19,8 +19,8 @@ Flutter plugin for KARTE Core.
   s.source           = { :path => '.' }
   s.source_files = 'Classes/**/*'
   s.dependency 'Flutter'
-  s.dependency 'KarteCore', '~> 2.21'
-  s.platform = :ios, '10.0'
+  s.dependency 'KarteCore', '= 2.32.0'
+  s.platform = :ios, '15.0'
   s.static_framework = true
 
   # Flutter.framework does not contain a i386 slice. Only x86_64 simulators are supported.

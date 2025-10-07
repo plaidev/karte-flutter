@@ -1,0 +1,35 @@
+name: latest_app_test
+description: "A new Flutter project."
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.7.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  karte_core:
+    path: ../../karte_core
+  karte_in_app_messaging:
+    path: ../../karte_in_app_messaging
+  karte_notification:
+    path: ../../karte_notification
+  karte_variables:
+    path: ../../karte_variables
+  karte_visual_tracking:
+    path: ../../karte_visual_tracking
+
+dependency_overrides:
+  karte_core:
+    path: ../../karte_core
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+flutter:
+  uses-material-design: true

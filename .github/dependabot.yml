@@ -1,0 +1,44 @@
+version: 2
+updates:
+  - package-ecosystem: "pub"
+    directory: "/karte_core"
+    schedule:
+      interval: "weekly"
+      time: "09:00"
+      timezone: "Asia/Tokyo"
+
+  - package-ecosystem: "pub"
+    directory: "/karte_in_app_messaging"
+    schedule:
+      interval: "weekly"
+      time: "09:00"
+      timezone: "Asia/Tokyo"
+
+  - package-ecosystem: "pub"
+    directory: "/karte_notification"
+    schedule:
+      interval: "weekly"
+      time: "09:00"
+      timezone: "Asia/Tokyo"
+
+  # Monitor Android dependencies for karte_notification since it depends on Firebase Messaging native libraries
+  - package-ecosystem: "gradle"
+    directory: "/karte_notification/android"
+    schedule:
+      interval: "weekly"
+      time: "09:00"
+      timezone: "Asia/Tokyo"
+
+  - package-ecosystem: "pub"
+    directory: "/karte_variables"
+    schedule:
+      interval: "weekly"
+      time: "09:00"
+      timezone: "Asia/Tokyo"
+
+  - package-ecosystem: "pub"
+    directory: "/karte_visual_tracking"
+    schedule:
+      interval: "weekly"
+      time: "09:00"
+      timezone: "Asia/Tokyo"
