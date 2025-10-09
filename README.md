@@ -9,6 +9,18 @@ This repository holds the source code for the Flutter version of KARTE SDK.
 ## Getting Started
 Please see the detailed instructions in our docs to add [KARTE Flutter SDK](https://developers.karte.io/docs/flutter-sdk) to your project.
 
+## Requirements
+
+To integrate the KARTE Flutter SDK, your development environment must meet the following requirements:
+- Flutter: 3.7.0 or later
+- Dart: 2.19.0 or later
+
+The KARTE Flutter SDK is a bridge SDK that wraps the native SDKs for each platform.  
+Therefore, your project must also meet the prerequisites for the respective native KARTE SDKs.
+
+- [iOS](https://developers.karte.io/docs/setup-ios-sdk-v2)
+- [Android](https://developers.karte.io/docs/setup-android-sdk-v2)
+
 ## Documentation
 The developer guide is located at
 - [Developer Portal - KARTE Flutter SDK](https://developers.karte.io/docs/flutter-sdk)
