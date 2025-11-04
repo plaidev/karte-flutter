@@ -6,6 +6,8 @@ env:
   # NOTE: Refer to each module's pubspec.yaml (e.g. karte_core/pubspec.yaml) for minimum SDK version.
   FLUTTER_VERSION: '3.7.0'
   FLUTTER_CHANNEL: 'stable'
+  # SHA256 checksum from https://storage.googleapis.com/flutter_infra_release/releases/releases_linux.json
+  FLUTTER_SHA256: 51160abac1d0d82b45647be6b2a6ed2d3827d51c3920f2c8ebf3ea8cebe6f484
   JAVA_VERSION: '11'
 jobs:
   build-android:
@@ -20,12 +22,17 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: ${{ env.JAVA_VERSION }}
-      - name: Setup Flutter
-        uses: subosito/flutter-action@fd55f4c5af5b953cc57a2be44cb082c8f6635e8e # v2.21.0
-        with:
-          flutter-version: ${{ env.FLUTTER_VERSION }}
-          channel: ${{ env.FLUTTER_CHANNEL }}
-          cache: true
+      - name: Install Flutter
+        working-directory: ${{ runner.temp }}
+        env:
+          FLUTTER_ARCHIVE: flutter_linux_${{ env.FLUTTER_VERSION }}-${{ env.FLUTTER_CHANNEL }}.tar.xz
+        run: |
+          curl -fsSLO "https://storage.googleapis.com/flutter_infra_release/releases/${FLUTTER_CHANNEL}/linux/${FLUTTER_ARCHIVE}"
+          echo "${FLUTTER_SHA256}  ${FLUTTER_ARCHIVE}" | sha256sum -c
+          tar xf "${FLUTTER_ARCHIVE}" -C "${HOME}"
+          echo "${HOME}/flutter/bin" >> $GITHUB_PATH
+      - name: Print Flutter version
+        run: flutter --version
       - name: Get dependencies
         working-directory: build_tests/old_app_test
         run: flutter pub get
