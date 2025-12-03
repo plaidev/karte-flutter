@@ -1,3 +1,7 @@
+## x.x.x
+
+* Replaced deprecated AsyncTask with ExecutorService and Handler.
+
 ## 2.0.0
 
 * Updated minimum Flutter SDK requirement to 3.7.0.
