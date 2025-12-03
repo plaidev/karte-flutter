@@ -26,10 +26,16 @@ jobs:
         run: |
           git checkout -b release/${{ steps.date.outputs.date }}
           git push origin -u release/${{ steps.date.outputs.date }}
+      - name: Generate GitHub App token
+        uses: actions/create-github-app-token@7e473efe3cb98aa54f8d4bac15400b15fad77d94 # v2.2.0
+        id: app-token
+        with:
+          app-id: ${{ secrets.SHARED_GITHUB_ACTION_AGENT_APP_ID }}
+          private-key: ${{ secrets.SHARED_GITHUB_ACTION_AGENT_APP_PRIVATE_KEY }}
       - name: Create Pull Request
         id: create_pr
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
         run: |
           PR_URL=$(gh pr create \
             --title "Release by ${{ github.actor }}" \
