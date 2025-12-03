@@ -22,13 +22,21 @@ jobs:
         run: |
           git config --global user.email "git@users.noreply.github.com"
           git config --global user.name "github actions"
+      - name: Generate GitHub App token
+        uses: actions/create-github-app-token@7e473efe3cb98aa54f8d4bac15400b15fad77d94 # v2.2.0
+        id: app-token
+        with:
+          app-id: ${{ secrets.SHARED_GITHUB_ACTION_AGENT_APP_ID }}
+          private-key: ${{ secrets.SHARED_GITHUB_ACTION_AGENT_APP_PRIVATE_KEY }}
+          owner: plaidev
+          repositories: |
+            karte-flutter
       - name: Checkout mirror repository
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
         with:
           repository: plaidev/karte-flutter
           ref: master
-          # TODO: Consider using GitHub Apps instead of PAT tokens.
-          token: ${{ secrets.SHARED_GITHUB_ACCESS_TOKEN }}
+          token: ${{ steps.app-token.outputs.token }}
           path: mirror-repo
           fetch-depth: 0
       - name: Add source remote
@@ -48,7 +56,7 @@ jobs:
       - name: Sync and push changes
         run: |
           cd mirror-repo
-          git remote set-url origin https://x-access-token:${{ secrets.SHARED_GITHUB_ACCESS_TOKEN }}@github.com/plaidev/karte-flutter.git
+          git remote set-url origin https://x-access-token:${{ steps.app-token.outputs.token }}@github.com/plaidev/karte-flutter.git
           git checkout -b ${{ github.event.pull_request.head.ref }}
           if ! git merge source/master --no-edit; then
             echo "❌ Merge conflicts detected"
@@ -59,8 +67,7 @@ jobs:
       - name: Create PR to mirror repo
         id: create_pr
         env:
-          # TODO: Consider using GitHub Apps instead of PAT tokens.
-          GH_TOKEN: ${{ secrets.SHARED_GITHUB_ACCESS_TOKEN }}
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
         run: |
           cd mirror-repo
           PR_URL=$(gh pr create \
