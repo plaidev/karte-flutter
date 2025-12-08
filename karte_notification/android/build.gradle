@@ -37,6 +37,6 @@ android {
 }
 
 dependencies {
-    implementation 'io.karte.android:notifications:2.15.0'
+    implementation 'io.karte.android:notifications:2.16.0'
     implementation 'com.google.firebase:firebase-messaging:22.0.0'
 }
