@@ -4,7 +4,6 @@ on:
     types: [closed]
     branches:
       - master
-  workflow_dispatch: # Enable manual execution for troubleshooting
 jobs:
   sync-to-mirror:
     runs-on: ubuntu-latest
