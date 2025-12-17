@@ -19,7 +19,7 @@ Flutter plugin for KARTE Core.
   s.source           = { :path => '.' }
   s.source_files = 'Classes/**/*'
   s.dependency 'Flutter'
-  s.dependency 'KarteCore', '= 2.32.0'
+  s.dependency 'KarteCore', '= 2.34.0'
   s.platform = :ios, '15.0'
   s.static_framework = true
 
