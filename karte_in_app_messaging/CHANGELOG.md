@@ -1,3 +1,11 @@
+## 2.1.0
+
+* Updated native SDK versions:
+  * iOS: KarteInAppMessaging 2.22.0 → 2.25.0
+    * For details, see [iOS SDK Release Notes](https://developers.karte.io/docs/release-notes-ios-sdk-v2)
+  * Android: inappmessaging 2.24.0 → 2.25.0
+    * For details, see [Android SDK Release Notes](https://developers.karte.io/docs/release-notes-android-sdk-v2)
+
 ## 2.0.0
 
 * Updated minimum Flutter SDK requirement to 3.7.0.

@@ -5,6 +5,8 @@ on:
 env:
   FLUTTER_VERSION: '3.35.1'
   FLUTTER_CHANNEL: 'stable'
+  # SHA256 checksum from https://storage.googleapis.com/flutter_infra_release/releases/releases_macos.json
+  FLUTTER_SHA256: cbb08534b54a65b04d0e13acfc564ebbdfbdb451f90d1119881c9d32a3632b44
 jobs:
   build-ios:
     name: Build iOS app with latest environment
@@ -17,12 +19,17 @@ jobs:
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
       - name: Select Xcode 26.0
         run: sudo xcode-select -s /Applications/Xcode_26.0.app/Contents/Developer
-      - name: Setup Flutter
-        uses: subosito/flutter-action@fd55f4c5af5b953cc57a2be44cb082c8f6635e8e # v2.21.0
-        with:
-          flutter-version: ${{ env.FLUTTER_VERSION }}
-          channel: ${{ env.FLUTTER_CHANNEL }}
-          cache: true
+      - name: Install Flutter
+        working-directory: ${{ runner.temp }}
+        env:
+          FLUTTER_ARCHIVE: flutter_macos_arm64_${{ env.FLUTTER_VERSION }}-${{ env.FLUTTER_CHANNEL }}.zip
+        run: |
+          curl -fsSLO "https://storage.googleapis.com/flutter_infra_release/releases/${FLUTTER_CHANNEL}/macos/${FLUTTER_ARCHIVE}"
+          echo "${FLUTTER_SHA256}  ${FLUTTER_ARCHIVE}" | shasum -a 256 -c
+          unzip -q "${FLUTTER_ARCHIVE}" -d "${HOME}"
+          echo "${HOME}/flutter/bin" >> $GITHUB_PATH
+      - name: Print Flutter version
+        run: flutter --version
       - name: Get dependencies
         working-directory: build_tests/latest_app_test
         run: flutter pub get
