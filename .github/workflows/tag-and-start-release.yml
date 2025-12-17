@@ -32,6 +32,7 @@ jobs:
       - name: Setup Melos
         run: |
           dart pub global activate melos
+          echo "$HOME/.pub-cache/bin" >> $GITHUB_PATH
           dart pub global run melos bootstrap
       - name: Configure Git
         run: |

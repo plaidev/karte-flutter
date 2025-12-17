@@ -47,6 +47,7 @@ jobs:
       - name: Setup Melos
         run: |
           dart pub global activate melos
+          echo "$HOME/.pub-cache/bin" >> $GITHUB_PATH
           dart pub global run melos bootstrap
       - name: Extract package name from tag
         # Ref) https://github.com/bluefireteam/melos-action/blob/9bcdb36f9a5556a10467a78aed2cc2e220f54035/action.yml#L129-L132
