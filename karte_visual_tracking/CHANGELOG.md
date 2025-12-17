@@ -1,3 +1,9 @@
+## 0.9.0
+
+* Updated native SDK versions:
+  * Android: visualtracking 2.12.0 → 2.13.0
+    * For details, see [Android SDK Release Notes](https://developers.karte.io/docs/release-notes-android-sdk-v2)
+
 ## 0.8.0
 
 * Updated minimum Flutter SDK requirement to 3.7.0.

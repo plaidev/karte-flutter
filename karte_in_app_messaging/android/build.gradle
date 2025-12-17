@@ -37,5 +37,5 @@ android {
 }
 
 dependencies {
-    implementation 'io.karte.android:inappmessaging:2.24.0'
+    implementation 'io.karte.android:inappmessaging:2.25.0'
 }

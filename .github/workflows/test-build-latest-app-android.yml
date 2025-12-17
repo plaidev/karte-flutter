@@ -5,6 +5,8 @@ on:
 env:
   FLUTTER_VERSION: '3.35.1'
   FLUTTER_CHANNEL: 'stable'
+  # SHA256 checksum from https://storage.googleapis.com/flutter_infra_release/releases/releases_linux.json
+  FLUTTER_SHA256: 58efd9d1e570a1bf976e218cfbbcca3f23b21b873d765a74e045d5b9022ab515
   JAVA_VERSION: '21'
 jobs:
   build-android:
@@ -15,16 +17,21 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
       - name: Setup Java
-        uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00 # v4.7.1
+        uses: actions/setup-java@dded0888837ed1f317902acf8a20df0ad188d165 # v5.0.0
         with:
           distribution: 'temurin'
           java-version: ${{ env.JAVA_VERSION }}
-      - name: Setup Flutter
-        uses: subosito/flutter-action@fd55f4c5af5b953cc57a2be44cb082c8f6635e8e # v2.21.0
-        with:
-          flutter-version: ${{ env.FLUTTER_VERSION }}
-          channel: ${{ env.FLUTTER_CHANNEL }}
-          cache: true
+      - name: Install Flutter
+        working-directory: ${{ runner.temp }}
+        env:
+          FLUTTER_ARCHIVE: flutter_linux_${{ env.FLUTTER_VERSION }}-${{ env.FLUTTER_CHANNEL }}.tar.xz
+        run: |
+          curl -fsSLO "https://storage.googleapis.com/flutter_infra_release/releases/${FLUTTER_CHANNEL}/linux/${FLUTTER_ARCHIVE}"
+          echo "${FLUTTER_SHA256}  ${FLUTTER_ARCHIVE}" | sha256sum -c
+          tar xf "${FLUTTER_ARCHIVE}" -C "${HOME}"
+          echo "${HOME}/flutter/bin" >> $GITHUB_PATH
+      - name: Print Flutter version
+        run: flutter --version
       - name: Get dependencies
         working-directory: build_tests/latest_app_test
         run: flutter pub get

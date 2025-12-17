@@ -8,9 +8,10 @@ jobs:
     if: github.repository != 'plaidev/karte-flutter'
     permissions:
       contents: write
+      pull-requests: write
     steps:
       - name: Checkout develop
-        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
         with:
           ref: develop
       - name: Configure Git
@@ -25,11 +26,16 @@ jobs:
         run: |
           git checkout -b release/${{ steps.date.outputs.date }}
           git push origin -u release/${{ steps.date.outputs.date }}
+      - name: Generate GitHub App token
+        uses: actions/create-github-app-token@7e473efe3cb98aa54f8d4bac15400b15fad77d94 # v2.2.0
+        id: app-token
+        with:
+          app-id: ${{ secrets.SHARED_GITHUB_ACTION_AGENT_APP_ID }}
+          private-key: ${{ secrets.SHARED_GITHUB_ACTION_AGENT_APP_PRIVATE_KEY }}
       - name: Create Pull Request
         id: create_pr
         env:
-          # TODO: Consider using GitHub Apps instead of PAT tokens.
-          GH_TOKEN: ${{ secrets.DEV_GH_TOKEN }}
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
         run: |
           PR_URL=$(gh pr create \
             --title "Release by ${{ github.actor }}" \

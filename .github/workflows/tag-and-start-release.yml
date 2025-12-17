@@ -4,6 +4,8 @@ on:
 env:
   FLUTTER_VERSION: 3.13.0
   FLUTTER_CHANNEL: 'stable'
+  # SHA256 checksum from https://storage.googleapis.com/flutter_infra_release/releases/releases_linux.json
+  FLUTTER_SHA256: a2fc218708b2eaa395ed108f43fa40242e4c12299730e3e745b966962ada95af
 jobs:
   publish-packages:
     name: Create tags for release
@@ -16,11 +18,17 @@ jobs:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
         with:
           fetch-depth: 0
-      - name: Setup Flutter
-        uses: subosito/flutter-action@fd55f4c5af5b953cc57a2be44cb082c8f6635e8e # v2.21.0
-        with:
-          flutter-version: ${{ env.FLUTTER_VERSION }}
-          channel: ${{ env.FLUTTER_CHANNEL }}
+      - name: Install Flutter
+        working-directory: ${{ runner.temp }}
+        env:
+          FLUTTER_ARCHIVE: flutter_linux_${{ env.FLUTTER_VERSION }}-${{ env.FLUTTER_CHANNEL }}.tar.xz
+        run: |
+          curl -fsSLO "https://storage.googleapis.com/flutter_infra_release/releases/${FLUTTER_CHANNEL}/linux/${FLUTTER_ARCHIVE}"
+          echo "${FLUTTER_SHA256}  ${FLUTTER_ARCHIVE}" | sha256sum -c
+          tar xf "${FLUTTER_ARCHIVE}" -C "${HOME}"
+          echo "${HOME}/flutter/bin" >> $GITHUB_PATH
+      - name: Print Flutter version
+        run: flutter --version
       - name: Setup Melos
         run: |
           dart pub global activate melos
