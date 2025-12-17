@@ -16,13 +16,14 @@
 package io.karte.flutter.notifications;
 
 import android.content.Context;
-import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Looper;
 
 import androidx.annotation.NonNull;
 
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import io.flutter.embedding.engine.plugins.FlutterPlugin;
 import io.flutter.plugin.common.MethodCall;
@@ -44,14 +45,20 @@ public class KarteNotificationPlugin implements FlutterPlugin, MethodCallHandler
     /// when the Flutter Engine is detached from the Activity
     private MethodChannel channel;
     private Context context;
+    private ExecutorService executorService;
+    private Handler mainHandler;
 
     @Override
     public void onAttachedToEngine(@NonNull FlutterPlugin.FlutterPluginBinding flutterPluginBinding) {
         channel = new MethodChannel(flutterPluginBinding.getBinaryMessenger(), "karte_notification");
         channel.setMethodCallHandler(this);
         context = flutterPluginBinding.getApplicationContext();
-    }
 
+        // Create executor service for background operations
+        executorService = Executors.newSingleThreadExecutor();
+        mainHandler = new Handler(Looper.getMainLooper());
+    }
+    
     @Override
     public void onMethodCall(@NonNull MethodCall call, @NonNull Result result) {
         Logger.d(LOG_TAG, "onMethodCall " + call.method);
@@ -101,11 +108,11 @@ public class KarteNotificationPlugin implements FlutterPlugin, MethodCallHandler
                 if (data != null) {
                     if (isMainThread()) {
                         final Map<String, String> d = data;
-                        AsyncTask.execute(new Runnable() {
+                        executorService.execute(new Runnable() {
                             @Override
                             public void run() {
                                 final boolean handled = MessageHandler.handleMessage(context, d);
-                                new Handler(Looper.getMainLooper()).post(new Runnable() {
+                                mainHandler.post(new Runnable() {
                                     @Override
                                     public void run() {
                                         result.success(handled);
@@ -139,6 +146,15 @@ public class KarteNotificationPlugin implements FlutterPlugin, MethodCallHandler
     @Override
     public void onDetachedFromEngine(@NonNull FlutterPlugin.FlutterPluginBinding binding) {
         channel.setMethodCallHandler(null);
+        // Shutdown executor service
+        if (executorService != null) {
+            executorService.shutdownNow();
+            executorService = null;
+        }
+        if (mainHandler != null) {
+            mainHandler.removeCallbacksAndMessages(null);
+            mainHandler = null;
+        }
     }
 
     private boolean isMainThread() {
