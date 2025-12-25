@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:karte_core/karte_core.dart';
 
 class CoreScreen extends StatefulWidget {
+  const CoreScreen({super.key});
+
   @override
   State<CoreScreen> createState() => _CoreState();
 }
@@ -69,14 +71,14 @@ class _CoreState extends State<CoreScreen> {
               var url =
                   // ignore: deprecated_member_use
                   await UserSync.appendingQueryParameter("https://example.com");
-              print("url: $url");
+              debugPrint("url: $url");
             },
             child: Text("userSync query(dep)"),
           ),
           ElevatedButton(
             onPressed: () async {
               var script = await UserSync.getUserSyncScript();
-              print("script: $script");
+              debugPrint("script: $script");
             },
             child: Text("userSync script"),
           ),

@@ -9,10 +9,12 @@ import 'package:karte_flutter/visual_tracking.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -34,17 +36,18 @@ class MyApp extends StatelessWidget {
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'Flutter KARTE Demo'),
+      home: const MyHomePage(title: 'Flutter KARTE Demo'),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key, this.title}) : super(key: key);
+  const MyHomePage({super.key, this.title});
+
   final String? title;
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
@@ -56,12 +59,12 @@ class _MyHomePageState extends State<MyHomePage> {
     "Notification",
     "VT",
   ];
-  static List<Widget> _widgetOptions = <Widget>[
-    CoreScreen(),
-    IAMScreen(),
-    VariablesScreen(),
-    NotificationScreen(),
-    VTScreen(),
+  static final List<Widget> _widgetOptions = <Widget>[
+    const CoreScreen(),
+    const IAMScreen(),
+    const VariablesScreen(),
+    const NotificationScreen(),
+    const VTScreen(),
   ];
 
   void _onItemTapped(int index) {

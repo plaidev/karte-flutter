@@ -4,10 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:karte_core/karte_core.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   _MyAppState createState() => _MyAppState();
 }
@@ -54,45 +56,45 @@ class _MyAppState extends State<MyApp> {
                 Text('isOptOut:  $_isOptOut'),
                 ElevatedButton(
                   onPressed: () => Tracker.track("test"),
-                  child: Text("track"),
+                  child: const Text("track"),
                 ),
                 ElevatedButton(
                   onPressed: () => Tracker.identify({"name": "sample"}),
-                  child: Text("identify"),
+                  child: const Text("identify"),
                 ),
                 ElevatedButton(
                   onPressed: () => Tracker.view("test"),
-                  child: Text("view"),
+                  child: const Text("view"),
                 ),
                 ElevatedButton(
                   onPressed: () async {
                     KarteApp.optIn();
                     await initPlatformState();
                   },
-                  child: Text("optIn"),
+                  child: const Text("optIn"),
                 ),
                 ElevatedButton(
                   onPressed: () async {
                     KarteApp.optOut();
                     await initPlatformState();
                   },
-                  child: Text("optOut"),
+                  child: const Text("optOut"),
                 ),
                 ElevatedButton(
                   onPressed: () async {
                     // ignore: deprecated_member_use
                     var url = await UserSync.appendingQueryParameter(
                         "https://example.com");
-                    print("url: $url");
+                    debugPrint("url: $url");
                   },
-                  child: Text("userSync query(dep)"),
+                  child: const Text("userSync query(dep)"),
                 ),
                 ElevatedButton(
                   onPressed: () async {
                     var script = await UserSync.getUserSyncScript();
-                    print("script: $script");
+                    debugPrint("script: $script");
                   },
-                  child: Text("userSync script"),
+                  child: const Text("userSync script"),
                 ),
               ],
             ),
