@@ -30,8 +30,12 @@ jobs:
         uses: actions/create-github-app-token@7e473efe3cb98aa54f8d4bac15400b15fad77d94 # v2.2.0
         id: app-token
         with:
-          app-id: ${{ secrets.SHARED_GITHUB_ACTION_AGENT_APP_ID }}
-          private-key: ${{ secrets.SHARED_GITHUB_ACTION_AGENT_APP_PRIVATE_KEY }}
+          app-id: ${{ secrets.APP_TEAM_GITHUB_APP_AGENT_ID }}
+          private-key: ${{ secrets.APP_TEAM_GITHUB_APP_PRIVATE_KEY }}
+          owner: plaidev
+          repositories: |
+            karte-flutter-dev
+            karte-flutter-tools
       - name: Create Pull Request
         id: create_pr
         env:
@@ -45,6 +49,20 @@ jobs:
             --base master \
             --head release/${{ steps.date.outputs.date }})
           echo "pr_url=$PR_URL" >> $GITHUB_OUTPUT
+      - name: Trigger deploy-ios
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+        run: |
+          gh workflow run deploy-ios.yml \
+            --repo plaidev/karte-flutter-tools \
+            --field sdk_branch=release/${{ steps.date.outputs.date }}
+      - name: Trigger deploy-android
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+        run: |
+          gh workflow run deploy-android.yml \
+            --repo plaidev/karte-flutter-tools \
+            --field sdk_branch=release/${{ steps.date.outputs.date }}
       - name: Notify Slack on success
         if: success()
         uses: rtCamp/action-slack-notify@e31e87e03dd19038e411e38ae27cbad084a90661 # v2.3.3
