@@ -10,7 +10,7 @@ jobs:
   publish-packages:
     name: Create tags for release
     permissions:
-      actions: write # Required to trigger release-publish.yml workflow
+      actions: write # Required to trigger publish.yml workflow
       contents: write # Required to create and push git tags
     runs-on: ubuntu-latest
     if: github.repository == 'plaidev/karte-flutter'
@@ -49,7 +49,7 @@ jobs:
         # Ref) https://github.com/bluefireteam/melos-action/blob/9bcdb36f9a5556a10467a78aed2cc2e220f54035/examples/01-workflow-dispatch/release-tag.yml#L22-L25
         run: |
           melos exec -c 1 --no-published --no-private --order-dependents -- \
-          gh workflow run release-publish.yml \
+          gh workflow run publish.yml \
           --ref \$MELOS_PACKAGE_NAME-v\$MELOS_PACKAGE_VERSION
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
