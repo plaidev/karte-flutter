@@ -40,12 +40,15 @@ jobs:
         id: create_pr
         env:
           GH_TOKEN: ${{ steps.app-token.outputs.token }}
+          PR_BODY: |
+            ### 以下の項目を確認してください
+            - [ ] 全体の`CHANGELOG.md`が更新されていることを確認した。
+            - [ ] 各モジュールの`pubspec.yaml`内のバージョンならびに`CHANGELOG.md`が更新されていることを確認した。
+            - [ ] サンプルアプリで動作確認を行った。
         run: |
           PR_URL=$(gh pr create \
             --title "Release by ${{ github.actor }}" \
-            --body "### 以下の項目を確認してください
-          - [ ] \`pubspec.yaml\`内のバージョンならびに\`CHANGELOG.md\`が更新されていることを確認した。
-          - [ ] サンプルアプリで動作確認を行った。" \
+            --body "$PR_BODY" \
             --base master \
             --head release/${{ steps.date.outputs.date }})
           echo "pr_url=$PR_URL" >> $GITHUB_OUTPUT
