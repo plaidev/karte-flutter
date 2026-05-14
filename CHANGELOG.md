@@ -1,4 +1,4 @@
-# Release - 2025.12.17
+# Releases - 2025.12.17
 
 ### karte_core 2.1.0
 
@@ -47,7 +47,7 @@
 
 
 
-# Release - 2025.10.06
+# Releases - 2025.10.06
 
 ### karte_core 2.0.0
 
@@ -116,7 +116,7 @@
 
 
 
-# Release - 2025.03.03
+# Releases - 2025.03.03
 
 ### karte_core 1.4.0
 
@@ -165,7 +165,7 @@
 
 
 
-# Release - 2023.12.06
+# Releases - 2023.12.06
 
 ### karte_core 1.3.0
 
@@ -197,7 +197,7 @@
 
 * Android において、kotlinへの依存を削除しました。
 
-# Release - 2023.04.13
+# Releases - 2023.04.13
 
 ### karte_core 1.2.1
 
@@ -205,7 +205,7 @@
 
 * Androidの依存関係指定に誤った制限があったので修正しました。
 
-# Release - 2023.03.14
+# Releases - 2023.03.14
 
 ### karte_core 1.2.0
 
@@ -246,7 +246,7 @@
 
 * Android SDK の参照する際に利用するリポジトリを JCenter から Meven Central に変更しました。
 
-# Release - 2022.09.30
+# Releases - 2022.09.30
 
 ### karte_core 1.1.0
 
@@ -293,7 +293,7 @@
 
 * ページ遷移の際のイベント自動送信でクラッシュする可能性がある不具合を修正しました。
 
-# Release - 2022.04.15
+# Releases - 2022.04.15
 
 ### karte_visual_tracking 0.3.0
 
@@ -305,7 +305,7 @@
 
 * Flutter 2.5.0以降で廃止されていたAPIを使用していた部分を修正しました。
 
-# Release - 2022.03.30
+# Releases - 2022.03.30
 
 ### karte_notification 1.1.0
 
@@ -313,7 +313,7 @@
 
 * firebase_messagingのバージョン11と組み合わせてビルドできるようにしました。
 
-# Release - 2022.01.18
+# Releases - 2022.01.18
 
 ### karte_core 1.0.0
 
@@ -331,7 +331,7 @@
 
 * GA版としてリリースしました。
 
-# Release - 2021.08.30
+# Releases - 2021.08.30
 
 ### karte_core 0.2.0
 
@@ -365,13 +365,13 @@
 
 * Null-Safetyに対応しました。
 
-# Release - 2021.03.26
+# Releases - 2021.03.26
 
 ### karte_visual_tracking 0.1.0
 
 * 初回リリース
 
-# Release - 2020.10.08
+# Releases - 2020.10.08
 
 ### karte_core 0.1.0
 
