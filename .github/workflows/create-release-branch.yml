@@ -45,6 +45,7 @@ jobs:
             - [ ] 全体の`CHANGELOG.md`が更新されていることを確認した。
             - [ ] 各モジュールの`pubspec.yaml`内のバージョンならびに`CHANGELOG.md`が更新されていることを確認した。
             - [ ] サンプルアプリで動作確認を行った。
+            - [ ] 全てのチェックボックスを埋めると自動的にマージ作業を開始します。
         run: |
           PR_URL=$(gh pr create \
             --title "Release by ${{ github.actor }}" \
