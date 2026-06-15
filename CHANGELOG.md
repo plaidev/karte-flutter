@@ -1,3 +1,63 @@
+# Latest Version
+
+| パッケージ名 | Description | 最新のバージョン |
+| :-- | :-- | :-- |
+| karte_core | イベントトラッキング機能を提供します。 | 2.2.0 |
+| karte_in_app_messaging | アプリ内メッセージ機能を提供します。 | 2.2.0 |
+| karte_notification | プッシュ通知の受信および効果測定機能を提供します。 | 2.2.0 |
+| karte_variables | 設定値配信機能を提供します。 | 2.2.0 |
+| karte_visual_tracking | ビジュアルトラッキング機能を提供します。 | 0.10.0 |
+
+# Releases - XXXX.XX.XX
+
+### karte_core 2.2.0
+
+**🔨CHANGED**
+
+* ネイティブSDKのバージョンを更新しました:
+  * iOS: KarteCore 2.34.0 → 2.36.0
+    * 詳細は [iOS SDK Release Notes](https://app.developers.karte.io/ios-sdk/release-notes-ios-sdk) を参照してください
+  * Android: core 2.32.0 → 2.34.0
+    * 詳細は [Android SDK Release Notes](https://app.developers.karte.io/android-sdk/release-notes-android-sdk) を参照してください
+
+### karte_in_app_messaging 2.2.0
+
+**🔨CHANGED**
+
+* ネイティブSDKのバージョンを更新しました:
+  * iOS: KarteInAppMessaging 2.25.0 → 2.26.0
+    * 詳細は [iOS SDK Release Notes](https://app.developers.karte.io/ios-sdk/release-notes-ios-sdk) を参照してください
+  * Android: inappmessaging 2.25.0 → 2.27.0
+    * 詳細は [Android SDK Release Notes](https://app.developers.karte.io/android-sdk/release-notes-android-sdk) を参照してください
+
+### karte_notification 2.2.0
+
+**🔨CHANGED**
+
+* ネイティブSDKのバージョンを更新しました:
+  * iOS: KarteRemoteNotification 2.13.0 → 2.14.0
+    * 詳細は [iOS SDK Release Notes](https://app.developers.karte.io/ios-sdk/release-notes-ios-sdk) を参照してください
+  * Android: notifications 2.16.0 → 2.18.0
+    * 詳細は [Android SDK Release Notes](https://app.developers.karte.io/android-sdk/release-notes-android-sdk) を参照してください
+
+### karte_variables 2.2.0
+
+**🔨CHANGED**
+
+* ネイティブSDKのバージョンを更新しました:
+  * Android: variables 2.11.0 → 2.13.0
+    * 詳細は [Android SDK Release Notes](https://app.developers.karte.io/android-sdk/release-notes-android-sdk) を参照してください
+
+### karte_visual_tracking 0.10.0
+
+**🔨CHANGED**
+
+* ネイティブSDKのバージョンを更新しました:
+  * Android: visualtracking 2.13.0 → 2.15.0
+    * 詳細は [Android SDK Release Notes](https://app.developers.karte.io/android-sdk/release-notes-android-sdk) を参照してください
+
+
+
 # Releases - 2025.12.17
 
 ### karte_core 2.1.0

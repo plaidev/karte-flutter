@@ -46,5 +46,5 @@ android {
 }
 
 dependencies {
-    api 'io.karte.android:core:2.32.0'
+    api 'io.karte.android:core:2.34.0'
 }

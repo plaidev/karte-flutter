@@ -19,7 +19,7 @@ Flutter plugin for KARTE Notification.
   s.source           = { :path => '.' }
   s.source_files = 'Classes/**/*'
   s.dependency 'Flutter'
-  s.dependency 'KarteRemoteNotification', '= 2.13.0'
+  s.dependency 'KarteRemoteNotification', '= 2.14.0'
   s.platform = :ios, '15.0'
   s.static_framework = true
 

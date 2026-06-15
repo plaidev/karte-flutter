@@ -1,6 +1,7 @@
 {
   "enabledPlugins": {
-    "changelog-lint@app-ai-plugins": true
+    "changelog-lint@app-ai-plugins": true,
+    "update-native-sdk@app-ai-plugins": true
   },
   "extraKnownMarketplaces": {
     "app-ai-plugins": {
