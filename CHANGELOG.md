@@ -14,6 +14,7 @@
 
 **🔨CHANGED**
 
+* Android の `compileSdkVersion` を 34 → 35 に更新しました。
 * ネイティブSDKのバージョンを更新しました:
   * iOS: KarteCore 2.34.0 → 2.36.0
     * 詳細は [iOS SDK Release Notes](https://app.developers.karte.io/ios-sdk/release-notes-ios-sdk) を参照してください
@@ -24,6 +25,7 @@
 
 **🔨CHANGED**
 
+* Android の `compileSdkVersion` を 34 → 35 に更新しました。
 * ネイティブSDKのバージョンを更新しました:
   * iOS: KarteInAppMessaging 2.25.0 → 2.26.0
     * 詳細は [iOS SDK Release Notes](https://app.developers.karte.io/ios-sdk/release-notes-ios-sdk) を参照してください
@@ -34,6 +36,7 @@
 
 **🔨CHANGED**
 
+* Android の `compileSdkVersion` を 34 → 35 に更新しました。
 * ネイティブSDKのバージョンを更新しました:
   * iOS: KarteRemoteNotification 2.13.0 → 2.14.0
     * 詳細は [iOS SDK Release Notes](https://app.developers.karte.io/ios-sdk/release-notes-ios-sdk) を参照してください
@@ -44,6 +47,7 @@
 
 **🔨CHANGED**
 
+* Android の `compileSdkVersion` を 34 → 35 に更新しました。
 * ネイティブSDKのバージョンを更新しました:
   * Android: variables 2.11.0 → 2.13.0
     * 詳細は [Android SDK Release Notes](https://app.developers.karte.io/android-sdk/release-notes-android-sdk) を参照してください
@@ -52,6 +56,7 @@
 
 **🔨CHANGED**
 
+* Android の `compileSdkVersion` を 34 → 35 に更新しました。
 * ネイティブSDKのバージョンを更新しました:
   * Android: visualtracking 2.13.0 → 2.15.0
     * 詳細は [Android SDK Release Notes](https://app.developers.karte.io/android-sdk/release-notes-android-sdk) を参照してください
