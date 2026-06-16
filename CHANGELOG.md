@@ -8,7 +8,7 @@
 | karte_variables | 設定値配信機能を提供します。 | 2.2.0 |
 | karte_visual_tracking | ビジュアルトラッキング機能を提供します。 | 0.10.0 |
 
-# Releases - XXXX.XX.XX
+# Releases - 2026.06.16
 
 ### karte_core 2.2.0
 
