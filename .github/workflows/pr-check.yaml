@@ -4,10 +4,10 @@ on:
   pull_request:
 
 env:
-  FLUTTER_VERSION: 3.13.0
+  FLUTTER_VERSION: 3.35.7
   FLUTTER_CHANNEL: 'stable'
   # SHA256 checksum from https://storage.googleapis.com/flutter_infra_release/releases/releases_linux.json
-  FLUTTER_SHA256: a2fc218708b2eaa395ed108f43fa40242e4c12299730e3e745b966962ada95af
+  FLUTTER_SHA256: 146df531f9ac6a11a918013c1a70faafc053d4811c8cb69a413fd70748d51c3d
 
 jobs:
   pr-check:

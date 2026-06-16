@@ -2,11 +2,11 @@ name: Publish packages
 on:
   workflow_dispatch:
 env:
-  FLUTTER_VERSION: 3.13.0
+  FLUTTER_VERSION: 3.35.7
   FLUTTER_CHANNEL: 'stable'
   # SHA256 checksum from https://storage.googleapis.com/flutter_infra_release/releases/releases_linux.json
-  FLUTTER_SHA256: a2fc218708b2eaa395ed108f43fa40242e4c12299730e3e745b966962ada95af
-  DART_VERSION: 3.1.0 # Compatible with Flutter 3.13.0
+  FLUTTER_SHA256: 146df531f9ac6a11a918013c1a70faafc053d4811c8cb69a413fd70748d51c3d
+  DART_VERSION: 3.9.2 # Compatible with Flutter 3.35.7
 jobs:
   publish-packages:
     name: Publish packages
@@ -28,7 +28,7 @@ jobs:
         with:
           fetch-depth: 0
       # Set up the Dart SDK and provision the OIDC token used for publishing.
-      # The `dart` command from this step will be shadowed by the one from the Flutter SDK below. 
+      # The `dart` command from this step will be shadowed by the one from the Flutter SDK below.
       - name: Setup Dart
         uses: dart-lang/setup-dart@e51d8e571e22473a2ddebf0ef8a2123f0ab2c02c # v1.7.1
         with:

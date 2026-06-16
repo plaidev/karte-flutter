@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:karte_variables/karte_variables.dart';
 
 class VariablesScreen extends StatefulWidget {
+  const VariablesScreen({super.key});
+
   @override
-  _VariablesState createState() => _VariablesState();
+  State<VariablesScreen> createState() => _VariablesState();
 }
 
 class _VariablesState extends State<VariablesScreen> {
@@ -37,12 +39,12 @@ class _VariablesState extends State<VariablesScreen> {
     Map map = await objVar.getObject({'un': "known"});
 
     var noneVar = await Variables.get('none');
-    print(await noneVar.getString('unknown'));
-    print(await noneVar.getInteger(-1));
-    print(await noneVar.getDouble(-1.1));
-    print(await noneVar.getBoolean(false));
-    print(await noneVar.getArray(['u', 'n', 'k', 'n', 'o', 'w', 'n']));
-    print(await noneVar.getObject({"un": 'known'}));
+    debugPrint(await noneVar.getString('unknown'));
+    debugPrint((await noneVar.getInteger(-1)).toString());
+    debugPrint((await noneVar.getDouble(-1.1)).toString());
+    debugPrint((await noneVar.getBoolean(false)).toString());
+    debugPrint((await noneVar.getArray(['u', 'n', 'k', 'n', 'o', 'w', 'n'])).toString());
+    debugPrint((await noneVar.getObject({"un": 'known'})).toString());
 
     // If the widget was removed from the tree while the asynchronous platform
     // message was in flight, we want to discard the reply rather than calling
@@ -90,7 +92,9 @@ class _VariablesState extends State<VariablesScreen> {
                           Variables.clearCache(_textEditingController.text);
                           await checkVariables();
                           _textEditingController.clear();
-                          Navigator.pop(context);
+                          if (context.mounted) {
+                            Navigator.pop(context);
+                          }
                         },
                         child: Text("OK"),
                       ),
@@ -104,24 +108,26 @@ class _VariablesState extends State<VariablesScreen> {
           ElevatedButton(
             onPressed: () {
               Variables.fetch().then((value) async {
-                print("variables fetch completed!");
+                debugPrint("variables fetch completed!");
                 await checkVariables();
                 List allKeys = await Variables.getAllKeys();
-                showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return AlertDialog(
-                      title: Text("Fetch Succeeded. Keys:"),
-                      content: Text(allKeys.join(',')),
-                      actions: [
-                        TextButton(
-                          onPressed: () => Navigator.pop(context),
-                          child: Text("OK")
-                        ),
-                      ],
-                    );
-                  }
-                );
+                if (context.mounted) {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: Text("Fetch Succeeded. Keys:"),
+                        content: Text(allKeys.join(',')),
+                        actions: [
+                          TextButton(
+                            onPressed: () => Navigator.pop(context),
+                            child: Text("OK")
+                          ),
+                        ],
+                      );
+                    }
+                  );
+                }
               });
             },
             child: Text("Fetch Variables"),

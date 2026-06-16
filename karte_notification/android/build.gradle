@@ -22,7 +22,7 @@ rootProject.allprojects {
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 34
+    compileSdkVersion 35
 
     if (project.android.hasProperty("namespace")) {
         namespace 'io.karte.flutter.notifications'
@@ -37,6 +37,6 @@ android {
 }
 
 dependencies {
-    implementation 'io.karte.android:notifications:2.16.0'
+    implementation 'io.karte.android:notifications:2.18.0'
     implementation 'com.google.firebase:firebase-messaging:22.0.0'
 }

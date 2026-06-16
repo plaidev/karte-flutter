@@ -1,0 +1,20 @@
+{
+  "enabledPlugins": {
+    "changelog-lint@app-ai-plugins": true,
+    "update-native-sdk@app-ai-plugins": true
+  },
+  "extraKnownMarketplaces": {
+    "app-ai-plugins": {
+      "source": {
+        "source": "github",
+        "repo": "plaidev/app-ai"
+      }
+    }
+  },
+  "strictKnownMarketplaces": [
+    {
+      "source": "github",
+      "repo": "plaidev/app-ai"
+    }
+  ]
+}

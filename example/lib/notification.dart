@@ -5,17 +5,19 @@ import 'package:karte_notification/karte_notification.dart' as krt;
 
 Future<dynamic> myBackgroundMessageHandler(RemoteMessage message) async {
   // Called when received notification on background only Android
-  print('myBackgroundMessageHandler $message');
+  debugPrint('myBackgroundMessageHandler $message');
   var karteNotification = await krt.Notification.create(message);
-  print("karte notification: $karteNotification");
+  debugPrint("karte notification: $karteNotification");
   if (karteNotification != null) {
     karteNotification.handleForAndroid();
   }
 }
 
 class NotificationScreen extends StatefulWidget {
+  const NotificationScreen({super.key});
+
   @override
-  _NotificationState createState() => _NotificationState();
+  State<NotificationScreen> createState() => _NotificationState();
 }
 
 class _NotificationState extends State<NotificationScreen> {
@@ -35,11 +37,11 @@ class _NotificationState extends State<NotificationScreen> {
     RemoteMessage? message =
         await FirebaseMessaging.instance.getInitialMessage();
     // Called when app launch by tap notification on iOS
-    print("checkInitialMessage: $message");
+    debugPrint("checkInitialMessage: $message");
     updateState(log: "\nonLaunch");
     if (message == null) return;
     var karteNotification = await krt.Notification.create(message);
-    print("karte notification: $karteNotification");
+    debugPrint("karte notification: $karteNotification");
     if (karteNotification != null) {
       karteNotification.handleForIOS();
     }
@@ -53,20 +55,20 @@ class _NotificationState extends State<NotificationScreen> {
     FirebaseMessaging.onBackgroundMessage(myBackgroundMessageHandler);
     FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
       // Called when received notification on foreground
-      print("onMessage: $message");
+      debugPrint("onMessage: $message");
       updateState(log: "\nonMessage");
       var karteNotification = await krt.Notification.create(message);
-      print("karte notification: $karteNotification");
+      debugPrint("karte notification: $karteNotification");
       if (karteNotification != null) {
         karteNotification.handleForAndroid();
       }
     });
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) async {
       // Called when app resume by tap notification on iOS
-      print("onMessageOpenedApp: $message");
+      debugPrint("onMessageOpenedApp: $message");
       updateState(log: "\nonMessageOpenedApp");
       var karteNotification = await krt.Notification.create(message);
-      print("karte notification: $karteNotification");
+      debugPrint("karte notification: $karteNotification");
       if (karteNotification != null) {
         karteNotification.handleForIOS();
       }
@@ -75,10 +77,10 @@ class _NotificationState extends State<NotificationScreen> {
         .requestPermission(
             alert: true, badge: true, provisional: true, sound: true)
         .then((NotificationSettings value) {
-      print("Settings registered: $value");
+      debugPrint("Settings registered: $value");
     });
     _firebaseMessaging.onTokenRefresh.listen((String token) {
-      print("onTokenRefreshed: $token");
+      debugPrint("onTokenRefreshed: $token");
       krt.Notification.registerFCMToken(token);
       updateState(token: token);
     });

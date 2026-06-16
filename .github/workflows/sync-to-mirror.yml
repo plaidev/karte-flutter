@@ -1,0 +1,55 @@
+name: "Sync to mirror repo"
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch: # Enable manual execution for troubleshooting
+jobs:
+  sync-to-mirror:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    # Should be executed on the dev repo.
+    if: github.repository != 'plaidev/karte-flutter'
+    permissions:
+      contents: read
+    steps:
+      - name: Generate GitHub App token
+        uses: actions/create-github-app-token@7e473efe3cb98aa54f8d4bac15400b15fad77d94 # v2.2.0
+        id: app-token
+        with:
+          app-id: ${{ secrets.APP_TEAM_GITHUB_APP_ID }}
+          private-key: ${{ secrets.APP_TEAM_GITHUB_APP_PRIVATE_KEY }}
+          owner: plaidev
+          repositories: |
+            karte-flutter
+      - name: Checkout master
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        with:
+          ref: master
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Configure Git
+        run: |
+          git config --global user.email "git@users.noreply.github.com"
+          git config --global user.name "github actions"
+      - name: Push to mirror repository
+        run: |
+          git remote add mirror https://x-access-token:${{ steps.app-token.outputs.token }}@github.com/plaidev/karte-flutter.git
+          git pull mirror master --no-rebase --no-edit
+          git push mirror master
+      - name: Notify Slack on success
+        if: success()
+        uses: rtCamp/action-slack-notify@e31e87e03dd19038e411e38ae27cbad084a90661 # v2.3.3
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_MESSAGE: |
+            ✅ Successfully synced changes to mirror repo master branch
+          SLACK_COLOR: success
+      - name: Notify Slack on failure
+        if: failure()
+        uses: rtCamp/action-slack-notify@e31e87e03dd19038e411e38ae27cbad084a90661 # v2.3.3
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_MESSAGE: |
+            ❌ Failed to sync changes to mirror repo
+          SLACK_COLOR: failure

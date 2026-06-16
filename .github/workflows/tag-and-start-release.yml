@@ -2,15 +2,15 @@ name: Tag and start release
 on:
   workflow_dispatch:
 env:
-  FLUTTER_VERSION: 3.13.0
+  FLUTTER_VERSION: 3.35.7
   FLUTTER_CHANNEL: 'stable'
   # SHA256 checksum from https://storage.googleapis.com/flutter_infra_release/releases/releases_linux.json
-  FLUTTER_SHA256: a2fc218708b2eaa395ed108f43fa40242e4c12299730e3e745b966962ada95af
+  FLUTTER_SHA256: 146df531f9ac6a11a918013c1a70faafc053d4811c8cb69a413fd70748d51c3d
 jobs:
   publish-packages:
     name: Create tags for release
     permissions:
-      actions: write # Required to trigger release-publish.yml workflow
+      actions: write # Required to trigger publish.yml workflow
       contents: write # Required to create and push git tags
     runs-on: ubuntu-latest
     if: github.repository == 'plaidev/karte-flutter'
@@ -49,7 +49,7 @@ jobs:
         # Ref) https://github.com/bluefireteam/melos-action/blob/9bcdb36f9a5556a10467a78aed2cc2e220f54035/examples/01-workflow-dispatch/release-tag.yml#L22-L25
         run: |
           melos exec -c 1 --no-published --no-private --order-dependents -- \
-          gh workflow run release-publish.yml \
+          gh workflow run publish.yml \
           --ref \$MELOS_PACKAGE_NAME-v\$MELOS_PACKAGE_VERSION
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

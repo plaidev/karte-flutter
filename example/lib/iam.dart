@@ -3,8 +3,10 @@ import 'package:karte_core/karte_core.dart';
 import 'package:karte_in_app_messaging/karte_in_app_messaging.dart';
 
 class IAMScreen extends StatefulWidget {
+  const IAMScreen({super.key});
+
   @override
-  _IAMState createState() => _IAMState();
+  State<IAMScreen> createState() => _IAMState();
 }
 
 class _IAMState extends State<IAMScreen> {

@@ -1,0 +1,67 @@
+name: "Auto-merge release branch"
+on:
+  pull_request:
+    types: [edited]
+    branches: [master]
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  check_that_current_pr_is_complete:
+    if: ${{ github.repository != 'plaidev/karte-flutter' && github.event.pull_request.state == 'open' && startsWith(github.head_ref, 'release/') }}
+    permissions:
+      pull-requests: read
+    runs-on: ubuntu-latest
+    outputs:
+      completed: ${{ steps.check_completion.outputs.completed }}
+    steps:
+      - name: Check Completion
+        id: check_completion
+        env:
+          BODY: ${{ github.event.pull_request.body }}
+        run: |
+          incomplete_task=$(echo "$BODY" | sed -n "/\- \[ \]/ p")
+          if [ -z "$incomplete_task" ]; then
+              echo "completed=true" >> $GITHUB_OUTPUT
+          else
+              echo "completed=false" >> $GITHUB_OUTPUT
+          fi
+  perform_merge:
+    permissions:
+      contents: write
+    needs: [check_that_current_pr_is_complete]
+    runs-on: ubuntu-latest
+    if: needs.check_that_current_pr_is_complete.outputs.completed == 'true'
+    steps:
+      # NOTE: Using GitHub App token to bypass branch protection rules.
+      - name: Generate GitHub App token
+        uses: actions/create-github-app-token@7e473efe3cb98aa54f8d4bac15400b15fad77d94 # v2.2.0
+        id: app-token
+        with:
+          app-id: ${{ secrets.APP_TEAM_GITHUB_APP_ID }}
+          private-key: ${{ secrets.APP_TEAM_GITHUB_APP_PRIVATE_KEY }}
+      - name: Checkout
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Configure Git
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+        run: |
+          git config --global url."https://x-access-token:${GH_TOKEN}@github.com/plaidev/karte-flutter-dev".insteadOf "https://github.com/plaidev/karte-flutter-dev"
+          git config user.email "git@users.noreply.github.com"
+          git config user.name "github actions"
+          git fetch
+      - name: Merge to develop
+        run: |
+          git checkout develop
+          git merge origin/${{ github.head_ref }} --no-ff -m "Merge ${{ github.head_ref }} into develop"
+      - name: Push to develop
+        run: git push origin develop
+      - name: Merge to master
+        run: |
+          git checkout master
+          git merge origin/${{ github.head_ref }} --no-ff -m "Merge ${{ github.head_ref }} into master"
+      - name: Push to master
+        run: git push origin master
